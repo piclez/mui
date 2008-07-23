@@ -1,0 +1,5 @@
+Merb Interface is a Merb Slice Ruby Gem that adds a library of HTML and CSS patterns to any Merb Application. 
+
+Being a slice allows a developer to override or customize these patterns as needed while gaining the benefit of professionally designed interface components as a baseline.
+
+License: Ruby License
