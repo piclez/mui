@@ -1,5 +1,53 @@
-Merb Interface is a Merb Slice Ruby Gem that adds a library of HTML and CSS patterns to any Merb Application. 
+merb-interface
+==============
 
-Being a slice allows a developer to override or customize these patterns as needed while gaining the benefit of professionally designed interface components as a baseline.
+HTML helper with dynamic CSS and JS.
 
-License: Ruby License
+------------------------------------------------------------------------------
+
+Prerequisites:
+
+merb-core, merb-slices, and merb-jquery
+
+------------------------------------------------------------------------------
+
+Instructions for installation:
+
+1.) Add merb-interface as a regular dependency - hostappname/config/init.rb
+
+dependency 'merb-interface'
+
+2.) Add merb-interface public directory - hostappname/config/rack.rb
+
+use Merb::Rack::Static, MerbInterface.dir_for(:public)
+
+3.) Add merb-interface routes - hostappname/config/router.rb
+
+r.add_slice(:MerbInterface)
+
+4.) Add merb-interface assets within the <head> - hostappname/app/views/layout/application.html.erb
+
+<%= mi_assets %>
+
+5.) Configure the slice (optional) - hostappname/config/init.rb
+
+Merb::BootLoader.before_app_loads do
+  
+  Merb::Slices::config[:merb_interface] do |mi|
+    mi[:button_color] = #000
+    mi[:button_background_color] = #fff
+  end
+  
+end
+
+6.) Override the slice code (optional) - hostappname/
+
+rake slices:merb-interface:install
+
+------------------------------------------------------------------------------
+
+To see all available tasks for merb-interface run:
+
+rake -T slices:merb-interface
+
+------------------------------------------------------------------------------
