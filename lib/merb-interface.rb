@@ -1,7 +1,7 @@
 if defined?(Merb::Plugins)
 
   $:.unshift File.dirname(__FILE__)
-  load_dependency 'merb-slices'
+  load_dependencies('merb-slices')
   Merb::Plugins.add_rakefiles 'merb-interface/merbtasks', 'merb-interface/slicetasks'
   Merb::Slices::register(__FILE__)
   Merb::Slices::config[:merb_interface][:layout] ||= :merb_interface
@@ -26,5 +26,5 @@ if defined?(Merb::Plugins)
     # Dynamic CSS format for Style controller
     Merb.add_mime_type(:css, :to_css, %w[text/css])
   end
-
+  
 end

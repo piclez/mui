@@ -2,52 +2,62 @@ module Merb
   module MerbInterface
     module StyleHelper
       
-      def hex_add(number1, number2)
-        (number1.to_i(base=16) + number2.to_i(base=16)).to_s(base=16)
+      def border_radius_gecko(options={})
+        options[:amount] ||= 0.5
+        property('-moz') do
+          property('border') do
+            if options[:edge] == 'top'
+              property('radius') do
+                property('bottomleft', :value => %{#{options[:amount]}em})
+                property('bottomright', :value => %{#{options[:amount]}em})
+              end
+            else
+              property('radius', :value => %{#{options[:amount]}em})
+            end
+          end
+        end
       end
 
-      def hex_subtract(number1, number2)
-        result = (number1.to_i(base=16) - number2.to_i(base=16)).to_s(base=16)
-        result = '000000' if result == '0'
-        result
+      def border_radius_webkit(options={})
+        options[:amount] ||= 0.5
+        property('-webkit') do
+          property('border') do
+            if options[:edge] == 'top'
+              property('bottom') do
+                property('left-radius', :value => %{#{options[:amount]}em})
+                property('right-radius', :value => %{#{options[:amount]}em})
+              end
+            else
+              property('radius', :value => %{#{options[:amount]}em})
+            end
+          end
+        end
       end
 
-      def round_corners(options={})
-        options[:amount] ||= 0.25
-        if options[:edge] == 'top'
-          properties = %(border-radius-topleft: #{options[:amount]}em;)
-          properties << %(\r  )
-          properties << %(border-radius-topright: #{options[:amount]}em;)
-          properties << %(\r  )
-        else
-          properties = %(border-radius: #{options[:amount]}em;)
-          properties << %(\r  )
+      def color(red,green,blue)
+        %{rgb(#{decimal_to_rgb(red)}, #{decimal_to_rgb(green)}, #{decimal_to_rgb(blue)})}
+      end
+      
+      def decimal_to_rgb(d)
+        (d * 255).to_i
+      end
+
+      def property(property, options={})
+        @parent ||= ''
+        @child ||= ''
+        if block_given?
+          @child = nil
+          @parent << %{#{property}-}
+          yield
+          @parent = nil
+          @child
+        elsif options[:value]
+          @child << %{\r  #{@parent}#{property}: #{options[:value]};}
         end
-        # Remove the following after Safari supports border-radius officially
-        if mi_browser == 'webkit'
-          if options[:edge] == 'top'
-            properties << %(-webkit-border-top-left-radius: #{options[:amount]}em;)
-            properties << %(\r  )
-            properties << %(-webkit-border-top-right-radius: #{options[:amount]}em;)
-          else
-            properties << %(-webkit-border-radius: #{options[:amount]}em;)
-          end
-        # Remove the following after FireFox supports border-radius officially
-        elsif mi_browser == 'gecko'
-          if options[:edge] == 'top'
-            properties << %(-moz-border-radius-topleft: #{options[:amount]}em;)
-            properties << %(\r  )
-            properties << %(-moz-border-radius-topright: #{options[:amount]}em;)
-          else
-            properties << %(-moz-border-radius: #{options[:amount]}em;)
-          end
-        # Force Internet Explorer to render buttons without extra padding
-        elsif mi_browser == 'ie'
-          properties << %(overflow: visible;)
-          properties << %(\r  )
-          properties << %(width: auto;)
-        end
-        properties
+      end
+      
+      def selector(selector)
+        "#{selector} {#{yield}\r}\r"
       end
 
     end

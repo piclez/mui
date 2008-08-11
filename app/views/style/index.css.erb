@@ -1,74 +1,57 @@
+<%= @gecko -%>
+<%= @msie -%>
+<%= @webkit -%>
 * {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-style: none;
+  border-width: 0;
   font-family: Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
-<% if mi_browser == 'gecko' %>
-*::-moz-focus-inner {
-  border: none;
-  padding: 0;
-}
-<% end %>
-img {
-  border: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  empty-cells:show;
-}
 
-/* mi_background */
+/* background */
 
 body.mi {
   background-image: url('/images/body.png');
   background-repeat: repeat-x;
 }
 
-/* mi_divider */
+/* bar */
 
-hr.mi {
-  background: #ccc;
-  border: none;
-  height: 1px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-/* mi_bar */
-<%
-mi_bar_background_color = '999999'
-mi_bar_color = 'ffffff'
-%>
-
-div.mi_bar, div.mi_bar_tray {
-  background-color: #<%= mi_bar_background_color %>;
+div.mi_bar {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
-  border-bottom-color: #<%= hex_subtract(mi_bar_background_color, '333333') %>;
+  border-bottom-color: <%= color(0, 0, 0) %>;
   border-bottom-style: solid;
   border-bottom-width: 0.1em;
-  border-top-color: #<%= hex_add(mi_bar_background_color, '333333') %>;
+  border-radius: 0.5em;
+  border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   border-top-style: solid;
   border-top-width: 0.1em;
-  color: #<%= mi_bar_color %>;
+  color: <%= color(1, 1, 1) %>;
   padding-bottom: 0.25em;
   padding-left: 1em;
   padding-right: 1em;
   padding-top: 0.25em;
 }
-div.mi_bar_tray {
-  border-left-color: #<%= mi_bar_background_color %>;
-  border-left-style: solid;
-  border-left-width: 0.1em;
-  border-right-color: #<%= mi_bar_background_color %>;
-  border-right-style: solid;
-  border-right-width: 0.1em;
-  <%= round_corners(:amount => 0.5, :edge => 'top') %>
+div.mi_tray_outer div.mi_bar {
+  border-bottom-style: none;
+  border-radius-bottomleft: 0.5em;
+  border-radius-bottomright: 0.5em;
 }
 
-/* mi_button */
+/* block */
+
+div.mi_block {
+  background-color: #fff;
+  margin: 1em;
+}
+
+/* button */
 
 button.mi, input[type=button].mi, input[type=reset].mi, input[type=submit].mi {
   background-image: url('/images/reflection.png');
@@ -78,42 +61,48 @@ button.mi, input[type=button].mi, input[type=reset].mi, input[type=submit].mi {
   border-width: 0.1em;
   font-size: 1em;
   height: 1.5em;
+  opacity: 0.9;
   padding: 0 0.75em 0 0.75em;
-  <%= round_corners %>
+}
+button.mi:hover, input[type=button].mi:hover, input[type=reset].mi:hover, input[type=submit].mi:hover {
+  opacity: 1;
 }
 button.mi, input[type=button].mi, input[type=reset].mi {
-  background-color: #333333;
-  border-bottom-color: #787878;
-  border-left-color: #484848;
-  border-right-color: #484848;
-  border-top-color: #000000;
-  color: #ffffff;
-  -moz-focus-inner: none;
+  background-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-left-color: <%= color(0.25, 0.25, 0.25) %>;
+  border-right-color: <%= color(0.25, 0.25, 0.25) %>;
+  border-top-color: <%= color(0.3, 0.3, 0.3) %>;
+  color: <%= color(1, 1, 1) %>;
 }
-button.mi:hover,   input[type=button].mi:hover,   input[type=reset].mi:hover {
-  background-color: #1e1e1e;
-  color: #eaeaea;
-}
-button.mi:active,   input[type=button].mi:active,   input[type=reset].mi:active {
-  background-color: #000000;
-  color: #cccccc;
+button.mi:active, input[type=button].mi:active, input[type=reset].mi:active {
+  background-color: <%= color(0.2, 0.2, 0.2) %>;
+  background-image: none;
+  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-left-color: <%= color(0.15, 0.15, 0.15) %>;
+  border-right-color: <%= color(0.15, 0.15, 0.15) %>;
+  border-top-color: <%= color(0.1, 0.1, 0.1) %>;
+  color: <%= color(1, 1, 1) %>;
 }
 input[type=submit].mi {
-  background-color: #0033ff;
-  border-bottom-color: #4578ff;
-  border-left-color: #1548ff;
-  border-right-color: #1548ff;
-  border-top-color: #0000cc;
-  color: #ffffff;
-}
-input[type=submit].mi:hover {
-  background-color: #001eea;
-  color: #eaeaea;
+  background-color: <%= color(0.1, 0.6, 0.1) %>;
+  border-bottom-color: <%= color(0, 0.5, 0) %>;
+  border-left-color: <%= color(0.05, 0.45, 0.05) %>;
+  border-right-color: <%= color(0.05, 0.45, 0.05) %>;
+  border-top-color: <%= color(0.1, 0.6, 0.1) %>;
+  color: <%= color(1, 1, 1) %>;
 }
 input[type=submit].mi:active {
-  background-color: #0000cc;
-  color: #cccccc;
+  background-color: <%= color(0, 0.5, 0) %>;
+  background-image: none;
+  border-bottom-color: <%= color(0, 0.5, 0) %>;
+  border-left-color: <%= color(0, 0.35, 0) %>;
+  border-right-color: <%= color(0, 0.35, 0) %>;
+  border-top-color: <%= color(0, 0.4, 0) %>;
+  color: <%= color(1, 1, 1) %>;
 }
+
+/* mi_checkbox */
 
 input[type=checkbox].mi {
   margin: 0 5px 0 0;
@@ -214,6 +203,16 @@ table.dialog-background {
   top: 0;
   left: 0;
   width: 100%;
+}
+
+/* mi_divider */
+
+hr.mi {
+  background: #ccc;
+  border: none;
+  height: 1px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 /* mi_field */
@@ -320,19 +319,6 @@ div.mi_message.warning {
   border-color: #fc0;
 }
 
-/* mi_panel */
-
-div.mi_panel {
-  background-color: #ffffff;
-  border-bottom-color: #eaeaea;
-  border-bottom-style: solid;
-  border-bottom-width: 0.1em;
-  border-top-color: #cccccc;
-  border-top-style: solid;
-  border-top-width: 0.1em;
-  padding: 1em;
-}
-
 /* mi_paragraph */
 
 p.mi {
@@ -350,7 +336,7 @@ img.mi_picture {
 /* mi_quote */
 
 blockquote.mi {
-  background-color: #e5e5e5;
+background-color: #e5e5e5;
 }
 
 /* mi_tray */
@@ -359,13 +345,13 @@ div.mi_tray_inner {
   margin: 1em;
 }
 div.mi_tray_outer {
-  background-color: #cccccc;
-  border-bottom-color: #e1e1e1;
-  border-left-color: #b7b7b7;
-  border-right-color: #b7b7b7;
+  background-color: <%= color(0.9, 0.9, 0.9) %>;
+  border-bottom-color: <%= color(0.8, 0.8, 0.8) %>;
+  border-left-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-radius: 0.5em;
+  border-right-color: <%= color(0.75, 0.75, 0.75) %>;
   border-style: solid;
-  border-top-color: #999999;
+  border-top-color: <%= color(0.7, 0.7, 0.7) %>;
   border-width: 0.1em;
   margin: 1em;
-  <%= round_corners(:amount => 0.5) %>
 }
