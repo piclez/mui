@@ -19,6 +19,7 @@ module Merb
         options[:type] ||= 'panel'
         attributes={}
         attributes[:class] = 'mi_bar'
+        attributes[:class] << %{_#{options[:edge]}} if options[:edge]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
@@ -45,6 +46,28 @@ module Merb
         elsif user_agent.include? 'msie'
           'ie'
         end
+      end
+      
+      def mi_checkbox(text, options={})
+        attributes={}
+        attributes[:class] = 'mi'
+        attributes[:id] = options[:id]
+        attributes[:checked] = 'checked' if options[:selected] == true
+        attributes[:type] = 'checkbox'
+        attributes_label={}
+        attributes_label[:class] = 'mi'
+        attributes_label[:for] = options[:id]
+        %{<input #{attributes.to_xml_attributes}/> <label #{attributes_label.to_xml_attributes}>#{text}</label>
+        }
+      end
+
+      def mi_field(text='', options={})
+        attributes={}
+        attributes[:class] = 'mi'
+        attributes[:id] = options[:id]
+        attributes[:type] = 'text'
+        attributes[:value] = text
+        %{<input #{attributes.to_xml_attributes}/>}
       end
 
       def mi_label(text, options={})
@@ -73,10 +96,17 @@ module Merb
         %{<img #{attributes.to_xml_attributes} />}
       end
 
-      def mi_tray(options={}, &block)
-        options[:type] ||= 'outer'
+      def mi_tab(text, options={})
         attributes={}
-        attributes[:class] = %(mi_tray_#{options[:type]})
+        attributes[:class] = 'mi_tab'
+        attributes[:class] << '_selected' if options[:selected] == true
+        attributes[:id] = options[:id]
+        %{<button #{attributes.to_xml_attributes}>#{text}</button>}
+      end
+
+      def mi_tray(options={}, &block)
+        attributes={}
+        attributes[:class] = 'mi_tray'
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 

@@ -1,6 +1,5 @@
 <%= @gecko -%>
 <%= @msie -%>
-<%= @webkit -%>
 * {
   border-collapse: collapse;
   border-spacing: 0;
@@ -20,34 +19,28 @@ body.mi {
 
 /* bar */
 
-div.mi_bar {
+div.mi_bar, div.mi_bar_bottom, div.mi_bar_top {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
-  border-bottom-color: <%= color(0, 0, 0) %>;
-  border-bottom-style: solid;
-  border-bottom-width: 0.1em;
-  border-radius: 0.5em;
-  border-top-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-top-style: solid;
-  border-top-width: 0.1em;
   color: <%= color(1, 1, 1) %>;
-  padding-bottom: 0.25em;
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0.25em;
+  height: 2em;
+  line-height: 2em;
 }
-div.mi_tray_outer div.mi_bar {
-  border-bottom-style: none;
-  border-radius-bottomleft: 0.5em;
-  border-radius-bottomright: 0.5em;
+div.mi_block div.mi_bar {
+  <%= border_radius %>
+}
+div.mi_bar_bottom {
+  <%= border_radius(:edge => 'bottom') %>
+}
+div.mi_bar_top {
+  <%= border_radius(:edge => 'top') %>
 }
 
 /* block */
 
 div.mi_block {
-  background-color: #fff;
   margin: 1em;
 }
 
@@ -63,6 +56,10 @@ button.mi, input[type=button].mi, input[type=reset].mi, input[type=submit].mi {
   height: 1.5em;
   opacity: 0.9;
   padding: 0 0.75em 0 0.75em;
+  <%= border_radius %>
+}
+button.mi:first-child, input[type=button].mi:first-child, input[type=reset].mi:first-child, input[type=submit].mi:first-child {
+  margin-left: 1em;
 }
 button.mi:hover, input[type=button].mi:hover, input[type=reset].mi:hover, input[type=submit].mi:hover {
   opacity: 1;
@@ -86,9 +83,9 @@ button.mi:active, input[type=button].mi:active, input[type=reset].mi:active {
 }
 input[type=submit].mi {
   background-color: <%= color(0.1, 0.6, 0.1) %>;
-  border-bottom-color: <%= color(0, 0.5, 0) %>;
-  border-left-color: <%= color(0.05, 0.45, 0.05) %>;
-  border-right-color: <%= color(0.05, 0.45, 0.05) %>;
+  border-bottom-color: <%= color(0, 0.45, 0) %>;
+  border-left-color: <%= color(0.05, 0.55, 0.05) %>;
+  border-right-color: <%= color(0.05, 0.55, 0.05) %>;
   border-top-color: <%= color(0.1, 0.6, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
@@ -98,24 +95,23 @@ input[type=submit].mi:active {
   border-bottom-color: <%= color(0, 0.5, 0) %>;
   border-left-color: <%= color(0, 0.35, 0) %>;
   border-right-color: <%= color(0, 0.35, 0) %>;
-  border-top-color: <%= color(0, 0.4, 0) %>;
+  border-top-color: <%= color(0, 0.3, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
 
 /* mi_checkbox */
 
 input[type=checkbox].mi {
-  margin: 0 5px 0 0;
 }
 
 /* mi_code */
 
 code.mi {
-  background-color: #000;
-  border-color: #000;
+  background-color: <%= color(0, 0, 0) %>;
+  border-color: <%= color(0, 0, 0) %>;
   border-style: solid;
   border-width: 1px;
-  color: #fff;
+  color: <%= color(1, 1, 1) %>;
   display: block;
   font-family: 'Bitstream Vera Sans Mono', 'Monaco', monospace;
   font-size: small;
@@ -126,17 +122,17 @@ code.mi {
   margin-top: 5px;
 }
 code.mi var {
-  color: #999;
+  color: <%= color(0.75, 0.75, 0.75) %>;
 }
 
 /* mi_dialog */
 
 div.dialog-foreground {
   -moz-border-radius: 6px;
-  -moz-box-shadow: 0 2px 4px #000;
+  -moz-box-shadow: 0 2px 4px <%= color(0, 0, 0) %>;
   -webkit-border-radius: 6px;
-  -webkit-box-shadow: 0 2px 4px #000;
-  color: #fff;
+  -webkit-box-shadow: 0 2px 4px <%= color(0, 0, 0) %>;
+  color: <%= color(1, 1, 1) %>;
 }
 div.dialog-foreground div.dialog-middle {
   background-image: url('/images/transparent-black.png');
@@ -155,7 +151,7 @@ div.dialog-foreground div.dialog-middle table.index th {
   padding-top: 1px;
 }
 div.dialog-foreground div.dialog-middle table.index th:first-child {
-  color: #fff;
+  color: <%= color(1, 1, 1) %>;
 }
 div.dialog-foreground div.dialog-middle td {
   padding-left: 30px;
@@ -208,7 +204,7 @@ table.dialog-background {
 /* mi_divider */
 
 hr.mi {
-  background: #ccc;
+  background: <%= color(0, 0, 0) %>;
   border: none;
   height: 1px;
   margin-bottom: 20px;
@@ -218,20 +214,20 @@ hr.mi {
 /* mi_field */
 
 input[type=text].mi, select.mi, textarea.mi {
-  -khtml-appearance: none;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-bottom-color: #ccc;
-  border-left-color: #999;
-  border-radius: 3px 3px;
-  border-right-color: #999;
+  background-color: <%= color(1, 1, 1) %>;
+  border-bottom-color: <%= color(0.8, 0.8, 0.8) %>;
+  border-left-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-right-color: <%= color(0.75, 0.75, 0.75) %>;
   border-style: solid;
-  border-top-color: #666;
-  border-width: 1px;
+  border-top-color: <%= color(0.7, 0.7, 0.7) %>;
+  border-width: 0.1em;
+  color: <%= color(0, 0, 0) %>;
   font-size: 1em;
+  padding: 0.25em 0.75em 0.25em 0.75em;
+  <%= border_radius %>
 }
 textarea.mi {
-  min-height: 80px;
+  min-height: 10em;
   width: 100%;
 }
 
@@ -321,8 +317,11 @@ div.mi_message.warning {
 
 /* mi_paragraph */
 
-p.mi {
-  margin-top: 1em;
+p.mi:first-child:first-letter {
+  font-size: 1.5em;
+}
+p+p.mi {
+  text-indent: 2em;
 }
 
 /* mi_picture */
@@ -339,19 +338,58 @@ blockquote.mi {
 background-color: #e5e5e5;
 }
 
+/* tab */
+
+button.mi_tab, button.mi_tab_selected {
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  border-style: solid;
+  border-width: 0.1em;
+  font-size: 1em;
+  height: 2em;
+  opacity: 0.9;
+  padding: 0 0.75em 0 0.75em;
+}
+button.mi_tab {
+  background: none;
+  border-bottom-color: <%= color(0, 0, 0) %>;
+  border-left-color: <%= color(0.15, 0.15, 0.15) %>;
+  border-right-color: <%= color(0, 0, 0) %>;
+  border-top-color: <%= color(0.1, 0.1, 0.1) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+button.mi_tab:hover {
+  background-color: <%= color(0.15, 0.15, 0.15) %>;
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+}
+button.mi_tab:active, button.mi_tab_selected {
+  background-color: <%= color(0, 0.3, 0.9) %>;
+  border-bottom-color: <%= color(0, 0.2, 0.8) %>;
+  border-left-color: <%= color(0, 0.25, 0.85) %>;
+  border-right-color: <%= color(0, 0.2, 0.8) %>;
+  border-top-color: <%= color(0, 0.3, 0.9) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+div.mi_block button.mi_tab:first-child, div.mi_block button.mi_tab_selected:first-child {
+  <%= border_radius(:edge => 'left') %>
+}
+div.mi_bar_top button.mi_tab:first-child, div.mi_bar_top button.mi_tab_selected:first-child {
+  <%= border_radius(:corner => 'top_left') %>
+}
+
 /* mi_tray */
 
-div.mi_tray_inner {
-  margin: 1em;
-}
-div.mi_tray_outer {
+div.mi_tray {
   background-color: <%= color(0.9, 0.9, 0.9) %>;
   border-bottom-color: <%= color(0.8, 0.8, 0.8) %>;
   border-left-color: <%= color(0.75, 0.75, 0.75) %>;
-  border-radius: 0.5em;
   border-right-color: <%= color(0.75, 0.75, 0.75) %>;
   border-style: solid;
   border-top-color: <%= color(0.7, 0.7, 0.7) %>;
   border-width: 0.1em;
   margin: 1em;
+  <%= border_radius %>
 }
