@@ -20,18 +20,22 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_bar'
         attributes[:class] << %{_#{options[:edge]}} if options[:edge]
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
       def mi_block(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_block'
+        attributes[:class] << '_inline' if options[:inline] == true
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
       def mi_button(text, options={})
         attributes={}
         attributes[:class] = 'mi'
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         options[:type] ||= 'button'
         attributes[:type] = options[:type]
         %{<input #{attributes.to_xml_attributes} value="#{text}"/>}
@@ -86,6 +90,7 @@ module Merb
       def mi_paragraph(options={}, &block)
         attributes={}
         attributes[:class] = 'mi'
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
@@ -93,6 +98,7 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_picture'
         attributes[:src] ||= file
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<img #{attributes.to_xml_attributes} />}
       end
 
@@ -101,12 +107,14 @@ module Merb
         attributes[:class] = 'mi_tab'
         attributes[:class] << '_selected' if options[:selected] == true
         attributes[:id] = options[:id]
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<button #{attributes.to_xml_attributes}>#{text}</button>}
       end
 
       def mi_tray(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_tray'
+        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 

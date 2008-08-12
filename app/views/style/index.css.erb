@@ -35,8 +35,12 @@ div.mi_bar_top {
 
 /* block */
 
-div.mi_block {
+div.mi_block, div.mi_block_inline {
   margin: 1em;
+}
+div.mi_block_inline {
+  display: inline-block;
+  vertical-align: top;
 }
 
 /* button */
@@ -100,7 +104,7 @@ input[type=checkbox].mi_checkbox {
   vertical-align: middle;
 }
 
-/* mi_code */
+/* code */
 
 code.mi {
   background-color: <%= color(0, 0, 0) %>;
@@ -121,7 +125,7 @@ code.mi var {
   color: <%= color(0.75, 0.75, 0.75) %>;
 }
 
-/* mi_dialog */
+/* dialog */
 
 div.dialog-foreground {
   -moz-border-radius: 6px;
@@ -197,9 +201,9 @@ table.dialog-background {
   width: 100%;
 }
 
-/* mi_divider */
+/* divider */
 
-hr.mi {
+hr.mi_divider {
   background: <%= color(0, 0, 0) %>;
   border: none;
   height: 1px;
@@ -207,7 +211,7 @@ hr.mi {
   margin-top: 20px;
 }
 
-/* mi_field */
+/* field */
 
 div.mi_field_label, div.mi_field_label_required {
   font-size: 0.75em;
@@ -236,7 +240,7 @@ textarea.mi_field {
   width: 100%;
 }
 
-/* mi_key */
+/* key */
 
 kbd.mi {
   background-color: #e5e5e5;
@@ -248,7 +252,7 @@ label.mi_label {
   display: inline-block;
 }
 
-/* mi_link */
+/* link */
 
 a.mi_link {
   color: #0066ff;
@@ -270,7 +274,7 @@ a.mi_link:hover {
   text-decoration: underline;
 }
 
-/* mi_logo */
+/* logo */
 
 div.mi_logo {
   background-image: url('/images/logo.png');
@@ -280,14 +284,14 @@ div.mi_logo {
   width: 150px;
 }
 
-/* mi_menu */
+/* menu */
 
 select.mi {
   padding-left: 2px;
   padding-right: 2px;
 }
 
-/* mi_message */
+/* message */
 
 div.mi_message {
   border: solid 1px;
@@ -309,7 +313,7 @@ div.mi_message.warning {
   border-color: #fc0;
 }
 
-/* mi_paragraph */
+/* paragraph */
 
 p.mi:first-child:first-letter {
   font-size: 1.5em;
@@ -318,7 +322,7 @@ p+p.mi {
   text-indent: 2em;
 }
 
-/* mi_picture */
+/* picture */
 
 img.mi_picture {
 	border-color: #000;
@@ -326,7 +330,7 @@ img.mi_picture {
   border-width: 2px;
 }
 
-/* mi_quote */
+/* quote */
 
 blockquote.mi {
 background-color: #e5e5e5;
@@ -383,7 +387,7 @@ table.mi_table {
   border-width: 0;
 }
 
-/* mi_tray */
+/* tray */
 
 div.mi_tray {
   background-color: <%= color(0.8, 0.8, 0.8) %>;
@@ -393,6 +397,5 @@ div.mi_tray {
   border-style: solid;
   border-top-color: <%= color(0.65, 0.65, 0.65) %>;
   border-width: 0.1em;
-  margin: 1em;
   <%= border_radius %>
 }
