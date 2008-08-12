@@ -9,7 +9,7 @@ class MerbInterface::Style < MerbInterface::Application
         property('padding', :value => 0)
       end
     elsif mi_browser == 'msie'
-      @msie = selector('button.mi, input[type=button].mi, input[type=reset].mi, input[type=submit].mi') do
+      @msie = selector('.mi_button, .mi_tab, .mi_tab_selected') do
         property('overflow', :value => 'visible')
         property('width', :value => 'auto')
       end

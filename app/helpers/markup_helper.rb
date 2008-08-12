@@ -29,12 +29,12 @@ module Merb
         attributes[:class] = 'mi_block'
         attributes[:class] << '_inline' if options[:inline] == true
         attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
-        %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
+        %{<span #{attributes.to_xml_attributes}>#{capture(&block)}</span>}
       end
 
       def mi_button(text, options={})
         attributes={}
-        attributes[:class] = 'mi'
+        attributes[:class] = 'mi_button'
         attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
         options[:type] ||= 'button'
         attributes[:type] = options[:type]
@@ -48,7 +48,7 @@ module Merb
         elsif user_agent.include? 'gecko'
           'gecko'
         elsif user_agent.include? 'msie'
-          'ie'
+          'msie'
         end
       end
       

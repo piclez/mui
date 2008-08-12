@@ -8,10 +8,12 @@ module Merb
           property('-moz') do
             property('border') do
               if options[:corner] == 'top_left'
-                property('bottomleft', :value => 0)
-                property('bottomright', :value => 0)
-                property('topleft', :value => %{#{options[:amount]}em})
-                property('topright', :value => 0)
+                property('radius') do
+                  property('bottomleft', :value => 0)
+                  property('bottomright', :value => 0)
+                  property('topleft', :value => %{#{options[:amount]}em})
+                  property('topright', :value => 0)
+                end
               elsif options[:edge] == 'left'
                 property('radius') do
                   property('bottomleft', :value => %{#{options[:amount]}em})

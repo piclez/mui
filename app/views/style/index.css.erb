@@ -7,14 +7,14 @@
 
 /* background */
 
-body.mi_background {
+.mi_background {
   background-image: url('/images/body.png');
   background-repeat: repeat-x;
 }
 
 /* bar */
 
-div.mi_bar, div.mi_bar_bottom, div.mi_bar_top {
+.mi_bar, .mi_bar_bottom, .mi_bar_top {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
@@ -22,48 +22,51 @@ div.mi_bar, div.mi_bar_bottom, div.mi_bar_top {
   color: <%= color(1, 1, 1) %>;
   height: 2em;
   line-height: 2em;
+  white-space: nowrap;
 }
-div.mi_block div.mi_bar {
+.mi_block .mi_bar, .mi_block_inline .mi_bar {
   <%= border_radius %>
 }
-div.mi_bar_bottom {
-  <%= border_radius(:edge => 'bottom') %>
+.mi_bar_bottom {
+  <%= border_radius(:amount => 0.425, :edge => 'bottom') %>
 }
-div.mi_bar_top {
-  <%= border_radius(:edge => 'top') %>
+.mi_bar_top {
+  <%= border_radius(:amount => 0.425, :edge => 'top') %>
 }
 
 /* block */
 
-div.mi_block, div.mi_block_inline {
+.mi_block {
+  display: block;
   margin: 1em;
 }
-div.mi_block_inline {
+.mi_block_inline {
   display: inline-block;
+  margin: 1em;
   vertical-align: top;
 }
 
 /* button */
 
-button.mi, input[type=button].mi, input[type=reset].mi, input[type=submit].mi {
+.mi_button {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
   border-style: solid;
-  border-width: 0.1em;
+  border-width: 1px;
   font-size: 1em;
   height: 1.5em;
   opacity: 0.9;
   padding: 0 0.75em 0 0.75em;
   <%= border_radius %>
 }
-button.mi:first-child, input[type=button].mi:first-child, input[type=reset].mi:first-child, input[type=submit].mi:first-child {
+.mi_button:first-child {
   margin-left: 1em;
 }
-button.mi:hover, input[type=button].mi:hover, input[type=reset].mi:hover, input[type=submit].mi:hover {
+.mi_button:hover {
   opacity: 1;
 }
-button.mi, input[type=button].mi, input[type=reset].mi {
+button.mi_button, input[type=button].mi_button, input[type=reset].mi_button {
   background-color: <%= color(0.3, 0.3, 0.3) %>;
   border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
   border-left-color: <%= color(0.25, 0.25, 0.25) %>;
@@ -71,7 +74,7 @@ button.mi, input[type=button].mi, input[type=reset].mi {
   border-top-color: <%= color(0.3, 0.3, 0.3) %>;
   color: <%= color(1, 1, 1) %>;
 }
-button.mi:active, input[type=button].mi:active, input[type=reset].mi:active {
+button.mi_button:active, input[type=button].mi_button:active, input[type=reset].mi_button:active {
   background-color: <%= color(0.2, 0.2, 0.2) %>;
   background-image: none;
   border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
@@ -80,7 +83,7 @@ button.mi:active, input[type=button].mi:active, input[type=reset].mi:active {
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mi {
+input[type=submit].mi_button {
   background-color: <%= color(0.1, 0.6, 0.1) %>;
   border-bottom-color: <%= color(0, 0.45, 0) %>;
   border-left-color: <%= color(0.05, 0.55, 0.05) %>;
@@ -88,7 +91,7 @@ input[type=submit].mi {
   border-top-color: <%= color(0.1, 0.6, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mi:active {
+input[type=submit].mi_button:active {
   background-color: <%= color(0, 0.5, 0) %>;
   background-image: none;
   border-bottom-color: <%= color(0, 0.5, 0) %>;
@@ -227,7 +230,7 @@ input[type=text].mi_field, textarea.mi_field {
   border-right-color: <%= color(0.65, 0.65, 0.65) %>;
   border-style: solid;
   border-top-color: <%= color(0.55, 0.55, 0.55) %>;
-  border-width: 0.1em;
+  border-width: 1px;
   color: <%= color(0, 0, 0) %>;
   font-size: 1em;
   margin-bottom: 1em;
@@ -338,18 +341,18 @@ background-color: #e5e5e5;
 
 /* tab */
 
-button.mi_tab, button.mi_tab_selected {
+.mi_tab, .mi_tab_selected {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
   border-style: solid;
-  border-width: 0.1em;
+  border-width: 1px;
   font-size: 1em;
   height: 2em;
   opacity: 0.9;
   padding: 0 0.75em 0 0.75em;
 }
-button.mi_tab {
+.mi_tab {
   background: none;
   border-bottom-color: <%= color(0, 0, 0) %>;
   border-left-color: <%= color(0.15, 0.15, 0.15) %>;
@@ -357,13 +360,13 @@ button.mi_tab {
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-button.mi_tab:hover {
+.mi_tab:hover {
   background-color: <%= color(0.15, 0.15, 0.15) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
 }
-button.mi_tab:active, button.mi_tab_selected {
+.mi_tab:active, button.mi_tab_selected {
   background-color: <%= color(0, 0.3, 0.9) %>;
   border-bottom-color: <%= color(0, 0.2, 0.8) %>;
   border-left-color: <%= color(0, 0.25, 0.85) %>;
@@ -371,10 +374,10 @@ button.mi_tab:active, button.mi_tab_selected {
   border-top-color: <%= color(0, 0.3, 0.9) %>;
   color: <%= color(1, 1, 1) %>;
 }
-div.mi_block button.mi_tab:first-child, div.mi_block button.mi_tab_selected:first-child {
+.mi_block .mi_tab:first-child, .mi_block .mi_tab_selected:first-child {
   <%= border_radius(:edge => 'left') %>
 }
-div.mi_bar_top button.mi_tab:first-child, div.mi_bar_top button.mi_tab_selected:first-child {
+.mi_bar_top .mi_tab:first-child, .mi_bar_top .mi_tab_selected:first-child {
   <%= border_radius(:corner => 'top_left') %>
 }
 
@@ -396,6 +399,6 @@ div.mi_tray {
   border-right-color: <%= color(0.7, 0.7, 0.7) %>;
   border-style: solid;
   border-top-color: <%= color(0.65, 0.65, 0.65) %>;
-  border-width: 0.1em;
+  border-width: 1px;
   <%= border_radius %>
 }
