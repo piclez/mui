@@ -1,18 +1,13 @@
 <%= @gecko -%>
 <%= @msie -%>
 * {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: none;
-  border-width: 0;
   font-family: Helvetica, Arial, sans-serif;
   margin: 0;
-  padding: 0;
 }
 
 /* background */
 
-body.mi {
+body.mi_background {
   background-image: url('/images/body.png');
   background-repeat: repeat-x;
 }
@@ -99,9 +94,10 @@ input[type=submit].mi:active {
   color: <%= color(1, 1, 1) %>;
 }
 
-/* mi_checkbox */
+/* form */
 
-input[type=checkbox].mi {
+input[type=checkbox].mi_checkbox {
+  vertical-align: middle;
 }
 
 /* mi_code */
@@ -213,20 +209,29 @@ hr.mi {
 
 /* mi_field */
 
-input[type=text].mi, select.mi, textarea.mi {
+div.mi_field_label, div.mi_field_label_required {
+  font-size: 0.75em;
+  padding: 0.25em 1.25em 0.25em 1.25em;
+}
+div.mi_field_label_required {
+  font-weight: bold;
+}
+input[type=text].mi_field, textarea.mi_field {
   background-color: <%= color(1, 1, 1) %>;
-  border-bottom-color: <%= color(0.8, 0.8, 0.8) %>;
-  border-left-color: <%= color(0.75, 0.75, 0.75) %>;
-  border-right-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-left-color: <%= color(0.65, 0.65, 0.65) %>;
+  border-right-color: <%= color(0.65, 0.65, 0.65) %>;
   border-style: solid;
-  border-top-color: <%= color(0.7, 0.7, 0.7) %>;
+  border-top-color: <%= color(0.55, 0.55, 0.55) %>;
   border-width: 0.1em;
   color: <%= color(0, 0, 0) %>;
   font-size: 1em;
-  padding: 0.25em 0.75em 0.25em 0.75em;
-  <%= border_radius %>
+  margin-bottom: 1em;
+  margin-right: 1em;
+  padding: 0.1em 0.75em 0.1em 0.75em;
+  <%= border_radius(:amount => 0.25) %>
 }
-textarea.mi {
+textarea.mi_field {
   min-height: 10em;
   width: 100%;
 }
@@ -237,42 +242,31 @@ kbd.mi {
   background-color: #e5e5e5;
 }
 
-/* mi_label */
+/* label */
 
-label.mi_label_block, label.mi_label_inline {
-  font-size: 1em;
-  font-weight: normal;
-}
-label.mi_label_block {
-  display: block;
-  margin-bottom: 5px;
-  margin-top: 15px;
-}
-label.mi_label_inline {
-  display: inline;
-  margin-bottom: 0;
-  margin-top: 0;
+label.mi_label {
+  display: inline-block;
 }
 
 /* mi_link */
 
-a.mi {
+a.mi_link {
   color: #0066ff;
   text-decoration: none;
 }
-a.mi:visited {
+a.mi_link:visited {
   color: #993399;
 }
-a.mi:active {
+a.mi_link:active {
   color: #3399ff;
   outline: 0;
   text-decoration: underline;
 }
-a.mi:focus {
+a.mi_link:focus {
   color: #3399ff;
   outline: 0;
 }
-a.mi:hover {
+a.mi_link:hover {
   text-decoration: underline;
 }
 
@@ -378,6 +372,15 @@ div.mi_block button.mi_tab:first-child, div.mi_block button.mi_tab_selected:firs
 }
 div.mi_bar_top button.mi_tab:first-child, div.mi_bar_top button.mi_tab_selected:first-child {
   <%= border_radius(:corner => 'top_left') %>
+}
+
+/* table */
+
+table.mi_table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-style: none;
+  border-width: 0;
 }
 
 /* mi_tray */

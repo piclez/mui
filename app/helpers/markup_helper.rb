@@ -49,36 +49,36 @@ module Merb
       end
       
       def mi_checkbox(text, options={})
-        attributes={}
-        attributes[:class] = 'mi'
-        attributes[:id] = options[:id]
-        attributes[:checked] = 'checked' if options[:selected] == true
-        attributes[:type] = 'checkbox'
+        attributes_input={}
+        attributes_input[:class] = 'mi_checkbox'
+        attributes_input[:id] = options[:id]
+        attributes_input[:checked] = 'checked' if options[:selected] == true
+        attributes_input[:type] = 'checkbox'
         attributes_label={}
-        attributes_label[:class] = 'mi'
+        attributes_label[:class] = 'mi_label'
         attributes_label[:for] = options[:id]
-        %{<input #{attributes.to_xml_attributes}/> <label #{attributes_label.to_xml_attributes}>#{text}</label>
+        %{<label #{attributes_label.to_xml_attributes}><input #{attributes_input.to_xml_attributes}/> #{text}</label>
         }
       end
 
-      def mi_field(text='', options={})
-        attributes={}
-        attributes[:class] = 'mi'
-        attributes[:id] = options[:id]
-        attributes[:type] = 'text'
-        attributes[:value] = text
-        %{<input #{attributes.to_xml_attributes}/>}
-      end
-
-      def mi_label(text, options={})
-        attributes={}
-        attributes[:class] = 'mi'
-        %{<label #{attributes.to_xml_attributes}>#{text}</label>}
+      def mi_field(text, options={})
+        options[:required] ||= true
+        attributes_div={}
+        attributes_div[:class] ||= 'mi_field_label'
+        attributes_div[:class] << '_required' if options[:required] == true
+        attributes_input={}
+        attributes_input[:class] = 'mi_field'
+        attributes_input[:id] = options[:id]
+        attributes_input[:type] = 'text'
+        attributes_input[:value] = options[:text] if options[:text]
+        attributes_label={}
+        attributes_label[:class] = 'mi_label'
+        %{<label #{attributes_label.to_xml_attributes}><div #{attributes_div.to_xml_attributes}>#{text}</div><input #{attributes_input.to_xml_attributes}/></label>}
       end
 
       def mi_link(block, path='', options={})
         attributes={}
-        attributes[:class] = 'mi'
+        attributes[:class] = 'mi_link'
         attributes[:href] ||= path
         %{<a #{attributes.to_xml_attributes}>#{block}</a>}
       end
