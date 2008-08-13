@@ -15,7 +15,7 @@
 /* bar */
 
 .mi_bar, .mi_bar_bottom, .mi_bar_top {
-  background-color: <%= color(0.1, 0.1, 0.1) %>;
+  background-color: <%= color(0, 0, 0) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
@@ -27,11 +27,21 @@
 .mi_block .mi_bar, .mi_block_inline .mi_bar {
   <%= border_radius %>
 }
-.mi_bar_bottom {
-  <%= border_radius(:amount => 0.425, :edge => 'bottom') %>
+.mi_panel .mi_bar_bottom {
+  background-color: <%= color(1, 1, 1) %>;
+  border-top-color: <%= color(0.9, 0.9, 0.9) %>;
+  border-top-style: solid;
+  border-top-width: 1px;
+  color: <%= color(0.2, 0.2, 0.2) %>;
+  <%= border_radius(:edge => 'bottom') %>
 }
-.mi_bar_top {
-  <%= border_radius(:amount => 0.425, :edge => 'top') %>
+.mi_panel .mi_bar_top {
+  background-color: <%= color(1, 1, 1) %>;
+  border-bottom-color: <%= color(0.7, 0.7, 0.7) %>;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: <%= color(0.2, 0.2, 0.2) %>;
+  <%= border_radius(:edge => 'top') %>
 }
 
 /* block */
@@ -42,7 +52,7 @@
 }
 .mi_block_inline {
   display: inline-block;
-  margin: 1em;
+  padding: 1em;
   vertical-align: top;
 }
 
@@ -55,49 +65,76 @@
   border-style: solid;
   border-width: 1px;
   font-size: 1em;
-  height: 1.5em;
-  opacity: 0.9;
-  padding: 0 0.75em 0 0.75em;
+  padding: 0.25em 0.75em 0.25em 0.75em;
+  text-align: left;
+  white-space: nowrap;
   <%= border_radius %>
 }
-.mi_button:first-child {
+.mi_button .mi_picture {
+  border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
+  border-left-color: <%= color(0.4, 0.4, 0.4) %>;
+  border-right-color: <%= color(0.4, 0.4, 0.4) %>;
+  border-top-color: <%= color(0.2, 0.2, 0.2) %>;
+  margin-right: 1em;
+  vertical-align: middle;
+}
+.mi_button .mi_button_text {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: normal;
+  width: 75%;
+}
+.mi_bar .mi_button:first-child, .mi_bar_bottom .mi_button:first-child, .mi_bar_top .mi_button:first-child {
   margin-left: 1em;
 }
-.mi_button:hover {
-  opacity: 1;
-}
-button.mi_button, input[type=button].mi_button, input[type=reset].mi_button {
+button.mi_button {
   background-color: <%= color(0.3, 0.3, 0.3) %>;
-  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-left-color: <%= color(0.25, 0.25, 0.25) %>;
-  border-right-color: <%= color(0.25, 0.25, 0.25) %>;
+  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-left-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-right-color: <%= color(0.2, 0.2, 0.2) %>;
   border-top-color: <%= color(0.3, 0.3, 0.3) %>;
   color: <%= color(1, 1, 1) %>;
 }
-button.mi_button:active, input[type=button].mi_button:active, input[type=reset].mi_button:active {
-  background-color: <%= color(0.2, 0.2, 0.2) %>;
-  background-image: none;
+button.mi_button:hover {
+  background-color: <%= color(0.4, 0.4, 0.4) %>;
   border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-left-color: <%= color(0.15, 0.15, 0.15) %>;
-  border-right-color: <%= color(0.15, 0.15, 0.15) %>;
+  border-left-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-right-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-top-color: <%= color(0.4, 0.4, 0.4) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+button.mi_button:active {
+  background-color: <%= color(0.3, 0.3, 0.3) %>;
+  background-image: none;
+  border-bottom-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-left-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-right-color: <%= color(0.2, 0.2, 0.2) %>;
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
 input[type=submit].mi_button {
-  background-color: <%= color(0.1, 0.6, 0.1) %>;
-  border-bottom-color: <%= color(0, 0.45, 0) %>;
-  border-left-color: <%= color(0.05, 0.55, 0.05) %>;
-  border-right-color: <%= color(0.05, 0.55, 0.05) %>;
-  border-top-color: <%= color(0.1, 0.6, 0.1) %>;
+  background-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-bottom-color: <%= color(0, 0.3, 0) %>;
+  border-left-color: <%= color(0, 0.4, 0) %>;
+  border-right-color: <%= color(0, 0.4, 0) %>;
+  border-top-color: <%= color(0.1, 0.5, 0.1) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+input[type=submit].mi_button:hover {
+  background-color: <%= color(0.2, 0.6, 0.2) %>;
+  border-bottom-color: <%= color(0, 0.4, 0) %>;
+  border-left-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-right-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-top-color: <%= color(0.2, 0.6, 0.2) %>;
   color: <%= color(1, 1, 1) %>;
 }
 input[type=submit].mi_button:active {
-  background-color: <%= color(0, 0.5, 0) %>;
+  background-color: <%= color(0.1, 0.5, 0.1) %>;
   background-image: none;
-  border-bottom-color: <%= color(0, 0.5, 0) %>;
-  border-left-color: <%= color(0, 0.35, 0) %>;
-  border-right-color: <%= color(0, 0.35, 0) %>;
-  border-top-color: <%= color(0, 0.3, 0) %>;
+  border-bottom-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-left-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-right-color: <%= color(0.1, 0.5, 0.1) %>;
+  border-top-color: <%= color(0, 0.4, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
 
@@ -233,8 +270,6 @@ input[type=text].mi_field, textarea.mi_field {
   border-width: 1px;
   color: <%= color(0, 0, 0) %>;
   font-size: 1em;
-  margin-bottom: 1em;
-  margin-right: 1em;
   padding: 0.1em 0.75em 0.1em 0.75em;
   <%= border_radius(:amount => 0.25) %>
 }
@@ -277,21 +312,25 @@ a.mi_link:hover {
   text-decoration: underline;
 }
 
-/* logo */
-
-div.mi_logo {
-  background-image: url('/images/logo.png');
-  background-repeat: no-repeat;
-  height: 100px;
-  margin-left: 60px;
-  width: 150px;
-}
-
 /* menu */
 
-select.mi {
+select.mi_menu {
   padding-left: 2px;
   padding-right: 2px;
+}
+
+/* merb */
+
+div.mi_merb {
+  background-image: url('/images/merb.png');
+  border-style: solid;
+  border-width: 0;
+  float: right;
+  height: 100px;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  width: 250px;
+  <%= border_radius %>
 }
 
 /* message */
@@ -316,27 +355,50 @@ div.mi_message.warning {
   border-color: #fc0;
 }
 
+/* panel */
+
+div.mi_panel {
+  background-color: <%= color(0.95, 0.95, 0.95) %>;
+  background-image: url('/images/bevel.png');
+  background-position: top center;
+  background-repeat: repeat-x;
+  border-color: <%= color(0.85, 0.85, 0.85) %>;
+  border-style: solid;
+  border-width: 1px;
+  <%= border_radius(:amount => 0.6) %>
+}
+
 /* paragraph */
 
-p.mi:first-child:first-letter {
-  font-size: 1.5em;
+p {
+  margin-top: 1em;
 }
-p+p.mi {
-  text-indent: 2em;
+p.mi_paragraph:first-letter {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+p+p.mi_paragraph {
+  font-size: 1em;
+  margin-top: 0.5em;
+  text-indent: 1.5em;
+}
+p+p.mi_paragraph:first-letter {
+  font-size: 1em;
+  font-weight: normal;
 }
 
 /* picture */
 
 img.mi_picture {
-	border-color: #000;
+  border-color: <%= color(0.5, 0.5, 0.5) %>;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
 }
 
 /* quote */
 
-blockquote.mi {
-background-color: #e5e5e5;
+blockquote.mi_quote {
+  background-color: #e5e5e5;
 }
 
 /* tab */
@@ -345,39 +407,44 @@ background-color: #e5e5e5;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
-  border-style: solid;
-  border-width: 1px;
+  border-bottom-style: none;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-style: none;
   font-size: 1em;
   height: 2em;
-  opacity: 0.9;
   padding: 0 0.75em 0 0.75em;
 }
 .mi_tab {
-  background: none;
-  border-bottom-color: <%= color(0, 0, 0) %>;
-  border-left-color: <%= color(0.15, 0.15, 0.15) %>;
+  background-color: <%= color(0, 0, 0) %>;
+  border-left-color: <%= color(0.1, 0.1, 0.1) %>;
   border-right-color: <%= color(0, 0, 0) %>;
-  border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mi_tab:hover {
-  background-color: <%= color(0.15, 0.15, 0.15) %>;
-  background-image: url('/images/reflection.png');
-  background-position: center center;
-  background-repeat: repeat-x;
+.mi_panel .mi_tab {
+  background-color: <%= color(1, 1, 1) %>;
+  border-left-color: <%= color(1, 1, 1) %>;
+  border-right-color: <%= color(0.9, 0.9, 0.9) %>;
+  color: <%= color(0.2, 0.2, 0.2) %>;
 }
-.mi_tab:active, button.mi_tab_selected {
+.mi_tab:hover {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
+}
+.mi_panel .mi_tab:hover {
+  background-color: <%= color(0.9, 0.9, 0.9) %>;
+}
+.mi_tab:active, .mi_tab_selected, .mi_panel .mi_tab:active, .mi_panel .mi_tab_selected {
   background-color: <%= color(0, 0.3, 0.9) %>;
-  border-bottom-color: <%= color(0, 0.2, 0.8) %>;
   border-left-color: <%= color(0, 0.25, 0.85) %>;
   border-right-color: <%= color(0, 0.2, 0.8) %>;
-  border-top-color: <%= color(0, 0.3, 0.9) %>;
   color: <%= color(1, 1, 1) %>;
 }
 .mi_block .mi_tab:first-child, .mi_block .mi_tab_selected:first-child {
   <%= border_radius(:edge => 'left') %>
 }
-.mi_bar_top .mi_tab:first-child, .mi_bar_top .mi_tab_selected:first-child {
+.mi_panel .mi_bar_top .mi_tab:first-child, .mi_panel .mi_bar_top .mi_tab_selected:first-child {
   <%= border_radius(:corner => 'top_left') %>
 }
 
@@ -390,15 +457,31 @@ table.mi_table {
   border-width: 0;
 }
 
+/* title */
+
+.mi_title {
+  margin-top: 1em;
+}
+.mi_title:first-child {
+  margin-top: 0;
+}
+.mi_bar .mi_title, .mi_bar_bottom .mi_title, .mi_bar_top .mi_title {
+  font-size: 1em;
+  margin-left: 1em;
+}
+
 /* tray */
 
 div.mi_tray {
-  background-color: <%= color(0.8, 0.8, 0.8) %>;
-  border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
-  border-left-color: <%= color(0.7, 0.7, 0.7) %>;
-  border-right-color: <%= color(0.7, 0.7, 0.7) %>;
+  background-color: <%= color(0.95, 0.95, 0.95) %>;
+  background-image: url('/images/bevel.png');
+  background-position: top center;
+  background-repeat: repeat-x;
+  border-bottom-color: <%= color(0.85, 0.85, 0.85) %>;
+  border-left-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-right-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-top-color: <%= color(0.6, 0.6, 0.6) %>;
   border-style: solid;
-  border-top-color: <%= color(0.65, 0.65, 0.65) %>;
   border-width: 1px;
-  <%= border_radius %>
+  <%= border_radius(:amount => 0.5) %>
 }

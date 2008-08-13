@@ -20,7 +20,7 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_bar'
         attributes[:class] << %{_#{options[:edge]}} if options[:edge]
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
@@ -28,17 +28,22 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_block'
         attributes[:class] << '_inline' if options[:inline] == true
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<span #{attributes.to_xml_attributes}>#{capture(&block)}</span>}
       end
 
-      def mi_button(text, options={})
-        attributes={}
-        attributes[:class] = 'mi_button'
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
-        options[:type] ||= 'button'
-        attributes[:type] = options[:type]
-        %{<input #{attributes.to_xml_attributes} value="#{text}"/>}
+      def mi_button(text='', options={}, &block)
+        attributes_button={}
+        attributes_button[:class] = 'mi_button'
+        attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+        attributes_button[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
+        attributes_span={}
+        attributes_span[:class] = 'mi_button_text'
+        if block
+          %{<button #{attributes_button.to_xml_attributes}>#{capture(&block)}<span #{attributes_span.to_xml_attributes}>#{text}</span></button>}
+        else
+          %{<button #{attributes_button.to_xml_attributes}>#{text}</button>}
+        end
       end
 
       def mi_browser
@@ -80,17 +85,30 @@ module Merb
         %{<label #{attributes_label.to_xml_attributes}><div #{attributes_div.to_xml_attributes}>#{text}</div><input #{attributes_input.to_xml_attributes}/></label>}
       end
 
-      def mi_link(block, path='', options={})
+      def mi_link(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_link'
-        attributes[:href] ||= path
-        %{<a #{attributes.to_xml_attributes}>#{block}</a>}
+        attributes[:href] = options[:url] if options[:url]
+        %{<a #{attributes.to_xml_attributes}>#{capture(&block)}</a>}
+      end
+
+      def mi_merb
+        attributes={}
+        attributes[:class] = 'mi_merb'
+        %{<div #{attributes.to_xml_attributes}></div>}
+      end
+
+      def mi_panel(options={}, &block)
+        attributes={}
+        attributes[:class] = 'mi_panel'
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
+        %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
       def mi_paragraph(options={}, &block)
         attributes={}
-        attributes[:class] = 'mi'
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:class] = 'mi_paragraph'
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
@@ -98,23 +116,34 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_picture'
         attributes[:src] ||= file
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<img #{attributes.to_xml_attributes} />}
       end
 
       def mi_tab(text, options={})
         attributes={}
         attributes[:class] = 'mi_tab'
-        attributes[:class] << '_selected' if options[:selected] == true
         attributes[:id] = options[:id]
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
+        if options[:controller] == controller_name || options[:selected] == true
+          attributes[:class] << '_selected'
+        else
+          attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+        end
         %{<button #{attributes.to_xml_attributes}>#{text}</button>}
+      end
+
+      def mi_title(text, options={})
+        options[:size] ||= 1
+        attributes={}
+        attributes[:class] = 'mi_title'
+        %{<h#{options[:size]} #{attributes.to_xml_attributes}>#{text}</h#{options[:size]}>}
       end
 
       def mi_tray(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_tray'
-        attributes[:style] = %{width:#{options[:width] * 100}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
