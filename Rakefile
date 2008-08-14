@@ -24,6 +24,7 @@ spec = Gem::Specification.new do |s|
   s.author = AUTHOR
   s.email = EMAIL
   s.homepage = HOMEPAGE
+  s.add_dependency('merb-core', '>= 0.9.4')
   s.add_dependency('merb-slices', '>= 0.9.4')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public,stubs}/**/*")
@@ -33,7 +34,7 @@ Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
-desc "Install Merb-interface as a gem"
+desc "Install MerbInterface as a gem"
 task :install => [:package] do
   sh %{#{sudo} gem install pkg/#{NAME}-#{GEM_VERSION} --no-update-sources}
 end
