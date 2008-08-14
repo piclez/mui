@@ -14,6 +14,13 @@ module Merb
                   property('topleft', :value => %{#{options[:amount]}em})
                   property('topright', :value => 0)
                 end
+              elsif options[:corner] == 'top_right_bottom_left'
+                property('radius') do
+                  property('bottomleft', :value => %{#{options[:amount]}em})
+                  property('bottomright', :value => 0)
+                  property('topleft', :value => 0)
+                  property('topright', :value => %{#{options[:amount]}em})
+                end
               elsif options[:edge] == 'left'
                 property('radius') do
                   property('bottomleft', :value => %{#{options[:amount]}em})
@@ -48,6 +55,11 @@ module Merb
                 property('bottom-right-radius', :value => 0)
                 property('top-left-radius', :value => %{#{options[:amount]}em})
                 property('top-right-radius', :value => 0)
+              elsif options[:corner] == 'top_right_bottom_left'
+                property('bottom-left-radius', :value => %{#{options[:amount]}em})
+                property('bottom-right-radius', :value => 0)
+                property('top-left-radius', :value => 0)
+                property('top-right-radius', :value => %{#{options[:amount]}em})
               elsif options[:edge] == 'left'
                 property('bottom-left-radius', :value => %{#{options[:amount]}em})
                 property('bottom-right-radius', :value => 0)
@@ -91,6 +103,10 @@ module Merb
         elsif options[:value]
           @child << %{\r  #{@parent}#{property}: #{options[:value]};}
         end
+      end
+      
+      def has_layout
+        'min-height: 0;' if mi_browser == 'msie'
       end
       
       def selector(selector)

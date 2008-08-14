@@ -16,31 +16,24 @@ module Merb
       end
 
       def mi_bar(options={}, &block)
-        options[:type] ||= 'panel'
         attributes={}
         attributes[:class] = 'mi_bar'
+        attributes[:class] << '_expanded' if options[:expanded] == true
         attributes[:class] << %{_#{options[:edge]}} if options[:edge]
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
-      end
-
-      def mi_block(options={}, &block)
-        attributes={}
-        attributes[:class] = 'mi_block'
-        attributes[:class] << '_inline' if options[:inline] == true
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
-        %{<span #{attributes.to_xml_attributes}>#{capture(&block)}</span>}
       end
 
       def mi_button(text='', options={}, &block)
         attributes_button={}
         attributes_button[:class] = 'mi_button'
         attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
-        attributes_button[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
-        attributes_span={}
-        attributes_span[:class] = 'mi_button_text'
-        if block
-          %{<button #{attributes_button.to_xml_attributes}>#{capture(&block)}<span #{attributes_span.to_xml_attributes}>#{text}</span></button>}
+        attributes_button[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
+        attributes_td={}
+        attributes_td[:class] = 'mi_button_text'
+        if block and text != ''
+          %{<button #{attributes_button.to_xml_attributes}><table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{text}</td></tr></table></button>}
+        elsif block
+          %{<button #{attributes_button.to_xml_attributes}>#{capture(&block)}</button>}
         else
           %{<button #{attributes_button.to_xml_attributes}>#{text}</button>}
         end
@@ -69,6 +62,13 @@ module Merb
         %{<label #{attributes_label.to_xml_attributes}><input #{attributes_input.to_xml_attributes}/> #{text}</label>
         }
       end
+      
+      def mi_column(options={}, &block)
+        attributes={}
+        attributes[:class] = 'mi_column'
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
+        %{<td #{attributes.to_xml_attributes}>#{capture(&block)}</td>}
+      end
 
       def mi_field(text, options={})
         options[:required] ||= true
@@ -95,20 +95,14 @@ module Merb
       def mi_merb
         attributes={}
         attributes[:class] = 'mi_merb'
+        attributes[:onclick] = %{location.href='http://merbivore.com/'}
         %{<div #{attributes.to_xml_attributes}></div>}
-      end
-
-      def mi_panel(options={}, &block)
-        attributes={}
-        attributes[:class] = 'mi_panel'
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
-        %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
       def mi_paragraph(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_paragraph'
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
+        attributes[:class] << '_first' if options[:first] == true
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
@@ -116,15 +110,20 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_picture'
         attributes[:src] ||= file
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<img #{attributes.to_xml_attributes} />}
+      end
+
+      def mi_row(options={}, &block)
+        attributes={}
+        attributes[:class] = 'mi_row'
+        %{<table #{attributes.to_xml_attributes}><tr>#{capture(&block)}</tr></table>}
       end
 
       def mi_tab(text, options={})
         attributes={}
         attributes[:class] = 'mi_tab'
         attributes[:id] = options[:id]
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
+        attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
         if options[:controller] == controller_name || options[:selected] == true
           attributes[:class] << '_selected'
         else
@@ -143,7 +142,6 @@ module Merb
       def mi_tray(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_tray'
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i - 3}%;} if options[:width]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 

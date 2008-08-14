@@ -14,7 +14,7 @@
 
 /* bar */
 
-.mi_bar, .mi_bar_bottom, .mi_bar_top {
+.mi_bar, .mi_bar_expanded, .mi_bar_bottom, .mi_bar_top {
   background-color: <%= color(0, 0, 0) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
@@ -24,10 +24,10 @@
   line-height: 2em;
   white-space: nowrap;
 }
-.mi_block .mi_bar, .mi_block_inline .mi_bar {
+.mi_bar {
   <%= border_radius %>
 }
-.mi_panel .mi_bar_bottom {
+.mi_tray .mi_bar_bottom {
   background-color: <%= color(1, 1, 1) %>;
   border-top-color: <%= color(0.9, 0.9, 0.9) %>;
   border-top-style: solid;
@@ -35,25 +35,13 @@
   color: <%= color(0.2, 0.2, 0.2) %>;
   <%= border_radius(:edge => 'bottom') %>
 }
-.mi_panel .mi_bar_top {
+.mi_tray .mi_bar_top {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.7, 0.7, 0.7) %>;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   color: <%= color(0.2, 0.2, 0.2) %>;
   <%= border_radius(:edge => 'top') %>
-}
-
-/* block */
-
-.mi_block {
-  display: block;
-  margin: 1em;
-}
-.mi_block_inline {
-  display: inline-block;
-  padding: 1em;
-  vertical-align: top;
 }
 
 /* button */
@@ -65,9 +53,12 @@
   border-style: solid;
   border-width: 1px;
   font-size: 1em;
-  padding: 0.25em 0.75em 0.25em 0.75em;
-  text-align: left;
-  white-space: nowrap;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-bottom: 0.25em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  padding-top: 0.25em;
   <%= border_radius %>
 }
 .mi_button .mi_picture {
@@ -75,17 +66,12 @@
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
   border-right-color: <%= color(0.4, 0.4, 0.4) %>;
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
-  margin-right: 1em;
-  vertical-align: middle;
+  margin: 0;
 }
 .mi_button .mi_button_text {
-  display: inline-block;
-  vertical-align: middle;
-  white-space: normal;
-  width: 75%;
-}
-.mi_bar .mi_button:first-child, .mi_bar_bottom .mi_button:first-child, .mi_bar_top .mi_button:first-child {
-  margin-left: 1em;
+  padding-left: 0.75em;
+  text-align: left;
+  width: 100%;
 }
 button.mi_button {
   background-color: <%= color(0.3, 0.3, 0.3) %>;
@@ -138,7 +124,7 @@ input[type=submit].mi_button:active {
   color: <%= color(1, 1, 1) %>;
 }
 
-/* form */
+/* checkbox */
 
 input[type=checkbox].mi_checkbox {
   vertical-align: middle;
@@ -163,6 +149,12 @@ code.mi {
 }
 code.mi var {
   color: <%= color(0.75, 0.75, 0.75) %>;
+}
+
+/* column */
+
+.mi_column {
+  vertical-align: top;
 }
 
 /* dialog */
@@ -330,7 +322,7 @@ div.mi_merb {
   margin-bottom: 1em;
   margin-left: 1em;
   width: 250px;
-  <%= border_radius %>
+  <%= border_radius(:corner => 'top_right_bottom_left') %>
 }
 
 /* message */
@@ -355,44 +347,33 @@ div.mi_message.warning {
   border-color: #fc0;
 }
 
-/* panel */
-
-div.mi_panel {
-  background-color: <%= color(0.95, 0.95, 0.95) %>;
-  background-image: url('/images/bevel.png');
-  background-position: top center;
-  background-repeat: repeat-x;
-  border-color: <%= color(0.85, 0.85, 0.85) %>;
-  border-style: solid;
-  border-width: 1px;
-  <%= border_radius(:amount => 0.6) %>
-}
-
 /* paragraph */
 
-p {
-  margin-top: 1em;
+p.mi_paragraph, p.mi_paragraph_first {
+  margin-left: 1em;
+  margin-right: 1em;
 }
-p.mi_paragraph:first-letter {
+p.mi_paragraph {
+  margin-top: 0.5em;
+}
+p.mi_paragraph_first {
+  margin-top: 1em;
+  <%= has_layout %>
+}
+p.mi_paragraph_first:first-letter {
   font-size: 1.5em;
   font-weight: bold;
-}
-p+p.mi_paragraph {
-  font-size: 1em;
-  margin-top: 0.5em;
-  text-indent: 1.5em;
-}
-p+p.mi_paragraph:first-letter {
-  font-size: 1em;
-  font-weight: normal;
 }
 
 /* picture */
 
-img.mi_picture {
+.mi_picture {
   border-color: <%= color(0.5, 0.5, 0.5) %>;
   border-style: solid;
   border-width: 1px;
+  margin-left: 1em;
+  margin-top: 1em;
+  vertical-align: middle;
 }
 
 /* quote */
@@ -423,7 +404,7 @@ blockquote.mi_quote {
   border-right-color: <%= color(0, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mi_panel .mi_tab {
+.mi_tray .mi_tab {
   background-color: <%= color(1, 1, 1) %>;
   border-left-color: <%= color(1, 1, 1) %>;
   border-right-color: <%= color(0.9, 0.9, 0.9) %>;
@@ -432,19 +413,19 @@ blockquote.mi_quote {
 .mi_tab:hover {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
 }
-.mi_panel .mi_tab:hover {
+.mi_tray .mi_tab:hover {
   background-color: <%= color(0.9, 0.9, 0.9) %>;
 }
-.mi_tab:active, .mi_tab_selected, .mi_panel .mi_tab:active, .mi_panel .mi_tab_selected {
+.mi_tab:active, .mi_tab_selected, .mi_tray .mi_tab:active, .mi_tray .mi_tab_selected {
   background-color: <%= color(0, 0.3, 0.9) %>;
   border-left-color: <%= color(0, 0.25, 0.85) %>;
   border-right-color: <%= color(0, 0.2, 0.8) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mi_block .mi_tab:first-child, .mi_block .mi_tab_selected:first-child {
+.mi_bar .mi_tab:first-child, .mi_bar .mi_tab_selected:first-child {
   <%= border_radius(:edge => 'left') %>
 }
-.mi_panel .mi_bar_top .mi_tab:first-child, .mi_panel .mi_bar_top .mi_tab_selected:first-child {
+.mi_tray .mi_bar_top .mi_tab:first-child, .mi_tray .mi_bar_top .mi_tab_selected:first-child {
   <%= border_radius(:corner => 'top_left') %>
 }
 
@@ -460,14 +441,13 @@ table.mi_table {
 /* title */
 
 .mi_title {
-  margin-top: 1em;
-}
-.mi_title:first-child {
-  margin-top: 0;
+  font-size: 2em;
+  margin: 0.5em;
 }
 .mi_bar .mi_title, .mi_bar_bottom .mi_title, .mi_bar_top .mi_title {
   font-size: 1em;
   margin-left: 1em;
+  margin-top: 0;
 }
 
 /* tray */
@@ -483,5 +463,7 @@ div.mi_tray {
   border-top-color: <%= color(0.6, 0.6, 0.6) %>;
   border-style: solid;
   border-width: 1px;
-  <%= border_radius(:amount => 0.5) %>
+  padding-bottom: 1em;
+  margin: 1em;
+  <%= border_radius(:amount => 0.6) %>
 }
