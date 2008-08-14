@@ -27,7 +27,7 @@ module Merb
         attributes_button={}
         attributes_button[:class] = 'mi_button'
         attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
-        attributes_button[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
+        attributes_button[:style] = %{width:#{options[:width]}em;} if options[:width]
         attributes_td={}
         attributes_td[:class] = 'mi_button_text'
         if block and text != ''
@@ -123,7 +123,7 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_tab'
         attributes[:id] = options[:id]
-        attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
+        attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
         if options[:controller] == controller_name || options[:selected] == true
           attributes[:class] << '_selected'
         else
