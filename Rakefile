@@ -1,19 +1,16 @@
 require 'rubygems'
 require 'rake/gempackagetask'
-require 'spec/rake/spectask'
 require 'merb-core/version'
-require 'merb-core/test/tasks/spectasks'
 require 'merb-core/tasks/merb_rake_helper'
 
 NAME = "merb-interface"
 AUTHOR = "Jamie Hoover"
-EMAIL = "dont.tase@me.com"
-HOMEPAGE = "http://jamiehoover.com/"
+HOMEPAGE = "http://uipoet.com/"
 SUMMARY = "Merb Interface"
 GEM_VERSION = "0.9.4"
 
 spec = Gem::Specification.new do |s|
-  s.rubyforge_project = 'merb'
+  s.rubyforge_project = 'merb-interface'
   s.name = NAME
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
@@ -22,12 +19,11 @@ spec = Gem::Specification.new do |s|
   s.summary = SUMMARY
   s.description = s.summary
   s.author = AUTHOR
-  s.email = EMAIL
   s.homepage = HOMEPAGE
   s.add_dependency('merb-core', '>= 0.9.4')
   s.add_dependency('merb-slices', '>= 0.9.4')
   s.require_path = 'lib'
-  s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,spec,app,public,stubs}/**/*")
+  s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,app,public}/**/*")
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

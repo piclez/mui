@@ -34,6 +34,10 @@ module Merb
           %{<button #{attributes_button.to_xml_attributes}><table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{text}</td></tr></table></button>}
         elsif block
           %{<button #{attributes_button.to_xml_attributes}>#{capture(&block)}</button>}
+        elsif options[:submit] == true
+          attributes_button[:type] = 'submit'
+          attributes_button[:value] = text
+          %{<input #{attributes_button.to_xml_attributes}/>}
         else
           %{<button #{attributes_button.to_xml_attributes}>#{text}</button>}
         end
@@ -77,8 +81,13 @@ module Merb
         attributes_div[:class] << '_required' if options[:required] == true
         attributes_input={}
         attributes_input[:class] = 'mi_field'
-        attributes_input[:id] = options[:id]
-        attributes_input[:type] = 'text'
+        attributes_input[:id] = options[:id] if options[:id]
+        attributes_input[:name] = options[:name] if options[:name]
+        if options[:password] == true
+          attributes_input[:type] = 'password'
+        else
+          attributes_input[:type] = 'text'
+        end
         attributes_input[:value] = options[:text] if options[:text]
         attributes_label={}
         attributes_label[:class] = 'mi_label'

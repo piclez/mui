@@ -61,6 +61,10 @@
   padding-top: 0.25em;
   <%= border_radius %>
 }
+.mi_bar .mi_button, .mi_bar_expanded .mi_button, .mi_bar_bottom .mi_button, .mi_bar_top .mi_button {
+  margin-top: 0;
+}
+
 .mi_button .mi_picture {
   border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
@@ -247,12 +251,12 @@ hr.mi_divider {
 
 div.mi_field_label, div.mi_field_label_required {
   font-size: 0.75em;
-  padding: 0.25em 1.25em 0.25em 1.25em;
+  margin: 1em 0 0.25em 1.5em;
 }
 div.mi_field_label_required {
   font-weight: bold;
 }
-input[type=text].mi_field, textarea.mi_field {
+input[type=password].mi_field, input[type=text].mi_field, textarea.mi_field {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
   border-left-color: <%= color(0.65, 0.65, 0.65) %>;
@@ -262,12 +266,20 @@ input[type=text].mi_field, textarea.mi_field {
   border-width: 1px;
   color: <%= color(0, 0, 0) %>;
   font-size: 1em;
-  padding: 0.1em 0.75em 0.1em 0.75em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  padding: 0.1em;
   <%= border_radius(:amount => 0.25) %>
 }
 textarea.mi_field {
   min-height: 10em;
   width: 100%;
+}
+
+/* form */
+
+form.mi_form {
+  display: inline;
 }
 
 /* key */
@@ -470,7 +482,6 @@ div.mi_tray {
   border-top-color: <%= color(0.6, 0.6, 0.6) %>;
   border-style: solid;
   border-width: 1px;
-  padding-bottom: 1em;
   margin: 1em;
   <%= border_radius(:amount => 0.6) %>
 }
