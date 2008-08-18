@@ -298,6 +298,9 @@ label.mi_label {
 
 a.mi_link {
   color: #0066ff;
+  display: inline-block;
+  margin-left: 1em;
+  margin-top: 1em;
   text-decoration: none;
 }
 a.mi_link:visited {
@@ -314,6 +317,10 @@ a.mi_link:focus {
 }
 a.mi_link:hover {
   text-decoration: underline;
+}
+.mi_paragraph .mi_link {
+  display: inline;
+  margin: 0;
 }
 
 /* menu */
@@ -339,43 +346,30 @@ div.mi_merb {
 
 /* message */
 
-div.mi_message {
+.mi_message {
   border: solid 1px;
   border-color: #06f;
   background: #ccc;
   margin: 20px 0 20px 0;
   padding: 10px;
 }
-div.mi_message.error {
+.mi_message.error {
   background: #fcc;
   border-color: #c33;
 }
-div.mi_message.success {
+.mi_message.success {
   background: #cfc;
   border-color: #6f6;
 }
-div.mi_message.warning {
+.mi_message.warning {
   background: #ff9;
   border-color: #fc0;
 }
 
 /* paragraph */
 
-p.mi_paragraph, p.mi_paragraph_first {
-  margin-left: 1em;
-  margin-right: 1em;
-}
-p.mi_paragraph {
-  margin-top: 0.5em;
-  text-indent: 2em;
-}
-p.mi_paragraph_first {
-  margin-top: 1em;
-  <%= has_layout %>
-}
-p.mi_paragraph_first:first-letter {
-  font-size: 2em;
-  font-weight: bold;
+.mi_paragraph {
+  margin: 1em;
 }
 
 /* picture */

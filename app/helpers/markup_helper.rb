@@ -94,11 +94,16 @@ module Merb
         %{<label #{attributes_label.to_xml_attributes}><div #{attributes_div.to_xml_attributes}>#{text}</div><input #{attributes_input.to_xml_attributes}/></label>}
       end
 
-      def mi_link(options={}, &block)
+      def mi_link(text, options={}, &block)
         attributes={}
         attributes[:class] = 'mi_link'
         attributes[:href] = options[:url] if options[:url]
-        %{<a #{attributes.to_xml_attributes}>#{capture(&block)}</a>}
+        if block
+          content = capture(&block)
+        else
+          content = text
+        end
+        %{<a #{attributes.to_xml_attributes}>#{content}</a>}
       end
 
       def mi_merb
@@ -111,7 +116,6 @@ module Merb
       def mi_paragraph(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_paragraph'
-        attributes[:class] << '_first' if options[:first] == true
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
