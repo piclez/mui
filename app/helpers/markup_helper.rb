@@ -93,6 +93,22 @@ module Merb
         html << %{</span>}
       end
 
+      def mi_image(file, options={})
+        attributes={}
+        attributes[:align] = options[:align] if options[:align]
+        attributes[:class] = 'mi_image'
+        attributes[:height] = options[:height] if options[:height]
+        if options[:border_radius] == true
+          attributes[:class] << '_border_radius'
+          attributes[:src] = '/images/nil.png'
+          attributes[:style] = %{background-image: url('#{file}');}
+        else
+          attributes[:src] ||= file
+        end
+        attributes[:width] = options[:width] if options[:width]
+        %{<img #{attributes.to_xml_attributes} />}
+      end
+
       def mi_link(text, options={}, &block)
         attributes={}
         attributes[:class] = 'mi_link'
@@ -105,22 +121,15 @@ module Merb
         %{<a #{attributes.to_xml_attributes}>#{content}</a>}
       end
 
-      def mi_merb
-        attributes={}
-        attributes[:class] = 'mi_merb'
-        attributes[:onclick] = %{location.href='http://merbivore.com/'}
-        %{<div #{attributes.to_xml_attributes}></div>}
-      end
-
       def mi_paragraph(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_paragraph'
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
-      def mi_picture(file, options={})
+      def mi_photo(file, options={})
         attributes={}
-        attributes[:class] = 'mi_picture'
+        attributes[:class] = 'mi_photo'
         attributes[:src] ||= file
         %{<img #{attributes.to_xml_attributes} />}
       end

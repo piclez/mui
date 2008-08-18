@@ -64,7 +64,7 @@
   padding-top: 0.125em;
   <%= border_radius %>
 }
-.mi_button .mi_picture {
+.mi_button .mi_photo {
   border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
   border-right-color: <%= color(0.4, 0.4, 0.4) %>;
@@ -291,6 +291,17 @@ hr.mi_divider {
   display: inline;
 }
 
+/* image */
+
+.mi_image, .mi_image_border_radius {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+.mi_image_border_radius {
+  background-repeat: no-repeat;
+  <%= border_radius %>
+}
+
 /* key */
 
 kbd.mi {
@@ -333,21 +344,6 @@ select.mi_menu {
   padding-right: 2px;
 }
 
-/* merb */
-
-div.mi_merb {
-  background-image: url('/images/merb.png');
-  background-repeat: no-repeat;
-  border-style: solid;
-  border-width: 0;
-  float: right;
-  height: 250px;
-  margin-bottom: 1em;
-  margin-left: 1em;
-  width: 250px;
-  <%= border_radius(:corner => 'top_right_bottom_left') %>
-}
-
 /* message */
 
 .mi_message {
@@ -373,13 +369,16 @@ div.mi_merb {
 /* paragraph */
 
 .mi_paragraph {
-  margin-left: 1em;
-  margin-top: 1em;
+  color: <%= color(0.2, 0.2, 0.2) %>;
+  font-size: 0.9em;
+  margin-left: 1.1em;
+  margin-top: 1.1em;
+  max-width: 40em;
 }
 
-/* picture */
+/* photo */
 
-.mi_picture {
+.mi_photo {
   border-color: <%= color(0.5, 0.5, 0.5) %>;
   border-style: solid;
   border-width: 1px;
@@ -455,14 +454,13 @@ table.mi_table {
 /* title */
 
 .mi_title {
-  font-size: 2em;
-  margin-bottom: 0.5em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  font-size: 4em;
+  line-height: 1em;
+  margin-left: 0.2em;
   margin-top: 1em;
 }
 .mi_title:first-child {
-  margin-top: 0.5em;
+  margin-top: 0.2em;
 }
 .mi_bar .mi_title, .mi_bar_bottom .mi_title, .mi_bar_top .mi_title {
   font-size: 1em;
@@ -482,5 +480,6 @@ div.mi_tray {
   border-width: 1px;
   margin: 1em;
   padding-bottom: 1em;
+  padding-right: 1em;
   <%= border_radius(:amount => 0.6) %>
 }
