@@ -1,53 +1,60 @@
-merb-interface
-==============
+MerbInterface
+=============
 
-HTML helper with dynamic CSS and JS.
-
-------------------------------------------------------------------------------
-
-Prerequisites:
-
-merb-core, merb-slices, and merb-jquery
+A slice of dynamic markup and style for the Merb framework.
 
 ------------------------------------------------------------------------------
 
-Instructions for installation:
+Installation
+============
 
-1.) Add merb-interface as a regular dependency - hostappname/config/init.rb
+1.) In file "config/init.rb", add:
 
 dependency 'merb-interface'
 
-2.) Add merb-interface public directory - hostappname/config/rack.rb
+2.) In file "config/rack.rb", add:
 
 use Merb::Rack::Static, MerbInterface.dir_for(:public)
 
-3.) Add merb-interface routes - hostappname/config/router.rb
+3.) In file "config/router.rb", add:
 
-r.add_slice(:MerbInterface)
+r.add_slice(:MerbInterface, 'mi')
 
-4.) Add merb-interface assets within the <head> - hostappname/app/views/layout/application.html.erb
+4.) In file "app/views/layout/application.html.erb", add within <head></head>:
 
 <%= mi_assets %>
 
-5.) Configure the slice (optional) - hostappname/config/init.rb
+------------------------------------------------------------------------------
 
-Merb::BootLoader.before_app_loads do
-  
-  Merb::Slices::config[:merb_interface] do |mi|
-    mi[:button_color] = #000
-    mi[:button_background_color] = #fff
-  end
-  
-end
+Example View
+============
 
-6.) Override the slice code (optional) - hostappname/
-
-rake slices:merb-interface:install
+<%= mi_row do%>
+  <%= mi_column do %>
+    <%= mi_title('MerbInterface') %>
+  	<%= mi_paragraph do %>MerbInterface is an HTML/CSS pattern Merb Slice. MerbInterface's professionally designed components may be mixed within your Merb application's views.<% end =%>
+    <%= mi_link('Project Overview', :url => 'http://uipoet.lighthouseapp.com/projects/14717-merb-interface/overview') %>
+    <%= mi_link('Source Code', :url => 'http://github.com/uipoet/merb-interface/tree/master') %>
+    <%= mi_title('MerbFlickr') %>
+  	<%= mi_paragraph do %>MerbFlickr is a Flickr photo gallery Merb Slice. It leverages the components of MerbInterface. With supplying only a Flickr API key, Shared Secret, and User ID, you get a polished working gallery of Flickr Sets that's ready to be customized.<% end =%>
+    <%= mi_link('Project Overview', :url => 'http://uipoet.lighthouseapp.com/projects/14716-merb-flickr/overview') %>
+    <%= mi_link('Source Code', :url => 'http://github.com/uipoet/merb-flickr/tree/master') %>
+  <% end =%>
+  <%= mi_column do %>
+    <%= mi_tray do %>
+      <%= mi_merb %>
+    	<%= mi_paragraph do %><%= mi_link('Ruby', :url => 'http://www.ruby-lang.org/') %> is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.<% end =%>
+    	<%= mi_paragraph do %>Ruby programs and libraries are easily distributed and installed as Gems. <%= mi_link('RubyGems', :url => 'http://www.rubygems.org/') %> is the premier ruby packaging system. <% end =%>
+    	<%= mi_paragraph do %><%= mi_link('Merb', :url => 'http://www.merbivore.com/') %> is a Ruby model, view, controller framework for creating web applications.<% end =%>
+    	<%= mi_paragraph do %>Merb is agnostic about which object-relational mapping, JavaScript library, or template language you decide to use. Easily installed as a Gem, Merb supports plugins that are also installed as Gems. Optionally add whichever functionality you need.<% end =%>
+    	<%= mi_paragraph do %>Merb-Slices is a Merb plugin for using application 'Slices'. A Slice is just like a regular Merb MVC application, both in functionality as well as in structure.<% end =%>
+    <% end =%>
+  <% end =%>
+<% end =%>
 
 ------------------------------------------------------------------------------
 
-To see all available tasks for merb-interface run:
+Documentation
+=============
 
-rake -T slices:merb-interface
-
-------------------------------------------------------------------------------
+Until documentation is written, see file "merb-interface/app/helpers/markup_helper.rb" for the names of all html helpers.
