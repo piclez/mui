@@ -23,26 +23,6 @@ module Merb
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
-      def mi_button(text='', options={}, &block)
-        attributes_button={}
-        attributes_button[:class] = 'mi_button'
-        attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
-        attributes_button[:style] = %{width:#{options[:width]}em;} if options[:width]
-        attributes_td={}
-        attributes_td[:class] = 'mi_button_text'
-        if block and text != ''
-          %{<button #{attributes_button.to_xml_attributes}><table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{text}</td></tr></table></button>}
-        elsif block
-          %{<button #{attributes_button.to_xml_attributes}>#{capture(&block)}</button>}
-        elsif options[:submit] == true
-          attributes_button[:type] = 'submit'
-          attributes_button[:value] = text
-          %{<input #{attributes_button.to_xml_attributes}/>}
-        else
-          %{<button #{attributes_button.to_xml_attributes}>#{text}</button>}
-        end
-      end
-
       def mi_browser
         user_agent = request.user_agent.downcase
         if user_agent.include? 'webkit'
@@ -54,19 +34,34 @@ module Merb
         end
       end
       
-      def mi_checkbox(text, options={})
-        attributes_input={}
-        attributes_input[:class] = 'mi_checkbox'
-        attributes_input[:id] = options[:id]
-        attributes_input[:checked] = 'checked' if options[:selected] == true
-        attributes_input[:type] = 'checkbox'
-        attributes_label={}
-        attributes_label[:class] = 'mi_label'
-        attributes_label[:for] = options[:id]
-        %{<label #{attributes_label.to_xml_attributes}><input #{attributes_input.to_xml_attributes}/> #{text}</label>
-        }
+      def mi_button(text='', options={}, &block)
+        attributes_button={}
+        attributes_button[:class] = 'mi_button'
+        attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+        attributes_button[:style] = %{width:#{options[:width]}em;} if options[:width]
+        if options[:submit] == true
+          attributes_input={}
+          attributes_input[:class] = 'mi_button_submit'
+          attributes_input[:type] = 'submit'
+          attributes_input[:value] = text
+          html = %{<input #{attributes_input.to_xml_attributes}/>}
+        else
+          html = %{<button #{attributes_button.to_xml_attributes}>}
+          if block and text != ''
+            attributes_td={}
+            attributes_td[:class] = 'mi_button_text'
+            html << %{<table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{text}</td></tr></table>}
+          elsif block
+            html << capture(&block)
+          else
+            attributes_span={}
+            attributes_span[:class] = 'mi_button_text'
+            html << %{<span #{attributes_span.to_xml_attributes}>#{text}</span>}
+          end
+          html << %{</button>}
+        end
       end
-      
+
       def mi_column(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_column'
@@ -75,23 +70,27 @@ module Merb
       end
 
       def mi_field(text, options={})
-        options[:required] ||= true
-        attributes_div={}
-        attributes_div[:class] ||= 'mi_field_label'
-        attributes_div[:class] << '_required' if options[:required] == true
+        options[:type] ||= 'text'
         attributes_input={}
-        attributes_input[:class] = 'mi_field'
+        attributes_input[:checked] = 'checked' if options[:selected] == true if options[:type] == 'checkbox'
+        attributes_input[:class] = %{mi_field_#{options[:type]}}
         attributes_input[:id] = options[:id] if options[:id]
         attributes_input[:name] = options[:name] if options[:name]
-        if options[:password] == true
-          attributes_input[:type] = 'password'
-        else
-          attributes_input[:type] = 'text'
-        end
+        attributes_input[:type] = options[:type]
         attributes_input[:value] = options[:text] if options[:text]
         attributes_label={}
-        attributes_label[:class] = 'mi_label'
-        %{<label #{attributes_label.to_xml_attributes}><div #{attributes_div.to_xml_attributes}>#{text}</div><input #{attributes_input.to_xml_attributes}/></label>}
+        attributes_label[:class] = 'mi_field_label'
+        attributes_label[:class] << '_optional' if options[:optional] == true
+        attributes_label[:for] = options[:id] if options[:id]
+        attributes_span={}
+        attributes_span[:class] ||= 'mi_field'
+        html = %{<span #{attributes_span.to_xml_attributes}>}
+        if options[:type] == 'checkbox'
+          html << %{<input #{attributes_input.to_xml_attributes}/> <label #{attributes_label.to_xml_attributes}>#{text}</label>}
+        else
+          html << %{<label #{attributes_label.to_xml_attributes}>#{text}</label><input #{attributes_input.to_xml_attributes}/>}
+        end
+        html << %{</span>}
       end
 
       def mi_link(text, options={}, &block)

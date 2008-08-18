@@ -21,7 +21,6 @@
   background-repeat: repeat-x;
   color: <%= color(1, 1, 1) %>;
   height: 2em;
-  line-height: 2em;
   white-space: nowrap;
 }
 .mi_bar {
@@ -33,6 +32,8 @@
   border-top-style: solid;
   border-top-width: 1px;
   color: <%= color(0.2, 0.2, 0.2) %>;
+  position: relative;
+  top: 1em;
   <%= border_radius(:edge => 'bottom') %>
 }
 .mi_tray .mi_bar_top {
@@ -46,7 +47,7 @@
 
 /* button */
 
-.mi_button {
+.mi_button, .mi_button_submit {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
@@ -55,16 +56,12 @@
   font-size: 1em;
   margin-left: 1em;
   margin-top: 1em;
-  padding-bottom: 0.25em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-top: 0.25em;
+  padding-bottom: 0.125em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.125em;
   <%= border_radius %>
 }
-.mi_bar .mi_button, .mi_bar_expanded .mi_button, .mi_bar_bottom .mi_button, .mi_bar_top .mi_button {
-  margin-top: 0;
-}
-
 .mi_button .mi_picture {
   border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
@@ -72,12 +69,14 @@
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
   margin: 0;
 }
-.mi_button .mi_button_text {
-  padding-left: 0.75em;
+.mi_button_text {
   text-align: left;
   width: 100%;
 }
-button.mi_button {
+.mi_bar .mi_button, .mi_bar_expanded .mi_button, .mi_bar_bottom .mi_button, .mi_bar_top .mi_button, .mi_bar .mi_button_submit, .mi_bar_expanded .mi_button_submit, .mi_bar_bottom .mi_button_submit, .mi_bar_top .mi_button_submit {
+  margin-top: 0;
+}
+.mi_button {
   background-color: <%= color(0.3, 0.3, 0.3) %>;
   border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
   border-left-color: <%= color(0.2, 0.2, 0.2) %>;
@@ -85,7 +84,7 @@ button.mi_button {
   border-top-color: <%= color(0.3, 0.3, 0.3) %>;
   color: <%= color(1, 1, 1) %>;
 }
-button.mi_button:hover {
+.mi_button:hover {
   background-color: <%= color(0.4, 0.4, 0.4) %>;
   border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
   border-left-color: <%= color(0.3, 0.3, 0.3) %>;
@@ -93,7 +92,7 @@ button.mi_button:hover {
   border-top-color: <%= color(0.4, 0.4, 0.4) %>;
   color: <%= color(1, 1, 1) %>;
 }
-button.mi_button:active {
+.mi_button:active {
   background-color: <%= color(0.3, 0.3, 0.3) %>;
   background-image: none;
   border-bottom-color: <%= color(0.3, 0.3, 0.3) %>;
@@ -102,7 +101,7 @@ button.mi_button:active {
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mi_button {
+.mi_button_submit {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   border-bottom-color: <%= color(0, 0.3, 0) %>;
   border-left-color: <%= color(0, 0.4, 0) %>;
@@ -110,7 +109,7 @@ input[type=submit].mi_button {
   border-top-color: <%= color(0.1, 0.5, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mi_button:hover {
+.mi_button_submit:hover {
   background-color: <%= color(0.2, 0.6, 0.2) %>;
   border-bottom-color: <%= color(0, 0.4, 0) %>;
   border-left-color: <%= color(0.1, 0.5, 0.1) %>;
@@ -118,7 +117,7 @@ input[type=submit].mi_button:hover {
   border-top-color: <%= color(0.2, 0.6, 0.2) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mi_button:active {
+.mi_button_submit:active {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   background-image: none;
   border-bottom-color: <%= color(0.1, 0.5, 0.1) %>;
@@ -249,14 +248,19 @@ hr.mi_divider {
 
 /* field */
 
-div.mi_field_label, div.mi_field_label_required {
-  font-size: 0.75em;
-  margin: 1em 0 0.25em 1.5em;
+.mi_field {
+  display: inline-block;
+  margin-left: 1em;
+  margin-top: 1em;
 }
-div.mi_field_label_required {
+.mi_field_label, .mi_field_label_optional {
+  font-size: 0.75em;
   font-weight: bold;
 }
-input[type=password].mi_field, input[type=text].mi_field, textarea.mi_field {
+.mi_field_label_optional {
+  font-weight: normal;
+}
+.mi_field_password, .mi_field_text, .mi_field_textarea {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
   border-left-color: <%= color(0.65, 0.65, 0.65) %>;
@@ -265,20 +269,23 @@ input[type=password].mi_field, input[type=text].mi_field, textarea.mi_field {
   border-top-color: <%= color(0.55, 0.55, 0.55) %>;
   border-width: 1px;
   color: <%= color(0, 0, 0) %>;
+  display: block;
   font-size: 1em;
-  margin-bottom: 1em;
-  margin-left: 1em;
-  padding: 0.1em;
+  margin-top: .25em;
+  padding-bottom: 0.125em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.125em;
   <%= border_radius(:amount => 0.25) %>
 }
-textarea.mi_field {
+.mi_field_textarea {
   min-height: 10em;
   width: 100%;
 }
 
 /* form */
 
-form.mi_form {
+.mi_form {
   display: inline;
 }
 
@@ -288,34 +295,28 @@ kbd.mi {
   background-color: #e5e5e5;
 }
 
-/* label */
-
-label.mi_label {
-  display: inline-block;
-}
-
 /* link */
 
-a.mi_link {
+.mi_link {
   color: #0066ff;
   display: inline-block;
   margin-left: 1em;
   margin-top: 1em;
   text-decoration: none;
 }
-a.mi_link:visited {
+.mi_link:visited {
   color: #993399;
 }
-a.mi_link:active {
+.mi_link:active {
   color: #3399ff;
   outline: 0;
   text-decoration: underline;
 }
-a.mi_link:focus {
+.mi_link:focus {
   color: #3399ff;
   outline: 0;
 }
-a.mi_link:hover {
+.mi_link:hover {
   text-decoration: underline;
 }
 .mi_paragraph .mi_link {
@@ -369,7 +370,8 @@ div.mi_merb {
 /* paragraph */
 
 .mi_paragraph {
-  margin: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
 }
 
 /* picture */
@@ -391,6 +393,21 @@ blockquote.mi_quote {
 
 /* tab */
 
+.mi_button, .mi_button_submit {
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 1em;
+  margin-left: 1em;
+  margin-top: 1em;
+  padding-bottom: 0.125em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.125em;
+  <%= border_radius %>
+}
 .mi_tab, .mi_tab_selected {
   background-image: url('/images/reflection.png');
   background-position: center center;
@@ -403,7 +420,8 @@ blockquote.mi_quote {
   border-top-style: none;
   font-size: 1em;
   height: 2em;
-  padding: 0 0.75em 0 0.75em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 .mi_tab {
   background-color: <%= color(0, 0, 0) %>;
@@ -477,5 +495,6 @@ div.mi_tray {
   border-style: solid;
   border-width: 1px;
   margin: 1em;
+  padding-bottom: 1em;
   <%= border_radius(:amount => 0.6) %>
 }
