@@ -19,7 +19,6 @@ module Merb
         attributes={}
         attributes[:class] = 'mi_bar'
         attributes[:class] << '_expanded' if options[:expanded] == true
-        attributes[:class] << %{_#{options[:edge]}} if options[:edge]
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
@@ -34,31 +33,29 @@ module Merb
         end
       end
       
-      def mi_button(text='', options={}, &block)
-        attributes_button={}
-        attributes_button[:class] = 'mi_button'
-        attributes_button[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
-        attributes_button[:style] = %{width:#{options[:width]}em;} if options[:width]
+      def mi_button(options={}, &block)        
+        attributes={}
+        attributes[:class] = 'mi_button'
+        attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+        attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
         if options[:submit] == true
-          attributes_input={}
-          attributes_input[:class] = 'mi_button_submit'
-          attributes_input[:type] = 'submit'
-          attributes_input[:value] = text
-          html = %{<input #{attributes_input.to_xml_attributes}/>}
+          attributes[:type] = 'submit'
         else
-          html = %{<button #{attributes_button.to_xml_attributes}>}
-          if block and text != ''
-            attributes_td={}
-            attributes_td[:class] = 'mi_button_text'
-            html << %{<table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{text}</td></tr></table>}
-          elsif block
-            html << capture(&block)
+          attributes[:type] = 'button'
+        end
+        attributes[:value] = options[:text] if options[:text]
+        if block
+          html = %{<button #{attributes.to_xml_attributes}>}
+          attributes_td={}
+          attributes_td[:class] = 'mi_button_text'
+          if options[:text]
+            html << %{<table><tr><td>#{capture(&block)}</td><td #{attributes_td.to_xml_attributes}>#{options[:text]}</td></tr></table>}
           else
-            attributes_span={}
-            attributes_span[:class] = 'mi_button_text'
-            html << %{<span #{attributes_span.to_xml_attributes}>#{text}</span>}
+            html << capture(&block)
           end
           html << %{</button>}
+        else
+          html = %{<input #{attributes.to_xml_attributes}/>}
         end
       end
 
@@ -139,17 +136,18 @@ module Merb
         %{<table #{attributes.to_xml_attributes}><tr>#{capture(&block)}</tr></table>}
       end
 
-      def mi_tab(text, options={})
+      def mi_tab(options={})
         attributes={}
         attributes[:class] = 'mi_tab'
-        attributes[:id] = options[:id]
-        attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
         if options[:controller] == controller_name || options[:selected] == true
-          attributes[:class] << '_selected'
+          attributes[:type] = 'submit'
         else
           attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+          attributes[:type] = 'button'
         end
-        %{<button #{attributes.to_xml_attributes}>#{text}</button>}
+        attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
+        attributes[:value] = options[:text] if options[:text]
+        %{<input #{attributes.to_xml_attributes}/>}
       end
 
       def mi_title(text, options={})
