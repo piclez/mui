@@ -100,6 +100,7 @@ module Merb
         attributes[:class] = 'mi_image'
         attributes[:class] << '_margin' if options[:margin] != false
         attributes[:class] << '_border_radius' if options[:border_radius] == true
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         attributes[:src] = '/images/nil.png'
         attributes[:style] = %{background-image: url('#{file}');}
         attributes[:style] << %{height: #{options[:height]}px;} if options[:height]
