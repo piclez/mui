@@ -40,20 +40,26 @@ body {
   background-repeat: repeat-x;
   border-style: solid;
   border-width: 1px;
+  display: block;
   font-size: 0.8em;
   line-height: 2em;
-  margin-left: 1em;
-  margin-top: 1em;
+  margin-left: 2.5em;
+  margin-top: 1.25em;
   padding-left: 1em;
   padding-right: 1em;
   <%= border_radius %>
+}
+button.mi_button {
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 .mi_button .mi_photo {
   border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
   border-right-color: <%= color(0.4, 0.4, 0.4) %>;
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
-  margin: 0;
+  margin-left: 0;
+  margin-top: 0;
 }
 .mi_button_text {
   padding-left: 1em;
@@ -240,8 +246,8 @@ hr.mi_divider {
 /* field */
 
 .mi_field {
-  display: inline-block;
-  margin-left: 1em;
+  display: block;
+  margin-left: 2em;
   margin-top: 1em;
 }
 .mi_field_label, .mi_field_label_optional {
@@ -260,14 +266,13 @@ hr.mi_divider {
   border-width: 1px;
   color: <%= color(0, 0, 0) %>;
   display: block;
-  font-size: 0.8em;
-  line-height: 2em;
-  margin-top: .25em;
-  padding-bottom: 0.125em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.125em;
-  <%= border_radius(:amount => 0.25) %>
+  font-size: 1em;
+  line-height: 1.6em;
+  margin-top: 0.25em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  <%= border_radius %>
+  <%= border_radius(:amount => 0.4) %>
 }
 .mi_field_textarea {
   min-height: 10em;
@@ -283,6 +288,7 @@ hr.mi_divider {
 /* image */
 
 .mi_image, .mi_image_border_radius, .mi_image_margin, .mi_image_margin_border_radius {
+  display: block;
   vertical-align: middle;
 }
 .mi_image_margin, .mi_image_margin_border_radius {
@@ -295,6 +301,13 @@ hr.mi_divider {
   background-repeat: no-repeat;
   <%= border_radius %>
 }
+
+/* inline */
+
+.mi_inline {
+  display: inline-block ! important;
+}
+
 
 /* key */
 
@@ -364,6 +377,7 @@ select.mi_menu {
 
 .mi_paragraph {
   color: <%= color(0.2, 0.2, 0.2) %>;
+  display: block;
   line-height: 1.5em;
   margin-left: 2em;
   margin-right: 2em;
@@ -378,8 +392,8 @@ select.mi_menu {
   border-color: <%= color(0.5, 0.5, 0.5) %>;
   border-style: solid;
   border-width: 1px;
-  margin-left: 1em;
-  margin-right: 1em;
+  display: block;
+  margin-left: 2em;
   margin-top: 1em;
   vertical-align: middle;
 }
@@ -404,14 +418,17 @@ blockquote.mi_quote {
   border-top: none;
   font-size: 1em;
   line-height: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 .mi_tab {
   background-color: <%= color(0, 0, 0) %>;
   border-left-color: <%= color(0.1, 0.1, 0.1) %>;
   border-right-color: <%= color(0, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
+}
+.mi_tray input[type=button].mi_tab {
+  font-weight: bold;
 }
 .mi_tab:hover {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
@@ -449,7 +466,11 @@ blockquote.mi_quote {
 
 /* title */
 
+.mi_title {
+  display: block;
+}
 h1.mi_title {
+  display: block;
   font-family: Helvetica, Verdana, sans-serif;
   font-size: 3em;
   letter-spacing: -0.05em;
@@ -461,7 +482,7 @@ h1.mi_title:first-child {
 }
 h2.mi_title, h3.mi_title, h4.mi_title, h5.mi_title, h6.mi_title {
   line-height: 2em;
-  margin-left: 1em;
+  margin-left: 2em;
 }
 
 /* tray */
@@ -474,6 +495,7 @@ div.mi_tray {
   border-top-color: <%= color(0.75, 0.75, 0.75) %>;
   border-style: solid;
   border-width: 1px;
+  display: block;
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 1em;

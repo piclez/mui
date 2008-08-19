@@ -36,6 +36,7 @@ module Merb
       def mi_button(options={}, &block)        
         attributes={}
         attributes[:class] = 'mi_button'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
         attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
         if options[:submit] == true
@@ -83,6 +84,7 @@ module Merb
         attributes_label[:for] = options[:id] if options[:id]
         attributes_span={}
         attributes_span[:class] ||= 'mi_field'
+        attributes_span[:class] << ' mi_inline' if options[:inline] == true
         html = %{<span #{attributes_span.to_xml_attributes}>}
         if options[:type] == 'checkbox'
           html << %{<input #{attributes_input.to_xml_attributes}/> <label #{attributes_label.to_xml_attributes}>#{text}</label>}
@@ -108,6 +110,7 @@ module Merb
       def mi_link(text, options={}, &block)
         attributes={}
         attributes[:class] = 'mi_link'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         attributes[:href] = options[:url] if options[:url]
         if block
           content = capture(&block)
@@ -120,12 +123,14 @@ module Merb
       def mi_paragraph(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_paragraph'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         %{<p #{attributes.to_xml_attributes}>#{capture(&block)}</p>}
       end
 
       def mi_photo(file, options={})
         attributes={}
         attributes[:class] = 'mi_photo'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         attributes[:src] ||= file
         %{<img #{attributes.to_xml_attributes} />}
       end
@@ -154,12 +159,14 @@ module Merb
         options[:size] ||= 1
         attributes={}
         attributes[:class] = 'mi_title'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         %{<h#{options[:size]} #{attributes.to_xml_attributes}>#{text}</h#{options[:size]}>}
       end
 
       def mi_tray(options={}, &block)
         attributes={}
         attributes[:class] = 'mi_tray'
+        attributes[:class] << ' mi_inline' if options[:inline] == true
         %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
       end
 
