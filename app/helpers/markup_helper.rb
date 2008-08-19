@@ -64,7 +64,9 @@ module Merb
 
       def mi_column(options={}, &block)
         attributes={}
+        attributes[:align] = options[:align] if options[:align]
         attributes[:class] = 'mi_column'
+        attributes[:class] << '_right' if options[:align] == 'right'
         attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
         %{<td #{attributes.to_xml_attributes}>#{capture(&block)}</td>}
       end
@@ -97,15 +99,12 @@ module Merb
         attributes={}
         attributes[:align] = options[:align] if options[:align]
         attributes[:class] = 'mi_image'
-        attributes[:height] = options[:height] if options[:height]
-        if options[:border_radius] == true
-          attributes[:class] << '_border_radius'
-          attributes[:src] = '/images/nil.png'
-          attributes[:style] = %{background-image: url('#{file}');}
-        else
-          attributes[:src] ||= file
-        end
-        attributes[:width] = options[:width] if options[:width]
+        attributes[:class] << '_margin' if options[:margin] != false
+        attributes[:class] << '_border_radius' if options[:border_radius] == true
+        attributes[:src] = '/images/nil.png'
+        attributes[:style] = %{background-image: url('#{file}');}
+        attributes[:style] << %{height: #{options[:height]}px;} if options[:height]
+        attributes[:style] << %{width: #{options[:width]}px;} if options[:width]
         %{<img #{attributes.to_xml_attributes} />}
       end
 
