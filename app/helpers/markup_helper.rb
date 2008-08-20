@@ -16,10 +16,15 @@ module Merb
       end
 
       def mi_bar(options={}, &block)
-        attributes={}
-        attributes[:class] = 'mi_bar'
-        attributes[:class] << '_expanded' if options[:expanded] == true
-        %{<div #{attributes.to_xml_attributes}>#{capture(&block)}</div>}
+        attributes_div={}
+        attributes_div[:class] = 'mi_bar'
+        attributes_div[:class] << '_expanded' if options[:expanded] == true
+        attributes_span={}
+        attributes_span[:class] = 'mi_bar_title'
+        html = %{<div #{attributes_div.to_xml_attributes}>}
+        html << %{<span #{attributes_span.to_xml_attributes}>#{options[:title]}</span>} if options[:title]
+        html << capture(&block) if block
+        html << %{</div>}
       end
 
       def mi_browser

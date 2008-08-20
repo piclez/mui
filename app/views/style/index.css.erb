@@ -23,6 +23,11 @@ body {
 .mi_bar {
   <%= border_radius %>
 }
+.mi_bar_title {
+  line-height: 2em;
+  min-height: 2em;
+  margin-left: 2em;
+}
 .mi_tray .mi_bar {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.7, 0.7, 0.7) %>;
@@ -293,10 +298,7 @@ hr.mi_divider {
   display: block;
 }
 .mi_image_margin, .mi_image_margin_border_radius {
-  margin-bottom: 1em;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 1em;
+  margin: 1em;
 }
 .mi_image_border_radius, .mi_image_margin_border_radius {
   background-repeat: no-repeat;
@@ -386,6 +388,10 @@ select.mi_menu {
   max-width: 40em;
   min-width: 10em;
 }
+.mi_tray .mi_paragraph {
+  margin-left: 1em;
+  margin-right: 1em;
+}
 
 /* photo */
 
@@ -469,20 +475,26 @@ blockquote.mi_quote {
   display: block;
 }
 h1.mi_title {
-  display: block;
   font-family: Helvetica, Verdana, sans-serif;
-  font-size: 3em;
+  font-size: 2.8em;
   letter-spacing: -0.05em;
-  margin-left: 0.62em;
-  margin-top: 1em;
+  margin-left: 0.675em;
+  margin-top: 0.675em;
 }
-h1.mi_title:first-child {
-  margin-top: 0.33em;
+h2.mi_title {
+  font-size: 2.4em;
 }
-h2.mi_title, h3.mi_title, h4.mi_title, h5.mi_title, h6.mi_title {
-  line-height: 2em;
-  min-height: 2em;
-  margin-left: 2em;
+h3.mi_title {
+  font-size: 2em;
+}
+h4.mi_title {
+  font-size: 1.6em;
+}
+h5.mi_title {
+font-size: 1.2em;
+}
+h6.mi_title {
+font-size: 0.8em;
 }
 
 /* tray */
@@ -498,7 +510,7 @@ div.mi_tray {
   display: block;
   margin-left: 2em;
   margin-right: 2em;
-  margin-top: 1em;
+  margin-top: 2em;
   padding-bottom: 1em;
   <%= border_radius(:amount => 0.6) %>
 }
