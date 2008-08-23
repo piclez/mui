@@ -6,7 +6,7 @@ require 'merb-core/tasks/merb_rake_helper'
 NAME = "merb-interface"
 AUTHOR = "Jamie Hoover"
 HOMEPAGE = "http://uipoet.com/"
-SUMMARY = "Merb Interface"
+SUMMARY = "Interface"
 GEM_VERSION = "0.9.4"
 
 spec = Gem::Specification.new do |s|
@@ -30,7 +30,7 @@ Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
-desc "Install MerbInterface as a gem"
+desc "Install Interface as a gem"
 task :install => [:package] do
   sh %{#{sudo} gem install pkg/#{NAME}-#{GEM_VERSION} --no-update-sources}
 end

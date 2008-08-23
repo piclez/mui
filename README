@@ -18,7 +18,7 @@ use Merb::Rack::Static, MerbInterface.dir_for(:public)
 
 3.) In file "config/router.rb", add:
 
-r.add_slice(:MerbInterface, 'mi')
+r.add_slice(:MerbInterface, :default_routes => false, :path => '')
 
 4.) In file "app/views/layout/application.html.erb", add within <head></head>:
 

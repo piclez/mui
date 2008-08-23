@@ -2,25 +2,20 @@ if defined?(Merb::Plugins)
 
   $:.unshift File.dirname(__FILE__)
   load_dependency 'merb-slices'
-  Merb::Plugins.add_rakefiles('merb-interface/merbtasks', 'merb-interface/slicetasks')
+  Merb::Plugins.add_rakefiles('tasks/merb', 'tasks/slice')
   Merb::Slices::register(__FILE__)
-  Merb::Slices::config[:merb_interface][:layout] ||= :merb_interface
+  Merb::Slices::config[:merb_interface][:layout] ||= :application
 
   module MerbInterface
     def self.setup_router(scope)
-      # Dynamic CSS via ERB views
-      scope.match('/style.css').to(:controller => 'style', :action => 'index').name(:merb_interface_style)
-      # Dynamic JS via ERB views
-      scope.match('/script.js').to(:controller => 'script', :action => 'index').name(:merb_interface_script)
+      scope.match('/stylesheets/interface.css').to(:controller => 'stylesheets', :action => 'interface').name(:merb_interface_stylesheets)
+      scope.match('/javascripts/interface.js').to(:controller => 'javascripts', :action => 'interface').name(:merb_interface_javascripts)
     end
   end
-
+  
   MerbInterface.setup_default_structure!
 
   Merb::BootLoader.after_app_loads do
-    # Markup helper for the host application
-    Merb::Controller.send(:include, Merb::MerbInterface::MarkupHelper)
-    # Dynamic CSS format for Style controller
     Merb.add_mime_type(:css, :to_css, %w[text/css])
   end
   
