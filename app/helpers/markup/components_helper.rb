@@ -2,14 +2,12 @@ module Merb::MerbInterface::ComponentsHelper
   
   def mi_bar(options = {}, &block)
     element(:div, :class => %{mi_bar#{'_expanded' if options[:expanded] == true}}) do
-      div = ''
       if options[:label]
-        div << element(:span, :class => 'mi_bar_label') do
+        label = element(:span, :class => 'mi_bar_label') do
           options[:label]
         end
       end
-      div << capture(&block) if block_given?
-      div
+      [label, (capture(&block) if block_given?)].join
     end
   end
 
@@ -90,6 +88,15 @@ module Merb::MerbInterface::ComponentsHelper
     end
   end
 
+  def mi_page(options={}, &block)
+    attributes={}
+    attributes[:class] = 'mi_paragraph'
+    attributes[:class] << ' mi_inline' if options[:inline] == true
+    element(:p, attributes) do
+      capture(&block) if block_given?
+    end
+  end
+
   def mi_paragraph(options={}, &block)
     attributes={}
     attributes[:class] = 'mi_paragraph'
@@ -113,7 +120,7 @@ module Merb::MerbInterface::ComponentsHelper
     if options[:controller] == controller_name || options[:selected] == true
       attributes[:type] = 'submit'
     else
-      attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+      attributes[:id] = options[:url] if options[:url]
       attributes[:type] = 'button'
     end
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
@@ -135,7 +142,7 @@ module Merb::MerbInterface::ComponentsHelper
     attributes={}
     attributes[:class] = 'mi_tray'
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(:div, attributes) do
+    element(:span, attributes) do
       capture(&block) if block_given?
     end
   end

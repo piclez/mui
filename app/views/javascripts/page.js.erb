@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  $('.mi_button, .mi_tab').click(function(){
+  	location.href=this.id;
+  	return false;
+  });
 	$('.mi_dialog_open').click(function(){
 		$('.mi_dialog_target').hide().load(this.id).fadeIn();
 		return false;
