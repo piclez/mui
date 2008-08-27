@@ -26,7 +26,7 @@ body {
 .mi_bar_title {
   line-height: 2em;
   min-height: 2em;
-  margin-left: 2em;
+  margin-left: 1em;
 }
 .mi_tray .mi_bar {
   background-color: <%= color(1, 1, 1) %>;
@@ -49,7 +49,7 @@ body {
   font-size: 0.8em;
   line-height: 2em;
   min-height: 2em;
-  margin-left: 2.5em;
+  margin-left: 1.25em;
   margin-top: 1.25em;
   padding-left: 1em;
   padding-right: 1em;
@@ -64,8 +64,7 @@ button.mi_button {
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
   border-right-color: <%= color(0.4, 0.4, 0.4) %>;
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
-  margin-left: 0;
-  margin-top: 0;
+  margin: 0;
 }
 .mi_button_text {
   padding-left: 1em;
@@ -165,79 +164,39 @@ code.mi var {
 
 /* dialog */
 
-div.dialog-foreground {
-  -moz-border-radius: 6px;
-  -moz-box-shadow: 0 2px 4px <%= color(0, 0, 0) %>;
-  -webkit-border-radius: 6px;
-  -webkit-box-shadow: 0 2px 4px <%= color(0, 0, 0) %>;
-  color: <%= color(1, 1, 1) %>;
+.mi_dialog_column {
+  text-align: center;
 }
-div.dialog-foreground div.dialog-middle {
-  background-image: url('/images/transparent-black.png');
-  max-height: 420px;
-  max-width: 740px;
-  overflow: auto;
-  padding-bottom: 15px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-div.dialog-foreground div.dialog-middle table.index {
-  margin-top: 15px;
-}
-div.dialog-foreground div.dialog-middle table.index th {
-  padding-bottom: 1px;
-  padding-top: 1px;
-}
-div.dialog-foreground div.dialog-middle table.index th:first-child {
-  color: <%= color(1, 1, 1) %>;
-}
-div.dialog-foreground div.dialog-middle td {
-  padding-left: 30px;
-  vertical-align: top;
-}
-div.dialog-foreground div.dialog-middle td:first-child {
-  padding-left: 0;
-}
-div.dialog-foreground div.dialog-middle td.set {
-  white-space: nowrap;
-}
-div.dialog-foreground div.dialog-top {
-  -moz-border-radius-topleft: 6px;
-  -moz-border-radius-topright: 6px;
-  -webkit-border-top-left-radius: 6px;
-  -webkit-border-top-right-radius: 6px;
-  background-image: url('/images/transparent-gray.png');
-  line-height: 30px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-div.dialog-foreground p {
-  margin-top: 15px;
-  max-width: 320px;
-}
-div.dialog-foreground table.dialog-bottom {
-  -moz-border-radius-bottomleft: 6px;
-  -moz-border-radius-bottomright: 6px;
-  -webkit-border-bottom-left-radius: 6px;
-  -webkit-border-bottom-right-radius: 6px;
-  background-image: url('/images/transparent-gray.png');
-  height: 30px;
-  width: 100%;
-}
-div.dialog-foreground table.dialog-bottom td {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-div.dialog-foreground table.dialog-bottom td:first-child {
-  width: 100%;
-}
-table.dialog-background {
+.mi_dialog_row, .mi_dialog_row_background {
   height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
 }
+.mi_dialog_row_background {
+  background: <%= color(0, 0, 0) %>;
+  opacity: 0.4;
+}
+.mi_dialog_window {
+  background: <%= color(0, 0, 0) %>;
+  display: inline-block;
+  color: <%= color(1, 1, 1) %>;
+  max-height: 32em;
+  min-height: 12em;
+  min-width: 16em;
+  overflow: auto;
+  <%= border_radius %>
+}
+.mi_dialog_window .mi_bar {
+  background-color: <%= color(0, 0, 0) %>;
+  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: <%= color(1, 1, 1) %>;
+  <%= border_radius(:edge => 'top') %>
+}
+
 
 /* divider */
 
@@ -249,20 +208,24 @@ hr.mi_divider {
   margin-top: 20px;
 }
 
-/* field */
+/* form */
 
+.mi_form {
+  display: inline;
+}
 .mi_field {
   display: block;
-  margin-left: 2em;
+  margin-left: 1em;
   margin-top: 1em;
 }
 .mi_field_label, .mi_field_label_optional {
+  display: block;
   font-size: 0.8em;
 }
 .mi_field_label {
   font-weight: bold;
 }
-.mi_field_password, .mi_field_text, .mi_field_textarea {
+.mi_form_password, .mi_form_text, .mi_form_textarea {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
   border-left-color: <%= color(0.65, 0.65, 0.65) %>;
@@ -281,15 +244,10 @@ hr.mi_divider {
   <%= border_radius %>
   <%= border_radius(:amount => 0.4) %>
 }
-.mi_field_textarea {
-  min-height: 10em;
+.mi_form_textarea {
+  min-height: 6.25em;
+  padding: 0;
   width: 100%;
-}
-
-/* form */
-
-.mi_form {
-  display: inline;
 }
 
 /* image */
@@ -304,6 +262,15 @@ hr.mi_divider {
 .mi_image_border_radius, .mi_image_margin_border_radius {
   <%= border_radius %>
 }
+.mi_photo {
+  border-color: <%= color(0.5, 0.5, 0.5) %>;
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 0;
+  margin-right: 0;
+  vertical-align: middle;
+}
+
 
 /* inline */
 
@@ -393,18 +360,6 @@ select.mi_menu {
   margin-right: 1em;
 }
 
-/* photo */
-
-.mi_photo {
-  border-color: <%= color(0.5, 0.5, 0.5) %>;
-  border-style: solid;
-  border-width: 1px;
-  display: block;
-  margin-left: 2em;
-  margin-top: 1em;
-  vertical-align: middle;
-}
-
 /* quote */
 
 blockquote.mi_quote {
@@ -426,8 +381,8 @@ blockquote.mi_quote {
   font-size: 1em;
   line-height: 2em;
   min-height: 2em;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 .mi_tab {
   background-color: <%= color(0, 0, 0) %>;
@@ -491,10 +446,10 @@ h4.mi_title {
   font-size: 1.6em;
 }
 h5.mi_title {
-font-size: 1.2em;
+  font-size: 1.2em;
 }
 h6.mi_title {
-font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 /* tray */

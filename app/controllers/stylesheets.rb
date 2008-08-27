@@ -17,4 +17,8 @@ class MerbInterface::Stylesheets < MerbInterface::Application
     render
   end
   
+  Merb::BootLoader.after_app_loads do
+    Merb.add_mime_type(:css, :to_css, %w[text/css])
+  end
+  
 end
