@@ -1,0 +1,9 @@
+$(document).ready(function(){
+  $('.mi_dialog_close').click(function(){
+    $('.mi_dialog_window').fadeOut(function(){
+      $('.mi_dialog_target').empty();
+    });
+  	return false;
+  });
+  $('.mi_dialog_window').draggable();
+});

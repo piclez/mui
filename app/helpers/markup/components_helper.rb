@@ -3,9 +3,9 @@ module Merb::MerbInterface::ComponentsHelper
   def mi_bar(options = {}, &block)
     element(:div, :class => %{mi_bar#{'_expanded' if options[:expanded] == true}}) do
       div = ''
-      if options[:title]
-        div << element(:span, :class => 'mi_bar_title') do
-          options[:title]
+      if options[:label]
+        div << element(:span, :class => 'mi_bar_label') do
+          options[:label]
         end
       end
       div << capture(&block) if block_given?
@@ -16,20 +16,26 @@ module Merb::MerbInterface::ComponentsHelper
   def mi_button(options = {}, &block)
     attributes = {}
     attributes[:class] = %{mi_button#{' mi_inline' if options[:inline] == true}}
-    attributes[:onclick] = %{location.href='#{options[:url]}'} if options[:url]
+    attributes[:class] << ' mi_dialog_close' if options[:dialog] == 'close'
+    attributes[:class] << ' mi_dialog_open' if options[:dialog] == 'open'
+    attributes[:id] = options[:url] if options[:url]
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
     attributes[:type] = options[:submit] == true ? 'submit' : 'button'
-    attributes[:value] = options[:text] if options[:text]
+    if options[:dialog] == 'close'
+      attributes[:value] = 'x'
+    else
+      attributes[:value] = options[:label] if options[:label]
+    end
     if block_given?
       element(:button, attributes) do
-        if options[:text]
+        if options[:label]
           element(:table) do
             element(:tr) do
               tr = element(:td) do
                 capture(&block)
               end
               tr << element(:td, :class => 'mi_button_text') do
-                options[:text]
+                options[:label]
               end
               tr
             end
@@ -111,7 +117,7 @@ module Merb::MerbInterface::ComponentsHelper
       attributes[:type] = 'button'
     end
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
-    attributes[:value] = options[:text] if options[:text]
+    attributes[:value] = options[:label] if options[:label]
     element(:input, attributes)
   end
 

@@ -1,0 +1,6 @@
+$(document).ready(function(){
+	$('.mi_dialog_open').click(function(){
+		$('.mi_dialog_target').hide().load(this.id).fadeIn();
+		return false;
+	});
+});

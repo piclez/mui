@@ -23,7 +23,7 @@ body {
 .mi_bar {
   <%= border_radius %>
 }
-.mi_bar_title {
+.mi_bar_label {
   line-height: 2em;
   min-height: 2em;
   margin-left: 1em;
@@ -167,36 +167,41 @@ code.mi var {
 .mi_dialog_column {
   text-align: center;
 }
-.mi_dialog_row, .mi_dialog_row_background {
+.mi_dialog_row {
   height: 100%;
   left: 0;
   position: fixed;
   top: 0;
   width: 100%;
 }
-.mi_dialog_row_background {
-  background: <%= color(0, 0, 0) %>;
-  opacity: 0.4;
-}
 .mi_dialog_window {
-  background: <%= color(0, 0, 0) %>;
+  background: <%= color(0.25, 0.25, 0.25) %>;
   display: inline-block;
   color: <%= color(1, 1, 1) %>;
   max-height: 32em;
   min-height: 12em;
   min-width: 16em;
   overflow: auto;
+  padding-bottom: 1em;
+  padding-right: 1em;
+  text-align: left;
   <%= border_radius %>
 }
 .mi_dialog_window .mi_bar {
   background-color: <%= color(0, 0, 0) %>;
-  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   color: <%= color(1, 1, 1) %>;
+  margin-right: -1em;
+  padding-right: 1em;
   <%= border_radius(:edge => 'top') %>
 }
-
+.mi_dialog_window .mi_dialog_close {
+  position: absolute;
+  right: 1.25em;
+  top: -1em;
+}
 
 /* divider */
 
@@ -411,7 +416,7 @@ blockquote.mi_quote {
 .mi_bar .mi_tab:first-child, .mi_bar input[type=submit].mi_tab:first-child {
   <%= border_radius(:edge => 'left') %>
 }
-.mi_tray .mi_tab:first-child, .mi_tray input[type=submit].mi_tab:first-child {
+.mi_tray .mi_tab:first-child, .mi_tray input[type=submit].mi_tab:first-child, .mi_dialog_window .mi_tab:first-child, .mi_dialog_window input[type=submit].mi_tab:first-child {
   <%= border_radius(:corner => 'top_left') %>
 }
 

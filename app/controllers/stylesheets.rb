@@ -2,7 +2,7 @@ class MerbInterface::Stylesheets < MerbInterface::Application
 
   only_provides :css
 
-  def interface
+  def page
     if gecko?
       @gecko = selector('*::-moz-focus-inner') do
         property('border', :value => 'none')
