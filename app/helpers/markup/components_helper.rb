@@ -14,8 +14,9 @@ module Merb::MerbInterface::ComponentsHelper
   def mi_button(options = {}, &block)
     attributes = {}
     attributes[:class] = %{mi_button#{' mi_inline' if options[:inline] == true}}
-    attributes[:class] << ' mi_dialog_close' if options[:dialog] == 'close'
-    attributes[:class] << ' mi_dialog_open' if options[:dialog] == 'open'
+    attributes[:class] << ' mi_click'
+    attributes[:class] << '_dialog_close' if options[:dialog] == 'close'
+    attributes[:class] << '_dialog_open' if options[:dialog] == 'open'
     attributes[:id] = options[:url] if options[:url]
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
     attributes[:type] = options[:submit] == true ? 'submit' : 'button'
@@ -116,7 +117,7 @@ module Merb::MerbInterface::ComponentsHelper
 
   def mi_tab(options={})
     attributes={}
-    attributes[:class] = 'mi_tab'
+    attributes[:class] = 'mi_tab mi_click'
     if options[:controller] == controller_name || options[:selected] == true
       attributes[:type] = 'submit'
     else
