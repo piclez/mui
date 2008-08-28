@@ -3,8 +3,10 @@ module Merb::MerbInterface::ElementsHelper
   def element(name, attributes = {})
     if block_given?
       start_tag(name, attributes) + yield.to_s + end_tag(name)
+    elsif name == :a || name ==:div || name == :script || name == :span
+      start_tag(name, attributes) + end_tag(name)
     else
-      empty_element_tag(name, attributes)
+      self_closing_tag(name, attributes)
     end
   end
 
@@ -18,12 +20,8 @@ module Merb::MerbInterface::ElementsHelper
     %{</#{name}>}
   end
 
-  def empty_element_tag(name, attributes = nil)
-    if name == :div || :span
-      %{<#{name} #{filter(attributes) if attributes && !attributes.empty?}></#{name}>}
-    else
-      %{<#{name} #{filter(attributes) if attributes && !attributes.empty?}/>}
-    end
+  def self_closing_tag(name, attributes = nil)
+    %{<#{name} #{filter(attributes) if attributes && !attributes.empty?}/>}
   end
 
   def filter(attributes = {})

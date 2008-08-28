@@ -1,23 +1,23 @@
-def mi_dialog_target
+def mi_dialog_target(options={}, &block)
   attributes={}
   attributes[:class] = 'mi_dialog_target'
-  element(:div, attributes)
+  element(:span, attributes)
+end
+
+def mi_dialog_tray(options={}, &block)
+  attributes={}
+  attributes[:class] = 'mi_dialog_tray'
+  element(:span, attributes) do
+    capture(&block)
+  end
 end
 
 def mi_dialog_window(options={}, &block)
   javascript = element(:script, :src => url(:mi_javascript_dialog), :type => 'text/javascript')
   attributes={}
-  attributes[:class] = 'mi_dialog_row'
-  html = element(:table, attributes) do
-    element(:tr) do
-      attributes[:class] = 'mi_dialog_column'
-      element(:td, attributes) do
-        attributes[:class] = 'mi_dialog_window'
-        element(:span, attributes) do
-          capture(&block) + mi_button(:dialog => 'close')
-        end
-      end
-    end
+  attributes[:class] = 'mi_dialog_window'
+  html = element(:span, attributes) do
+    capture(&block)
   end
   javascript + html
 end

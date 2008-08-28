@@ -164,27 +164,25 @@ code.mi var {
 
 /* dialog */
 
-.mi_dialog_column {
-  text-align: center;
-}
-.mi_dialog_row {
-  height: 100%;
-  left: 0;
+.mi_dialog_target {
+  display: inline-block;
+  left: 50%;
+  max-height: 90%;
+  max-width: 90%;
   position: fixed;
-  top: 0;
-  width: 100%;
+  top: 50%;
+}
+.mi_dialog_tray {
+  color: <%= color(1, 1, 1) %>;
+  display: inline-block;
+  overflow: auto;
+  padding-bottom: 1em;
+  padding-right: 1em;
+  position: relative;
 }
 .mi_dialog_window {
   background-image: url('/images/transparency.png');
   display: inline-block;
-  color: <%= color(1, 1, 1) %>;
-  max-height: 32em;
-  min-height: 12em;
-  min-width: 16em;
-  overflow: auto;
-  padding-bottom: 1em;
-  padding-right: 1em;
-  text-align: left;
   <%= border_radius %>
 }
 .mi_dialog_window .mi_bar {
@@ -193,14 +191,12 @@ code.mi var {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   color: <%= color(1, 1, 1) %>;
-  margin-right: -1em;
-  padding-right: 1em;
   <%= border_radius(:edge => 'top') %>
 }
 .mi_dialog_window .mi_click_dialog_close {
   position: absolute;
   right: 1.25em;
-  top: -1em;
+  top: .25em;
 }
 
 /* divider */
