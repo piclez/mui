@@ -11,4 +11,13 @@ $(document).ready(function(){
   	return false;
   });
   $('.mi_dialog_window').draggable();
+  $('.mi_focus').focus();
+});
+$(document).keyup(function(event){
+  if (event.keyCode == 27) {
+    $('.mi_dialog_window').fadeOut(function(){
+      $('.mi_dialog_target').empty();
+    });
+  	return false;
+  }
 });

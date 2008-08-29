@@ -26,6 +26,7 @@ module Merb::MerbInterface::FormsHelper
     options[:label] ||= options[:field]
     attributes = {}
     attributes[:class] = 'mi_form_text'
+    attributes[:class] << ' mi_focus' if options[:focus] == true
     attributes[:name] = options[:field] if options[:field]
     field(options) do
       attributes[:type] = 'password'
@@ -46,6 +47,7 @@ module Merb::MerbInterface::FormsHelper
     options[:label] ||= options[:field]
     attributes = {}
     attributes[:class] = 'mi_form_text'
+    attributes[:class] << ' mi_focus' if options[:focus] == true
     attributes[:name] = options[:field] if options[:field]
     field(options) do
       attributes[:type] = 'text'
@@ -59,6 +61,7 @@ module Merb::MerbInterface::FormsHelper
     options[:label] ||= options[:field]
     attributes = {}
     attributes[:class] = 'mi_form_text'
+    attributes[:class] << ' mi_focus' if options[:focus] == true
     attributes[:name] = options[:field] if options[:field]
     field(options) do
       attributes[:class] << 'area'
