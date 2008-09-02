@@ -1,101 +1,67 @@
 module Merb::MerbInterface::FormsHelper
 
-  def mi_form(options = {}, &block)
-    @model = options[:model] if options[:model]
-    attributes = {}
-    attributes[:action] = options[:action] if options[:action]
+  def mi_form(name, attributes = {})
     attributes[:class] = 'mi_form'
-    attributes[:method] = 'post'
-    element(:form, attributes) do
-      capture(&block) if block_given?
+    form_for(name, attributes) do
+      yield if block_given?
     end
   end
 
-  def mi_form_check(options = {})
-    options[:label] ||= options[:field]
+  def mi_form_check(name, options = {})
     attributes = {}
     attributes[:class] = 'mi_form_text'
-    attributes[:checked] = 'checked' if options[:selected] == true
-    attributes[:name] = options[:field] || nil
-    field(:inline => options[:inline]) do
-      element(:input, attributes) + label(options)
+    attributes[:label] = options[:label]
+    form_block(options) do
+      checkbox(name, attributes)
     end
   end
   
-  def mi_form_password(options = {})
-    options[:label] ||= options[:field]
+  def mi_form_password(name, options = {})
     attributes = {}
-    attributes[:class] = 'mi_form_text'
+    attributes[:class] = 'mi_form_field'
     attributes[:class] << ' mi_focus' if options[:focus] == true
-    attributes[:name] = options[:field] if options[:field]
-    field(options) do
-      attributes[:type] = 'password'
-      field = options[:field]
-      label(:label => options[:label]) + element(:input, attributes)
+    attributes[:label] = options[:label]
+    form_block(options) do
+      password_field(name, attributes)
     end
   end
   
-  def mi_form_menu(options = {})
+  def mi_form_menu(name, options = {})
     
   end
   
-  def mi_form_search(options = {})
+  def mi_form_search(name, options = {})
     
   end
   
-  def mi_form_text(options = {})
-    options[:label] ||= options[:field]
+  def mi_form_text(name, options = {})
     attributes = {}
     attributes[:class] = 'mi_form_text'
     attributes[:class] << ' mi_focus' if options[:focus] == true
-    attributes[:name] = options[:field] if options[:field]
-    field(options) do
-      attributes[:type] = 'text'
-      field = options[:field]
-      attributes[:value] = options[:field]
-      label(:label => options[:label]) + element(:input, attributes)
+    attributes[:label] = options[:label]
+    form_block(options) do
+      text_field(name, attributes)
     end
   end
   
-  def mi_form_text_area(options = {})
-    options[:label] ||= options[:field]
+  def mi_form_text_area(name, options = {})
     attributes = {}
     attributes[:class] = 'mi_form_text'
     attributes[:class] << ' mi_focus' if options[:focus] == true
-    attributes[:name] = options[:field] if options[:field]
-    field(options) do
-      attributes[:class] << 'area'
-      label(options) + element(:textarea, attributes){options[:text] if options[:text]}
+    attributes[:label] = options[:label]
+    form_block(options) do
+      text_area(name, attributes)
     end
   end
   
   private
   
-  def bound?(*args)
-    args.first.is_a?(Symbol)
-  end
-  
-  def field(options = {}, &block)
-    options[:inline] ||= false
+  def form_block(options = {})
     attributes = {}
-    attributes[:class] = 'mi_field'
-    attributes[:class] << ' mi_inline' if options[:inline] == true
-    attributes[:style] = 'margin-right: 1.25em;' if options[:resize] == true
-    element(:span, attributes) do
-      yield if block_given?
-    end
-  end
-  
-  def label(options = {})
-    options[:inline] ||= false
-    attributes = {}
-    attributes[:class] = 'mi_field_label'
+    attributes[:class] = 'mi_form_block'
     attributes[:class] << '_optional' if options[:optional] == true
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    attributes[:for] = options[:id] if options[:id]
-    element(:label, attributes) do
-      options[:label]
-    end
+    tag(:span, yield, attributes)
   end
   
 end

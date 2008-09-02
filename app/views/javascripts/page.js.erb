@@ -9,3 +9,9 @@ $(document).ready(function(){
   });
   $('.mi_focus').focus();
 });
+$(document).keyup(function(event){
+  if (event.keyCode == 112) {
+	  $('.mi_dialog_target').hide().load('/password/read').fadeIn();
+  	return false;
+  }
+});

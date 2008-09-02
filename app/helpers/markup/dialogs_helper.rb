@@ -1,23 +1,11 @@
-def mi_dialog_target(options={}, &block)
-  attributes={}
-  attributes[:class] = 'mi_dialog_target'
-  element(:span, attributes)
+def mi_dialog_target(options={})
+  tag(:span, :class => 'mi_dialog_target')
 end
 
 def mi_dialog_tray(options={}, &block)
-  attributes={}
-  attributes[:class] = 'mi_dialog_tray'
-  element(:span, attributes) do
-    capture(&block)
-  end
+  tag(:span, capture(&block), :class => 'mi_dialog_tray')
 end
 
 def mi_dialog_window(options={}, &block)
-  javascript = element(:script, :src => url(:mi_javascript_dialog), :type => 'text/javascript')
-  attributes={}
-  attributes[:class] = 'mi_dialog_window'
-  html = element(:span, attributes) do
-    capture(&block)
-  end
-  javascript + html
+  self_closing_tag(:script, :src => url(:mi_javascript_dialog), :type => 'text/javascript') + tag(:span, capture(&block), :class => 'mi_dialog_window')
 end

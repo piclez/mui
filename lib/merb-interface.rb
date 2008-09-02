@@ -1,7 +1,7 @@
 if defined?(Merb::Plugins)
 
   $:.unshift File.dirname(__FILE__)
-  load_dependency 'merb-slices'
+  load_dependencies('merb-slices', 'merb_helpers')
   Merb::Plugins.add_rakefiles('tasks/merb', 'tasks/slice')
   Merb::Slices::register(__FILE__)
   Merb::Slices::config[:merb_interface][:layout] ||= :application

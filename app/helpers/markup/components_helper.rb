@@ -1,14 +1,10 @@
 module Merb::MerbInterface::ComponentsHelper
   
   def mi_bar(options = {}, &block)
-    element(:div, :class => %{mi_bar#{'_expanded' if options[:expanded] == true}}) do
-      if options[:label]
-        label = element(:span, :class => 'mi_bar_label') do
-          options[:label]
-        end
-      end
-      [label, (capture(&block) if block_given?)].join
-    end
+    content = ''
+    content << tag(:span, options[:label], :class => 'mi_bar_label') if options[:label]
+    content << capture(&block) if block_given?
+    tag(:div, content, :class => %{mi_bar#{'_expanded' if options[:expanded] == true}})
   end
 
   def mi_button(options = {}, &block)
@@ -26,25 +22,14 @@ module Merb::MerbInterface::ComponentsHelper
       attributes[:value] = options[:label] if options[:label]
     end
     if block_given?
-      element(:button, attributes) do
-        if options[:label]
-          element(:table) do
-            element(:tr) do
-              tr = element(:td) do
-                capture(&block)
-              end
-              tr << element(:td, :class => 'mi_button_text') do
-                options[:label]
-              end
-              tr
-            end
-          end
-        else
-          capture(&block)
-        end
+      if options[:label]
+        content = tag(:table, tag(:tr, tag(:td, capture(&block)) + tag(:td, options[:label], :class => 'mi_button_text')))
+      else
+        content = capture(&block)
       end
+      tag(:button, content, attributes)
     else
-      element(:input, attributes)
+      self_closing_tag(:input, attributes)
     end
   end
 
@@ -54,9 +39,7 @@ module Merb::MerbInterface::ComponentsHelper
     attributes[:class] = 'mi_column'
     attributes[:class] << '_right' if options[:align] == 'right'
     attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
-    element(:td, attributes) do
-      capture(&block)
-    end
+    tag(:td, (capture(&block) if block_given?), attributes)
   end
 
   def mi_image(file, options={})
@@ -75,44 +58,27 @@ module Merb::MerbInterface::ComponentsHelper
     end
     attributes[:class] << ' mi_photo' if options[:photo] == true
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(:img, attributes)
+    self_closing_tag(:img, attributes)
   end
 
   def mi_link(content, options={}, &block)
-    attributes={}
+    attributes = {}
     attributes[:class] = 'mi_link'
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    attributes[:href] = options[:url] if options[:url]
+    attributes[:href] = options[:href]
     content = capture(&block) if block_given?
-    element(:a, attributes) do
-      content
-    end
-  end
-
-  def mi_page(options={}, &block)
-    attributes={}
-    attributes[:class] = 'mi_paragraph'
-    attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(:p, attributes) do
-      capture(&block) if block_given?
-    end
+    tag(:a, content, attributes)
   end
 
   def mi_paragraph(options={}, &block)
     attributes={}
     attributes[:class] = 'mi_paragraph'
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(:p, attributes) do
-      capture(&block) if block_given?
-    end
+    tag(:p, (capture(&block) if block_given?), attributes)
   end
 
   def mi_row(options={}, &block)
-    element(:table, :class => 'mi_row') do
-      element(:tr) do
-        capture(&block) if block_given?
-      end
-    end
+    tag(:table, tag(:tr, (capture(&block) if block_given?)), :class => 'mi_row')
   end
 
   def mi_tab(options={})
@@ -126,7 +92,7 @@ module Merb::MerbInterface::ComponentsHelper
     end
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
     attributes[:value] = options[:label] if options[:label]
-    element(:input, attributes)
+    self_closing_tag(:input, attributes)
   end
 
   def mi_title(text, options={})
@@ -134,18 +100,14 @@ module Merb::MerbInterface::ComponentsHelper
     attributes={}
     attributes[:class] = 'mi_title'
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(%{h#{options[:size]}}, attributes) do
-      text
-    end
+    tag(%{h#{options[:size]}}, text, attributes)
   end
 
   def mi_tray(options={}, &block)
     attributes={}
     attributes[:class] = 'mi_tray'
     attributes[:class] << ' mi_inline' if options[:inline] == true
-    element(:span, attributes) do
-      capture(&block) if block_given?
-    end
+    tag(:span, (capture(&block) if block_given?), attributes)
   end
 
 end

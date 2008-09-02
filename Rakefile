@@ -25,6 +25,7 @@ spec = Gem::Specification.new do |s|
   s.email = EMAIL
   s.homepage = HOMEPAGE
   s.add_dependency('merb-slices', '>= 0.9.5')
+  s.add_dependency('merb_helpers', '>= 0.9.5')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,app,public}/**/*")
 end
