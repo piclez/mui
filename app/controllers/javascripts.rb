@@ -3,11 +3,11 @@ class MerbInterface::Javascripts < MerbInterface::Application
   only_provides :js
   
   def page
-    render
+    render :layout => false
   end
   
   def dialog
-    render
+    render :layout => false
   end
   
 end

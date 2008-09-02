@@ -14,7 +14,7 @@ class MerbInterface::Stylesheets < MerbInterface::Application
         property('width', :value => 'auto')
       end
     end
-    render
+    render :layout => false
   end
   
   Merb::BootLoader.after_app_loads do
