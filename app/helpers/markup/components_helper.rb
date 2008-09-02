@@ -33,12 +33,8 @@ module Merb::MerbInterface::ComponentsHelper
     end
   end
 
-  def mi_column(options={}, &block)
-    attributes={}
-    attributes[:align] = options[:align] if options[:align]
-    attributes[:class] = 'mi_column'
-    attributes[:class] << '_right' if options[:align] == 'right'
-    attributes[:style] = %{width:#{(options[:width] * 100).to_i}%;} if options[:width]
+  def mi_column(attributes={}, &block)
+    attributes[:valign] ||= 'top'
     tag(:td, (capture(&block) if block_given?), attributes)
   end
 
@@ -77,8 +73,10 @@ module Merb::MerbInterface::ComponentsHelper
     tag(:p, (capture(&block) if block_given?), attributes)
   end
 
-  def mi_row(options={}, &block)
-    tag(:table, tag(:tr, (capture(&block) if block_given?)), :class => 'mi_row')
+  def mi_row(attributes={}, &block)
+    attributes[:class] = 'mi_row'
+    attributes[:width] ||= '100%'
+    tag(:table, tag(:tr, (capture(&block) if block_given?)), attributes)
   end
 
   def mi_tab(options={})
