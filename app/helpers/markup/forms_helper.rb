@@ -1,15 +1,20 @@
 module Merb::MerbInterface::FormsHelper
 
-  def mi_form(name, attributes = {})
-    attributes[:class] = 'mi_form'
-    form_for(name, attributes) do
-      yield if block_given?
+  def mi_form(options = {})
+    if options[:model]
+      form_for(options[:model], :action => options[:action], :class => 'mi_form') do
+        yield if block_given?
+      end
+    else
+      form(:action => options[:action], :class => 'mi_form') do
+        yield if block_given?
+      end
     end
   end
 
   def mi_form_check(name, options = {})
     attributes = {}
-    attributes[:class] = 'mi_form_text'
+    attributes[:class] = 'mi_form_check'
     attributes[:label] = options[:label]
     form_block(options) do
       checkbox(name, attributes)
@@ -36,7 +41,7 @@ module Merb::MerbInterface::FormsHelper
   
   def mi_form_text(name, options = {})
     attributes = {}
-    attributes[:class] = 'mi_form_text'
+    attributes[:class] = 'mi_form_field'
     attributes[:class] << ' mi_focus' if options[:focus] == true
     attributes[:label] = options[:label]
     form_block(options) do
@@ -46,7 +51,7 @@ module Merb::MerbInterface::FormsHelper
   
   def mi_form_text_area(name, options = {})
     attributes = {}
-    attributes[:class] = 'mi_form_text'
+    attributes[:class] = 'mi_form_text_area'
     attributes[:class] << ' mi_focus' if options[:focus] == true
     attributes[:label] = options[:label]
     form_block(options) do

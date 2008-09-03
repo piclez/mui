@@ -219,7 +219,7 @@ hr.mi_divider {
 .mi_form_block label {
   font-weight: bold;
 }
-.mi_form_field, .mi_form_textarea {
+.mi_form_field, .mi_form_text_area {
   background-color: <%= color(1, 1, 1) %>;
   border-bottom-color: <%= color(0.75, 0.75, 0.75) %>;
   border-left-color: <%= color(0.65, 0.65, 0.65) %>;
@@ -238,8 +238,9 @@ hr.mi_divider {
   <%= border_radius %>
   <%= border_radius(:amount => 0.4) %>
 }
-.mi_form_textarea {
+.mi_form_text_area {
   min-height: 6.25em;
+  min-width: 20em;
   padding: 0;
   width: 100%;
 }
@@ -362,6 +363,15 @@ blockquote.mi_quote {
   background-color: #e5e5e5;
 }
 
+/* row */
+
+.mi_row {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-style: none;
+  border-width: 0;
+}
+
 /* tab */
 
 .mi_tab, input[type=submit].mi_tab {
@@ -388,21 +398,6 @@ blockquote.mi_quote {
 }
 .mi_tab:hover {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
-}
-.mi_tab:active, input[type=submit].mi_tab, .mi_tray .mi_tab:active, .mi_tray input[type=submit].mi_tab {
-  background-color: <%= color(0, 0.3, 0.9) %>;
-  border-left-color: <%= color(0, 0.25, 0.85) %>;
-  border-right-color: <%= color(0, 0.2, 0.8) %>;
-  color: <%= color(1, 1, 1) %>;
-}
-
-/* row */
-
-.mi_row {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: none;
-  border-width: 0;
 }
 
 /* title */
@@ -468,6 +463,12 @@ h6.mi_title {
 }
 .mi_tray .mi_tab:hover {
   background-color: <%= color(0.9, 0.9, 0.9) %>;
+}
+.mi_tray .mi_tab:active, .mi_tray input[type=submit].mi_tab, .mi_tab:active, input[type=submit].mi_tab {
+  background-color: <%= color(0, 0.3, 0.9) %>;
+  border-left-color: <%= color(0, 0.25, 0.85) %>;
+  border-right-color: <%= color(0, 0.2, 0.8) %>;
+  color: <%= color(1, 1, 1) %>;
 }
 .mi_tray .mi_tab:first-child, .mi_tray input[type=submit].mi_tab:first-child, .mi_dialog_window .mi_tab:first-child, .mi_dialog_window input[type=submit].mi_tab:first-child {
   <%= border_radius(:corner => 'top_left') %>
