@@ -1,0 +1,23 @@
+<%= mui_row do %>
+  <%= mui_column(:width => '100%') do %>
+    <%= mui_title('Pages')%>
+  <% end =%>
+  <% if identified? %>
+    <%= mui_column do %>
+      <%= mui_bar(:label => 'Pages') do %>
+        <%= mui_button(:dialog => 'open', :inline => true, :label => 'Create', :url => url(:mui_page_create)) %>
+      <% end =%>
+    <% end =%>
+  <% end %>
+<% end =%>
+<% @pages.each do |page| %>
+  <%= mui_tray do %>
+    <%= mui_bar(:label => page.label) do %>
+      <%= mui_button(:dialog => 'open', :inline => true, :label => 'Update', :url => url(:mui_page_update, :id => page.id)) %>
+      <%= mui_button(:dialog => 'open', :inline => true, :label => 'Delete', :url => url(:mui_page_delete, :id => page.id)) %>
+    <% end =%>
+    <%= mui_paragraph do %>
+      <%= page.value %>
+    <% end =%>
+  <% end =%>
+<% end %>

@@ -1,0 +1,13 @@
+<%= mui_dialog_window do %>
+  <%= mui_bar(:label => 'Delete') do %>
+    <%= mui_button(:dialog => 'close')%>
+  <% end =%>
+  <%= mui_dialog_tray do %>
+    <%= mui_form(:action => url(:mui_password_delete)) do %>
+      <%= mui_paragraph do %>
+        Are you sure that you want to delete your password?
+      <% end =%>
+      <%= mui_button(:label => 'Delete Password', :submit => true)%>
+    <% end =%>
+  <% end =%>
+<% end =%>

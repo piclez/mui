@@ -1,0 +1,12 @@
+<%= mui_dialog_window do %>
+  <%= mui_bar(:label => 'Update') do %>
+    <%= mui_button(:dialog => 'close')%>
+  <% end =%>
+  <%= mui_dialog_tray do %>
+    <%= mui_form(:action => url(:mui_page_update, :id => @page.id), :model => @page) do %>
+      <%= mui_form_text(:label, :focus => true, :label => 'Label') %>
+      <%= mui_form_text_area :value %>
+      <%= mui_button(:label => 'Update Page', :submit => true)%>
+    <% end =%>
+  <% end =%>
+<% end =%>
