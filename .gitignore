@@ -1,6 +1,7 @@
 test_log
 pkg
 pkg/*
+*/pkg/*
 *.log
 log
 !log*.rb
@@ -8,10 +9,10 @@ log
 log/*
 */log/*
 coverage
-.DS_Store
+*/coverage
+bundle
+lib/mui.rb
+*.DS_Store
 *.pid
 *.gem
 TAGS
-*.rbc
-*.tmproj
-.#*
