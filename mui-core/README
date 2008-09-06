@@ -1,0 +1,61 @@
+mui
+=============
+
+User Interface components for Merb.
+
+------------------------------------------------------------------------------
+
+Installation
+============
+
+1.) In file "config/init.rb", add:
+
+dependency 'mui-core'
+
+2.) In file "config/rack.rb", add:
+
+use Merb::Rack::Static, Mui.dir_for(:public)
+
+3.) In file "config/router.rb", add:
+
+r.add_slice(:Mui, :default_routes => false, :path => '')
+
+4.) In file "app/views/layout/application.html.erb", add within <head></head>:
+
+<%= mui_stylesheet %>
+<%= mui_javascript %>
+
+------------------------------------------------------------------------------
+
+Example View
+============
+
+<%= mui_row do%>
+  <%= mui_column do %>
+    <%= mui_title('MerbInterface') %>
+  	<%= mui_paragraph do %>MerbInterface is an HTML/CSS pattern Merb Slice. MerbInterface's professionally designed components may be mixed within your Merb application's views.<% end =%>
+    <%= mui_link('Project Overview', :url => 'http://uipoet.lighthouseapp.com/projects/14717-merb-interface/overview') %>
+    <%= mui_link('Source Code', :url => 'http://github.com/uipoet/merb-interface/tree/master') %>
+    <%= mui_title('MerbFlickr') %>
+  	<%= mui_paragraph do %>MerbFlickr is a Flickr photo gallery Merb Slice. It leverages the components of MerbInterface. With supplying only a Flickr API key, Shared Secret, and User ID, you get a polished working gallery of Flickr Sets that's ready to be customized.<% end =%>
+    <%= mui_link('Project Overview', :url => 'http://uipoet.lighthouseapp.com/projects/14716-merb-flickr/overview') %>
+    <%= mui_link('Source Code', :url => 'http://github.com/uipoet/merb-flickr/tree/master') %>
+  <% end =%>
+  <%= mui_column do %>
+    <%= mui_tray do %>
+      <%= mui_merb %>
+    	<%= mui_paragraph do %><%= mui_link('Ruby', :url => 'http://www.ruby-lang.org/') %> is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.<% end =%>
+    	<%= mui_paragraph do %>Ruby programs and libraries are easily distributed and installed as Gems. <%= mui_link('RubyGems', :url => 'http://www.rubygems.org/') %> is the premier ruby packaging system. <% end =%>
+    	<%= mui_paragraph do %><%= mui_link('Merb', :url => 'http://www.merbivore.com/') %> is a Ruby model, view, controller framework for creating web applications.<% end =%>
+    	<%= mui_paragraph do %>Merb is agnostic about which object-relational mapping, JavaScript library, or template language you decide to use. Easily installed as a Gem, Merb supports plugins that are also installed as Gems. Optionally add whichever functionality you need.<% end =%>
+    	<%= mui_paragraph do %>Merb-Slices is a Merb plugin for using application 'Slices'. A Slice is just like a regular Merb MVC application, both in functionality as well as in structure.<% end =%>
+    <% end =%>
+  <% end =%>
+<% end =%>
+
+------------------------------------------------------------------------------
+
+Documentation
+=============
+
+Until documentation is written, see files inside "mui-core/app/helpers/markup" for the names of all markup helpers.

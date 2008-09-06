@@ -1,0 +1,34 @@
+mui-flickr
+===========
+Flickr photosets for Merb.
+
+------------------------------------------------------------------------------
+
+Prerequisites
+=============
+
+- Flickr User ID
+- At least one photoset containing photos at http://flickr.com/photos/userid/sets/
+- Flickr Developer API Key and Shared Secret
+
+------------------------------------------------------------------------------
+
+Installation
+============
+
+1.) In file "config/init.rb", add:
+
+dependency 'mui-flickr'
+Merb::BootLoader.before_app_loads do
+  Merb::Slices::config[:mui_flickr][:user_name] = 'username'
+  Merb::Slices::config[:mui_flickr][:api_key] = '1234...'
+  Merb::Slices::config[:mui_flickr][:shared_secret] = '1234...'
+end
+
+2.) In file "config/router.rb", add:
+
+r.add_slice(:MuiFlickr, :default_routes => false, :path => '')
+
+3.) Restart your Merb application and navigate to http://localhost:4000/photos
+
+4.) :)
