@@ -1,5 +1,5 @@
 <%= mui_tray do %>
   <%= mui_bar(:label => 'Sets') %>
-  <% @photosets.each do |photoset| %><%= mui_button(:inline => true, :label => %{#{photoset.title} (#{photoset.photos})}, :url => url(:merb_photoset, :id => photoset.id), :width => 20) do %>
+  <% @photosets.each do |photoset| %><%= mui_button(:inline => true, :label => %{#{photoset.title} (#{photoset.photos})}, :url => url(:mui_photoset, :id => photoset.id), :width => 20) do %>
   <%= mui_image("http://farm#{photoset.farm}.static.flickr.com/#{photoset.server}/#{photoset.primary}_#{photoset.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %><% end =%><% end %>
 <% end =%>

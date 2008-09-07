@@ -1,6 +1,6 @@
 <%= mui_tray do %>
   <%= mui_bar do %>
-  	<%= mui_tab(:label => 'Sets', :url => url(:mui_photos)) %><%= mui_tab(:label => @photoset.title, :selected => true) %>
+  	<%= mui_tab(:label => 'Sets', :url => url(:mui_photosets)) %><%= mui_tab(:label => @photoset.title, :selected => true) %>
   <% end =%>
   <% @photos.each do |photo| %><%= mui_button(:inline => true, :url => url(:mui_photo, :id => photo.id)) do %>
       <%= mui_image("http://farm#{@photoset.farm}.static.flickr.com/#{photo.server}/#{photo.id}_#{photo.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %><% end =%><% end %>

@@ -1,6 +1,6 @@
 <%= mui_tray do %>
   <%= mui_bar do %>
-  	<%= mui_tab(:label => 'Sets', :url => url(:mui__photos)) %><%= mui_tab(:label => @photoset.title, :url => url(:mui__photoset, :id => @photoset.id)) %><%= mui_tab(:label => @photo.title, :selected => true) %>
+  	<%= mui_tab(:label => 'Sets', :url => url(:mui_photosets)) %><%= mui_tab(:label => @photoset.title, :url => url(:mui_photoset, :id => @photoset.id)) %><%= mui_tab(:label => @photo.title, :selected => true) %>
   <% end =%>
   <%= mui_row do %>
     <%= mui_column do %>
@@ -8,12 +8,12 @@
     <% end =%>
     <%= mui_column do %>
       <% if @previous %>
-        <%= mui_button(:inline => true, :label => 'Previous', :url => url(:mui__photo, :id => @previous.id), :width => 15) do %>
+        <%= mui_button(:inline => true, :label => 'Previous', :url => url(:mui_photo, :id => @previous.id), :width => 15) do %>
           <%= mui_image("http://farm#{@photo.farm}.static.flickr.com/#{@previous.server}/#{@previous.id}_#{@previous.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %>
         <% end =%>
       <% end %>
       <% if @next %>
-        <%= mui_button(:inline => true, :label => 'Next', :url => url(:mui__photo, :id => @next.id), :width => 15) do %>
+        <%= mui_button(:inline => true, :label => 'Next', :url => url(:mui_photo, :id => @next.id), :width => 15) do %>
           <%= mui_image("http://farm#{@photo.farm}.static.flickr.com/#{@next.server}/#{@next.id}_#{@next.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %>
         <% end =%>
       <% end %>
