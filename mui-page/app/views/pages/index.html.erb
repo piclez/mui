@@ -2,7 +2,7 @@
   <%= mui_column(:width => '100%') do %>
     <%= mui_title('Pages')%>
   <% end =%>
-  <% if identified? %>
+  <% if mui_password? %>
     <%= mui_column do %>
       <%= mui_bar(:label => 'Pages') do %>
         <%= mui_button(:dialog => 'open', :inline => true, :label => 'Create', :url => url(:mui_page_create)) %>

@@ -1,4 +1,4 @@
-class Page < MuiPage::Pages
+class Page
 
   include DataMapper::Resource
   

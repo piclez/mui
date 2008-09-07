@@ -1,4 +1,4 @@
-class Password < MuiPassword::Passwords
+class Password
 
   include DataMapper::Validate
   include DataMapper::Resource

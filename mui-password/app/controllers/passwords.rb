@@ -10,13 +10,13 @@ class MuiPassword::Passwords < MuiPassword::Application
   def create_post
     password = Password.new(params[:password])
     if password.save
-      session[:password_id] = password.id
+      session[:mui_password_id] = password.id
       redirect(session[:mui_password_referer], :message => {:success => 'Password created.'})
     else
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_password_referer], :message => {:dialog => url(:merb_password_create), :error => error.to_s})
+      redirect(session[:mui_password_referer], :message => {:dialog => url(:mui_password_create), :error => error.to_s})
     end
   end
 
@@ -24,17 +24,17 @@ class MuiPassword::Passwords < MuiPassword::Application
     if mui_password_exists?
       display(@password = Password.new, :layout => false)
     else
-      redirect url(:merb_password_create)
+      redirect url(:mui_password_create)
     end
   end
 
   def read_post
     encrypted = encrypt(params[:password])
     if password_match = Password.first(:encrypted => encrypted)
-      session[:password_id] = password_match.id
+      session[:mui_password_id] = password_match.id
       redirect(session[:mui_password_referer], :message => {:success => 'Password correct.'})
     else
-      redirect(session[:mui_password_referer], :message => {:dialog => url(:merb_password_read), :error => 'Password incorrect.'})
+      redirect(session[:mui_password_referer], :message => {:dialog => url(:mui_password_read), :error => 'Password incorrect.'})
     end
   end
 
@@ -50,7 +50,7 @@ class MuiPassword::Passwords < MuiPassword::Application
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_password_referer], :message => {:dialog => url(:merb_password_update), :error => error.to_s})
+      redirect(session[:mui_password_referer], :message => {:dialog => url(:mui_password_update), :error => error.to_s})
     end
   end
 
@@ -67,7 +67,7 @@ class MuiPassword::Passwords < MuiPassword::Application
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_password_referer], :message => {:dialog => url(:merb_password_delete), :error => error})
+      redirect(session[:mui_password_referer], :message => {:dialog => url(:mui_password_delete), :error => error})
     end
   end
 
