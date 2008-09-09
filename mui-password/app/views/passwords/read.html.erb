@@ -1,11 +1,6 @@
-<%= mui_dialog_window do %>
-  <%= mui_bar(:label => 'Password Entry') do %>
-    <%= mui_button(:dialog => 'close')%>
-  <% end =%>
-  <%= mui_dialog_tray do %>
-    <%= mui_form(:action => url(:mui_password_read), :model => @password) do %>
-      <%= mui_form_password(:password, :focus => true, :inline => true, :label => 'Password') %>
-      <%= mui_button(:label => 'Enter', :submit => true)%>
-    <% end =%>
+<%= mui_dialog_window(:label => 'Password Entry') do %>
+  <%= mui_form(:action => url(:mui_password_read), :model => @password) do %>
+    <%= mui_form_password(:password, :focus => true, :inline => true, :label => 'Password') %>
+    <%= mui_button(:label => 'Enter', :submit => true, :tone => 'positive')%>
   <% end =%>
 <% end =%>

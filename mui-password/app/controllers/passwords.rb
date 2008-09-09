@@ -1,8 +1,16 @@
 class MuiPassword::Passwords < MuiPassword::Application
 
-  before(:mui_password_referer, :only => [:create, :read, :update, :delete])
+  before(:mui_password_referer, :only => [:exit, :create, :read, :update, :delete])
   before(:mui_password_redirect, :exclude => [:create, :read], :unless => :mui_password?)
   
+  def exit
+    if session.delete(:mui_password_id)
+      redirect(session[:mui_password_referer], :message => {:success => 'Exited.'})
+    else
+      redirect(session[:mui_password_referer], :message => {:error => 'Not exited.'})
+    end
+  end
+
   def create
     display(@password = Password.new, :layout => false)
   end

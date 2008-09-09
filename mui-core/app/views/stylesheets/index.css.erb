@@ -45,7 +45,7 @@ div.mui_bar input.mui_button, div.mui_bar_expanded input.mui_button {
 
 /* button */
 
-.mui_button, input[type=submit].mui_button {
+.mui_button {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
@@ -53,8 +53,8 @@ div.mui_bar input.mui_button, div.mui_bar_expanded input.mui_button {
   border-width: 1px;
   display: block;
   font-size: 0.8em;
-  line-height: 2em;
-  min-height: 2em;
+  line-height: 1.5em;
+  min-height: 1.5em;
   margin-left: 1.25em;
   margin-top: 1.25em;
   padding-left: 1em;
@@ -65,44 +65,44 @@ button.mui_button {
   padding-bottom: 1em;
   padding-top: 1em;
 }
-.mui_button .mui_photo {
+button.mui_button .mui_photo {
   border-bottom-color: <%= color(0.5, 0.5, 0.5) %>;
   border-left-color: <%= color(0.4, 0.4, 0.4) %>;
   border-right-color: <%= color(0.4, 0.4, 0.4) %>;
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
   margin: 0;
 }
-.mui_button_text {
+button.mui_button .mui_button_text {
   padding-left: 1em;
   text-align: left;
   width: 100%;
 }
-.mui_button {
-  background-color: <%= color(0.3, 0.3, 0.3) %>;
-  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-left-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-right-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-top-color: <%= color(0.3, 0.3, 0.3) %>;
-  color: <%= color(1, 1, 1) %>;
-}
-.mui_button:hover {
-  background-color: <%= color(0.4, 0.4, 0.4) %>;
-  border-bottom-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-left-color: <%= color(0.3, 0.3, 0.3) %>;
-  border-right-color: <%= color(0.3, 0.3, 0.3) %>;
-  border-top-color: <%= color(0.4, 0.4, 0.4) %>;
-  color: <%= color(1, 1, 1) %>;
-}
-.mui_button:active {
-  background-color: <%= color(0.3, 0.3, 0.3) %>;
-  background-image: none;
-  border-bottom-color: <%= color(0.3, 0.3, 0.3) %>;
-  border-left-color: <%= color(0.2, 0.2, 0.2) %>;
-  border-right-color: <%= color(0.2, 0.2, 0.2) %>;
+.mui_button_tone_neutral {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-bottom-color: <%= color(0, 0, 0) %>;
+  border-left-color: <%= color(0, 0, 0) %>;
+  border-right-color: <%= color(0, 0, 0) %>;
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mui_button {
+.mui_button_tone_neutral:hover {
+  background-color: <%= color(0.2, 0.2, 0.2) %>;
+  border-bottom-color: <%= color(0, 0, 0) %>;
+  border-left-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-right-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-top-color: <%= color(0.2, 0.2, 0.2) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+.mui_button_tone_neutral:active {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
+  background-image: none;
+  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-left-color: <%= color(0, 0, 0) %>;
+  border-right-color: <%= color(0, 0, 0) %>;
+  border-top-color: <%= color(0, 0, 0) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+.mui_button_tone_positive {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   border-bottom-color: <%= color(0, 0.3, 0) %>;
   border-left-color: <%= color(0, 0.4, 0) %>;
@@ -110,7 +110,7 @@ input[type=submit].mui_button {
   border-top-color: <%= color(0.1, 0.5, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mui_button:hover {
+.mui_button_tone_positive:hover {
   background-color: <%= color(0.2, 0.6, 0.2) %>;
   border-bottom-color: <%= color(0, 0.4, 0) %>;
   border-left-color: <%= color(0.1, 0.5, 0.1) %>;
@@ -118,13 +118,38 @@ input[type=submit].mui_button:hover {
   border-top-color: <%= color(0.2, 0.6, 0.2) %>;
   color: <%= color(1, 1, 1) %>;
 }
-input[type=submit].mui_button:active {
+.mui_button_tone_positive:active {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   background-image: none;
   border-bottom-color: <%= color(0.1, 0.5, 0.1) %>;
   border-left-color: <%= color(0.1, 0.5, 0.1) %>;
   border-right-color: <%= color(0.1, 0.5, 0.1) %>;
   border-top-color: <%= color(0, 0.4, 0) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+.mui_button_tone_negative {
+  background-color: <%= color(0.6, 0, 0) %>;
+  border-bottom-color: <%= color(0.4, 0, 0) %>;
+  border-left-color: <%= color(0.5, 0, 0) %>;
+  border-right-color: <%= color(0.4, 0, 0) %>;
+  border-top-color: <%= color(0.6, 0, 0) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+.mui_button_tone_negative:hover {
+  background-color: <%= color(0.7, 0, 0) %>;
+  border-bottom-color: <%= color(0.5, 0, 0) %>;
+  border-left-color: <%= color(0.6, 0, 0) %>;
+  border-right-color: <%= color(0.6, 0, 0) %>;
+  border-top-color: <%= color(0.7, 0, 0) %>;
+  color: <%= color(1, 1, 1) %>;
+}
+.mui_button_tone_negative:active {
+  background-color: <%= color(0.6, 0, 0) %>;
+  background-image: none;
+  border-bottom-color: <%= color(0.6, 0, 0) %>;
+  border-left-color: <%= color(0.6, 0, 0) %>;
+  border-right-color: <%= color(0.6, 0, 0) %>;
+  border-top-color: <%= color(0.5, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
 
@@ -156,6 +181,22 @@ code.mi var {
 
 /* dialog */
 
+.mui_dialog_bar {
+  background-color: <%= color(0, 0, 0) %>;
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  color: <%= color(1, 1, 1) %>;
+  padding-right: 1em;
+  white-space: nowrap;
+  <%= border_radius(:edge => 'top') %>
+}
+.mui_dialog_bar .mui_button {
+  margin: 0;
+}
 .mui_dialog_target {
   display: inline-block;
   left: 50%;
@@ -176,20 +217,6 @@ code.mi var {
   background-image: url('/images/transparency.png');
   display: inline-block;
   <%= border_radius %>
-}
-.mui_dialog_window .mui_bar {
-  background-color: <%= color(0, 0, 0) %>;
-  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  color: <%= color(1, 1, 1) %>;
-  margin-top: 0;
-  <%= border_radius(:edge => 'top') %>
-}
-.mui_dialog_window .mui_click_dialog_close {
-  position: absolute;
-  right: 1.25em;
-  top: .25em;
 }
 
 /* divider */
@@ -440,7 +467,7 @@ h6.mui_title {
   border-width: 1px;
   display: block;
   margin-left: 1em;
-  margin-top: 2em;
+  margin-top: 1em;
   padding-bottom: 1em;
   padding-right: 1em;
   <%= border_radius(:amount => 0.6) %>

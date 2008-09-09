@@ -9,18 +9,16 @@ module Merb::MuiCore::ComponentsHelper
 
   def mui_button(options = {}, &block)
     attributes = {}
-    attributes[:class] = %{mui_button#{' mui_inline' if options[:inline] == true}}
+    attributes[:class] = 'mui_button'
+    attributes[:class] << %{ mui_button_tone_#{options[:tone] || 'neutral'}}
+    attributes[:class] << ' mui_inline' if options[:inline] == true
     attributes[:class] << ' mui_click'
+    attributes[:class] << '_dialog_close' if options[:dialog] == 'close'
     attributes[:class] << '_dialog_open' if options[:dialog] == 'open'
     attributes[:id] = options[:url] if options[:url]
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
     attributes[:type] = options[:submit] == true ? 'submit' : 'button'
-    if options[:dialog] == 'close'
-      attributes[:class] << '_dialog_close'
-      attributes[:value] = 'x'
-    else
-      attributes[:value] = options[:label] if options[:label]
-    end
+    attributes[:value] = options[:label] if options[:label]
     if block_given?
       if options[:label]
         content = tag(:table, tag(:tr, tag(:td, capture(&block)) + tag(:td, options[:label], :class => 'mui_button_text')))

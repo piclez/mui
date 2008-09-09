@@ -10,6 +10,7 @@ if defined?(Merb::Plugins)
     def self.setup_router(scope)
       scope.match('/javascripts/mui_password.js').to(:controller => 'javascripts', :action => 'index').name(:mui_password_javascript)
       scope.to(:controller => 'passwords') do |i|
+        i.match('/password/exit').to(:action => 'exit').name(:mui_password_exit)
         i.match('/password/create', :method => :post).to(:action => 'create_post').name(:mui_password_create)
         i.match('/password/create').to(:action => 'create').name(:mui_password_create)
         i.match('/password/read', :method => :post).to(:action => 'read_post').name(:mui_password_read)
@@ -18,7 +19,6 @@ if defined?(Merb::Plugins)
         i.match('/password/update').to(:action => 'update').name(:mui_password_update)
         i.match('/password/delete', :method => :post).to(:action => 'delete_post').name(:mui_password_delete)
         i.match('/password/delete').to(:action => 'delete').name(:mui_password_delete)
-        i.match('/password/exit').to(:action => 'exit').name(:mui_password_exit)
       end
     end
   end

@@ -8,14 +8,6 @@ module MuiPassword::Helper
     Password.first ? true : false
   end
 
-  def mui_password_exit
-    if session.delete(:mui_password_id)
-      redirect(session[:mui_password_referer], :message => {:success => 'Exited.'})
-    else
-      redirect(session[:mui_password_referer], :message => {:error => 'Not exited.'})
-    end
-  end
-
   def mui_password_javascript
     self_closing_tag(:script, :src => url(:mui_password_javascript), :type => 'text/javascript')
   end

@@ -1,13 +1,8 @@
-<%= mui_dialog_window do %>
-  <%= mui_bar(:label => 'Delete') do %>
-    <%= mui_button(:dialog => 'close')%>
+<%= mui_dialog_window(:label => 'Delete') do %>
+  <%= mui_paragraph do %>
+    Are you sure that you want to delete <%= @page.label %>?
   <% end =%>
-  <%= mui_dialog_tray do %>
-    <%= mui_form(:action => url(:mui_page_delete, :id => @page.id), :model => @page) do %>
-      <%= mui_paragraph do %>
-        Are you sure that you want to delete <%= @page.label %>?
-      <% end =%>
-      <%= mui_button(:label => 'Delete Page', :submit => true)%>
-    <% end =%>
+  <%= mui_form(:action => url(:mui_page_delete, :id => @page.id), :model => @page) do %>
+    <%= mui_button(:label => 'Delete Page', :submit => true, :tone => 'negative')%>
   <% end =%>
 <% end =%>
