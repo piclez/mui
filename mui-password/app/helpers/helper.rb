@@ -9,7 +9,7 @@ module MuiPassword::Helper
   end
 
   def mui_password_javascript
-    self_closing_tag(:script, :src => url(:mui_password_javascript), :type => 'text/javascript')
+    tag(:script, :src => url(:mui_password_javascript), :type => 'text/javascript')
   end
 
   def mui_password_redirect

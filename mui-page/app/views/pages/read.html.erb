@@ -1,1 +1,14 @@
-booya
+<%= mui_row do %>
+  <%= mui_column(:width => '100%') do %>
+    <%= mui_title(@page.label)%>
+  <% end =%>
+  <% if mui_password? %>
+    <%= mui_column(:nowrap => 'nowrap', :valign => 'bottom') do %>
+      <%= mui_button(:dialog => 'open', :inline => true, :label => 'Update', :url => url(:mui_page_update, :id => @page.id)) %>
+      <%= mui_button(:dialog => 'open', :inline => true, :label => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :id => @page.id)) %>
+    <% end =%>
+  <% end %>
+<% end =%>
+<%= mui_paragraph do %>
+  <%= @page.value %>
+<% end =%>
