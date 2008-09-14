@@ -1,4 +1,4 @@
-module MuiPassword::Helper
+module MuiPassword::ApplicationHelper
 
   def mui_password?
     session[:mui_password_id] ? true : false
@@ -20,10 +20,6 @@ module MuiPassword::Helper
     end
   end
       
-  def mui_password_referer
-    session[:mui_password_referer] = request.referer
-  end
-
 end
 
-include MuiPassword::Helper
+include MuiPassword::ApplicationHelper

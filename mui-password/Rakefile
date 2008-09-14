@@ -17,7 +17,7 @@ GEM_EMAIL  = "dont.tase@me.com"
 
 GEM_NAME    = "mui-password"
 PKG_BUILD   = ENV['PKG_BUILD'] ? '.' + ENV['PKG_BUILD'] : ''
-GEM_VERSION = (Mui::MORE_VERSION rescue "0.9.5") + PKG_BUILD
+GEM_VERSION = (Mui::MORE_VERSION rescue "1.0") + PKG_BUILD
 
 RELEASE_NAME    = "REL #{GEM_VERSION}"
 
@@ -35,13 +35,13 @@ spec = Gem::Specification.new do |s|
   s.author = GEM_AUTHOR
   s.email = GEM_EMAIL
   s.homepage = PROJECT_URL
-  s.add_dependency('mui-core', '>= 0.9.5')
-  s.add_dependency('dm-core', '>= 0.9.5')
-  s.add_dependency('dm-migrations', '>= 0.9.5')
-  s.add_dependency('dm-validations', '>= 0.9.5')
-  s.add_dependency('data_objects', '>= 0.9.5')
-  s.add_dependency('do_sqlite3', '>= 0.9.5')
-  s.add_dependency('merb_datamapper', '>= 0.9.5')
+  s.add_dependency('mui-core', '>= 1.0')
+  s.add_dependency('dm-core', '>= 0.9.6')
+  s.add_dependency('dm-migrations', '>= 0.9.6')
+  s.add_dependency('dm-validations', '>= 0.9.6')
+  s.add_dependency('data_objects', '>= 0.9.6')
+  s.add_dependency('do_sqlite3', '>= 0.9.6')
+  s.add_dependency('merb_datamapper', '>= 0.9.6')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,app}/**/*")
 end

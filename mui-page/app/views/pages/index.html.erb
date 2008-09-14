@@ -8,7 +8,8 @@
     <% end =%>
   <% end %>
 <% end =%>
-<% @pages.each do |page| %>
+<% if @pages
+  @pages.each do |page| %>
   <%= mui_tray do %>
     <%= mui_bar(:label => page.label) %>
     <%= mui_paragraph do %>
@@ -26,4 +27,5 @@
       <% end %>
     <% end =%>
   <% end =%>
-<% end %>
+<% end
+end %>

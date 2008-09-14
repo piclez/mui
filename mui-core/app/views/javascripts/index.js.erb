@@ -1,9 +1,11 @@
 $(document).ready(function(){
-  $('.mui_click_dialog_open').click(function(){
-  	$('.mui_dialog_target').hide().load(this.id).fadeIn();
+  $('.mui_click_window_open').click(function(){
+  	$('.mui_window_target').hide().load(this.id).fadeIn();
+  	return false;
   });
   $('.mui_click').click(function(){
   	location.href=this.id;
+  	return false;
   });
   $('.mui_focus').focus();
 });

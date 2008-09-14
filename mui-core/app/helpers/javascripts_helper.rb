@@ -8,8 +8,8 @@ module Merb::MuiCore::JavascriptsHelper
     script
   end
 
-  def mui_javascript_dialog
-    tag(:script, :src => url(:mui_javascript_dialog), :type => 'text/javascript')
+  def mui_javascript_window
+    tag(:script, :src => url(:mui_javascript_window), :type => 'text/javascript')
   end
 
 end

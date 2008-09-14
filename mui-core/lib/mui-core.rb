@@ -11,7 +11,7 @@ if defined?(Merb::Plugins)
       scope.match('/stylesheets/mui.css').to(:controller => 'stylesheets', :action => 'index').name(:mui_stylesheet)
       scope.to(:controller => 'javascripts') do |j|
         j.match('/javascripts/mui.js').to(:action => 'index').name(:mui_javascript)
-        j.match('/javascripts/mui_dialog.js').to(:action => 'dialog').name(:mui_javascript_dialog)
+        j.match('/javascripts/mui_window.js').to(:action => 'window').name(:mui_javascript_window)
       end
     end
   end

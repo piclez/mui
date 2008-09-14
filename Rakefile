@@ -1,5 +1,5 @@
 module Mui
-  VERSION = '0.9.5'
+  VERSION = '1.0'
 end
 
 AUTHOR = 'Jamie Hoover'
@@ -114,7 +114,7 @@ namespace :release do
       puts
       puts "Release failed: #{e.message}"
       puts
-      puts 'Set PKG_BUILD environment variable if you do a subrelease (0.9.5.2008_08_02 when version is 0.9.5)'
+      puts 'Set PKG_BUILD environment variable if you do a subrelease (1.0.1.2008_08_02 when version is 1.0.1)'
     end
   end
 

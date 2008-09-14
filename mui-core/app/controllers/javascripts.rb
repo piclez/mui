@@ -6,7 +6,7 @@ class MuiCore::Javascripts < MuiCore::Application
     render :layout => false
   end
   
-  def dialog
+  def window
     render :layout => false
   end
   
