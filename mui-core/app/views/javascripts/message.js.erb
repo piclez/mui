@@ -1,0 +1,16 @@
+$(document).ready(function(){
+  $('.mui_click_message_close').click(function(){
+    $('.mui_message').fadeOut(function(){
+      $('.mui_message_target').empty();
+    });
+  	return false;
+  });
+});
+$(document).keyup(function(event){
+  if (event.keyCode == 27) {
+    $('.mui_message').fadeOut(function(){
+      $('.mui_message_target').empty();
+    });
+  	return false;
+  }
+});

@@ -1,11 +1,12 @@
 class MuiPassword::Passwords < MuiPassword::Application
 
-  before(:mui_window_referer_create, :only => [:create, :read, :update, :delete])
+  before(:mui_window_referer_create, :only => [:exit, :create, :read, :update, :delete])
   before(:mui_password_redirect, :exclude => [:exit, :create, :read], :unless => :mui_password?)
   
   def exit
     session.delete(:mui_password_id)
-    redirect('.', :message => {:success => 'Exited.'})
+    session[:mui_message] = {:text => 'Exited.', :tone => 'positive'}
+    mui_window_redirect
   end
 
   def create
@@ -16,12 +17,15 @@ class MuiPassword::Passwords < MuiPassword::Application
     password = Password.new(params[:password])
     if password.save
       session[:mui_password_id] = password.id
-      mui_window_redirect(:message => {:success => 'Password created.'})
+      session[:mui_message] = {:text => 'Password created.', :tone => 'positive'}
+      mui_window_redirect
     else
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      mui_window_redirect(:message => {:window => url(:mui_password_create), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_password_create)
+      mui_window_redirect
     end
   end
 
@@ -37,10 +41,12 @@ class MuiPassword::Passwords < MuiPassword::Application
     encrypted = encrypt(params[:password])
     if password_match = Password.first(:encrypted => encrypted)
       session[:mui_password_id] = password_match.id
-      mui_window_redirect(:message => {:success => 'Password correct.'})
+      session[:mui_message] = {:text => 'Password correct.', :tone => 'positive'}
     else
-      mui_window_redirect(:message => {:window => url(:mui_password_read), :error => 'Password incorrect.'})
+      session[:mui_message] = {:text => 'Password incorrect.', :tone => 'negative'}
+      session[:mui_window] = url(:mui_password_read)
     end
+    mui_window_redirect
   end
 
   def update
@@ -50,12 +56,15 @@ class MuiPassword::Passwords < MuiPassword::Application
   def update_post
     password = Password.get!(session[:password_id])
     if password.update_attributes(params[:password])
-      mui_window_redirect(:message => {:success => 'Password updated.'})
+      session[:mui_message] = {:text => 'Password updated.', :tone => 'positive'}
+      mui_window_redirect
     else
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      mui_window_redirect(:message => {:window => url(:mui_password_update), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_password_update)
+      mui_window_redirect
     end
   end
 
@@ -67,12 +76,15 @@ class MuiPassword::Passwords < MuiPassword::Application
     password = Password.get!(session[:mui_password_id])
     if password.destroy
       session.delete(:mui_password_id)
-      mui_window_redirect(:message => {:success => 'Password deleted.'})
+      session[:mui_message] = {:text => 'Password deleted.', :tone => 'positive'}
+      mui_window_redirect
     else
       error = password.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      mui_window_redirect(:message => {:window => url(:mui_password_delete), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_password_delete)
+      mui_window_redirect
     end
   end
 

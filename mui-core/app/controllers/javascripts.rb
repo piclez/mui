@@ -6,6 +6,10 @@ class MuiCore::Javascripts < MuiCore::Application
     render :layout => false
   end
   
+  def message
+    render :layout => false
+  end
+  
   def window
     render :layout => false
   end

@@ -308,24 +308,49 @@ select.mui_menu {
 
 /* message */
 
+.mui_message_bar .mui_button {
+  margin-left: 0;
+  margin-right: 1em;
+  margin-top: 0;
+}
+.mui_message_target {
+  display: inline-block;
+  max-height: 9em;
+  max-width: 18em;
+  position: fixed;
+  right: 2em;
+  top: 0;
+}
+.mui_message_tray {
+  display: inline-block;
+  padding-bottom: 1em;
+  padding-right: 1em;
+  position: relative;
+}
+.mui_message_tray .mui_paragraph {
+  color: <%= color(1, 1, 1) %>;
+}
 .mui_message {
-  border: solid 1px;
-  border-color: #06f;
-  background: #ccc;
-  margin: 20px 0 20px 0;
-  padding: 10px;
+  background-image: url('/images/transparency.png');
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-style: solid;
+  border-top-style: none;
+  display: inline-block;
+  <%= border_radius(:edge => 'bottom') %>
 }
-.mui_message.error {
-  background: #fcc;
-  border-color: #c33;
+.mui_message_tone_positive {
+  border-color: <%= color(0, 0.6, 0) %>;
 }
-.mui_message.success {
-  background: #cfc;
-  border-color: #6f6;
+.mui_message_tone_negative {
+  border-color: <%= color(0.6, 0, 0) %>;
 }
-.mui_message.warning {
-  background: #ff9;
-  border-color: #fc0;
+.mui_message_tone_neutral {
+  border-color: <%= color(0, 0, 0) %>;
 }
 
 /* paragraph */
