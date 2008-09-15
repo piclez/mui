@@ -10,6 +10,10 @@ $(document).ready(function(){
     });
   	return false;
   });
+  $('.mui_click_window_open').click(function(){
+  	$('.mui_window_target').hide().load(this.id).fadeIn();
+  	return false;
+  });
   $('.mui_window').draggable();
   $('.mui_focus').focus();
 });

@@ -54,7 +54,7 @@ class MuiPassword::Passwords < MuiPassword::Application
   end
 
   def update_post
-    password = Password.get!(session[:password_id])
+    password = Password.get!(session[:mui_password_id])
     if password.update_attributes(params[:password])
       session[:mui_message] = {:text => 'Password updated.', :tone => 'positive'}
       mui_window_redirect
