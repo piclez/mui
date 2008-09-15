@@ -1,6 +1,6 @@
 $(document).keyup(function(event){
   if (event.keyCode == 112) {
-	  $('.mui_window_target').hide().load('/password/read').fadeIn();
+	  $('.mui_window_target').hide().load('<%= url(:mui_password_read) %>').fadeIn();
   	return false;
   }
 });
