@@ -1,4 +1,4 @@
-module Merb::MuiCore::Javascripts
+module Merb::MuiCore::MuiJavascripts
   
   def mui_javascript
     script = tag(:script, :src => '/javascripts/jquery-1.2.6.pack.js', :type => 'text/javascript')
@@ -14,4 +14,4 @@ module Merb::MuiCore::Javascripts
 
 end
 
-include Merb::MuiCore::Javascripts
+include Merb::MuiCore::MuiJavascripts

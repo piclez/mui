@@ -1,4 +1,4 @@
-module MuiPassword::PasswordHelpers
+module MuiPassword::MuiPasswords
 
   def mui_password?
     session[:mui_password_id] ? true : false
@@ -22,4 +22,4 @@ module MuiPassword::PasswordHelpers
       
 end
 
-include MuiPassword::PasswordHelpers
+include MuiPassword::MuiPasswords

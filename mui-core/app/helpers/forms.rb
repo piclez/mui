@@ -1,4 +1,4 @@
-module Merb::MuiCore::Forms
+module Merb::MuiCore::MuiForms
 
   def mui_form(options = {})
     if options[:model]
@@ -71,4 +71,4 @@ module Merb::MuiCore::Forms
   
 end
 
-include Merb::MuiCore::Forms
+include Merb::MuiCore::MuiForms

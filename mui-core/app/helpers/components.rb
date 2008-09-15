@@ -1,4 +1,4 @@
-module Merb::MuiCore::Components
+module Merb::MuiCore::MuiComponents
   
   def mui_bar(options = {}, &block)
     content = ''
@@ -109,4 +109,4 @@ module Merb::MuiCore::Components
 
 end
 
-include Merb::MuiCore::Components
+include Merb::MuiCore::MuiComponents

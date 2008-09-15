@@ -1,4 +1,4 @@
-module Merb::MuiCore::Windows
+module Merb::MuiCore::MuiWindows
   
   def mui_window_redirect(options = {})
     referer = session[:mui_window_referer] || '/'
@@ -35,4 +35,4 @@ module Merb::MuiCore::Windows
 
 end
 
-include Merb::MuiCore::Windows
+include Merb::MuiCore::MuiWindows
