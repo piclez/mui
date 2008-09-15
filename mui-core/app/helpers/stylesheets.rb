@@ -1,4 +1,4 @@
-module Merb::MuiCore::StylesheetsHelper
+module Merb::MuiCore::Stylesheets
 
   def mui_stylesheet
     self_closing_tag(:link, :charset => 'utf-8', :href => url(:mui_stylesheet), :media => 'all', :rel => 'Stylesheet', :type => 'text/css')
@@ -105,4 +105,4 @@ module Merb::MuiCore::StylesheetsHelper
 
 end
 
-include Merb::MuiCore::StylesheetsHelper
+include Merb::MuiCore::Stylesheets

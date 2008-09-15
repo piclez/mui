@@ -1,4 +1,4 @@
-module Merb::MuiCore::MessageHelper
+module Merb::MuiCore::Messages
   
   def mui_message_target
     html = tag(:span, :class => 'mui_message_target')
@@ -23,4 +23,4 @@ module Merb::MuiCore::MessageHelper
 
 end
 
-include Merb::MuiCore::MessageHelper
+include Merb::MuiCore::Messages

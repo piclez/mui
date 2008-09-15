@@ -1,4 +1,4 @@
-module Merb::MuiCore::UserAgentHelper
+module Merb::MuiCore::UserAgents
 
   def mui_gecko?
     request.user_agent.include? 'Gecko/'
@@ -14,4 +14,4 @@ module Merb::MuiCore::UserAgentHelper
 
 end
 
-include Merb::MuiCore::UserAgentHelper
+include Merb::MuiCore::UserAgents
