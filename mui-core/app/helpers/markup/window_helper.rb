@@ -26,7 +26,7 @@ module Merb::MuiCore::WindowHelper
     script = tag(:script, :src => url(:mui_javascript_window), :type => 'text/javascript')
     td = tag(:span, options[:label], :class => 'mui_bar_label') if options[:label]
     tr = tag(:td, td)
-    tr << tag(:td, mui_button(:window => 'close', :label => '&#215;', :tone => 'negative'), :align => 'right')
+    tr << tag(:td, mui_button(:window => 'close', :label => '&#215;'), :align => 'right')
     table = tag(:table, tag(:tr, tr), :class => 'mui_window_bar', :width => '100%')
     span = tag(:span, capture(&block), :class => 'mui_window_tray')
     html = script + table + span

@@ -15,7 +15,7 @@ module Merb::MuiCore::MessageHelper
     tone = options[:tone] || 'neutral'
     script = tag(:script, :src => url(:mui_javascript_message), :type => 'text/javascript')
     tr = tag(:td, capture(&block), :class => 'mui_message_tray')
-    tr << tag(:td, mui_button(:label => '&#215;', :message => 'close', :tone => 'negative'), :align => 'right')
+    tr << tag(:td, mui_button(:label => '&#215;', :message => 'close'), :align => 'right')
     table = tag(:table, tag(:tr, tr), :class => 'mui_message_bar', :width => '100%')
     html = script + table
     tag(:span, html, :class => %{mui_message mui_message_tone_#{tone}})
