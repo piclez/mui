@@ -7,7 +7,9 @@ class MuiPage::Pages < MuiPage::Application
     if Page.first
       display @pages = Page.all
     else
-      redirect('.', :message => {:window => url(:mui_page_create)})
+      session[:mui_message] = {:text => 'Create the first page.'}
+      session[:mui_window] = url(:mui_page_create)
+      mui_window_redirect
     end
   end
 
