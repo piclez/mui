@@ -4,7 +4,7 @@
     <%= mui_form_password(:password_confirmation, :inline => true, :label => 'Password Confirmation') %>
     <div>
       <%= mui_button(:inline => true, :label => 'Update', :submit => true, :tone => 'positive')%>
-      <%= mui_button(:inline => true, :label => 'Delete', :tone => 'negative', :url => url(:mui_password_delete), :window => 'open') %>
+      <%= mui_button(:inline => true, :label => 'Delete', :tone => 'negative', :url => url(:mui_password_delete), :window => 'redirect') %>
     </div>
   <% end =%>
 <% end =%>

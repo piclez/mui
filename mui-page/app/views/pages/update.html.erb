@@ -1,4 +1,4 @@
-<%= mui_dialog_window(:label => 'Update') do %>
+<%= mui_window(:label => 'Update') do %>
   <%= mui_form(:action => url(:mui_page_update, :id => @page.id), :model => @page) do %>
     <%= mui_form_text(:label, :focus => true, :label => 'Label') %>
     <%= mui_form_text_area :value %>

@@ -1,6 +1,6 @@
 class MuiPage::Pages < MuiPage::Application
 
-  before(:mui_window_referer_create, :only => [:create, :update, :delete])
+  before(:mui_window_referer, :only => [:create, :update, :delete])
   before(:mui_password_redirect, :exclude => [:index, :read], :unless => :mui_password?)
 
   def index
@@ -9,7 +9,7 @@ class MuiPage::Pages < MuiPage::Application
     else
       session[:mui_message] = {:text => 'Create the first page.'}
       session[:mui_window] = url(:mui_page_create)
-      mui_window_redirect
+      render
     end
   end
 
@@ -20,13 +20,15 @@ class MuiPage::Pages < MuiPage::Application
   def create_post
     page = Page.new(params[:page])
     if page.save
-      redirect(session[:mui_window_referer_read], :message => {:success => 'Page created.'})
+      session[:mui_message] = {:text => 'Page created.', :tone => 'positive'}
     else
       error = page.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_window_referer_read], :message => {:window => url(:mui_page_create), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_page_create)
     end
+    mui_window_redirect
   end
 
   def read
@@ -40,13 +42,15 @@ class MuiPage::Pages < MuiPage::Application
   def update_put
     page = Page.get!(params[:id])
     if page.update_attributes(params[:page])
-      redirect(session[:mui_window_referer_read], :message => {:success => 'Page updated.'})
+      session[:mui_message] = {:text => 'Page updated.', :tone => 'positive'}
     else
       error = page.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_window_referer_read], :message => {:window => url(:mui_page_update, :id => page.id), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_page_create)
     end
+    mui_window_redirect
   end
 
   def delete
@@ -56,13 +60,15 @@ class MuiPage::Pages < MuiPage::Application
   def delete_put
     page = Page.get!(params[:id])
     if page.destroy
-      redirect(session[:mui_window_referer_read], :message => {:success => 'Page deleted.'})
+      session[:mui_message] = {:text => 'Page deleted.', :tone => 'positive'}
     else
       error = page.errors.each do |e|
         tag(:span, e, :class => 'error')
       end
-      redirect(session[:mui_window_referer_read], :message => {:window => url(:mui_page_delete, :id => page.id), :error => error.to_s})
+      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_window] = url(:mui_page_create)
     end
+    mui_window_redirect
   end
 
 end

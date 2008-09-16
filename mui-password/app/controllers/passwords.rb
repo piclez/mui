@@ -1,6 +1,6 @@
 class MuiPassword::Passwords < MuiPassword::Application
 
-  before(:mui_window_referer_create, :only => [:exit, :create, :read, :update, :delete])
+  before(:mui_window_referer, :only => [:exit, :create, :read, :update, :delete])
   before(:mui_password_redirect, :exclude => [:exit, :create, :read], :unless => :mui_password?)
   
   def exit

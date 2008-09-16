@@ -13,9 +13,8 @@ module Merb::MuiCore::MuiComponents
     attributes[:class] << %{ mui_button_tone_#{options[:tone] || 'neutral'}}
     attributes[:class] << ' mui_inline' if options[:inline] == true
     attributes[:class] << ' mui_click'
-    attributes[:class] << '_message_close' if options[:message] == 'close'
-    attributes[:class] << '_window_close' if options[:window] == 'close'
-    attributes[:class] << '_window_open' if options[:window] == 'open'
+    attributes[:class] << %{_message_#{options[:message]}} if options[:message]
+    attributes[:class] << %{_window_#{options[:window]}} if options[:window]
     attributes[:id] = options[:url] if options[:url]
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
     attributes[:type] = options[:submit] == true ? 'submit' : 'button'

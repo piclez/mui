@@ -1,16 +1,16 @@
 module Merb::MuiCore::MuiWindows
   
-  def mui_window_redirect(options = {})
-    referer = session[:mui_window_referer] || '/'
-    session.delete(:mui_window_referer)
-    redirect(referer)
+  def mui_window_redirect
+    url = session[:mui_referer] || '/'
+    session.delete(:mui_referer)
+    redirect(url)
   end
   
-  def mui_window_referer_create
-    session[:mui_window_referer] = request.referer
+  def mui_window_referer
+    session[:mui_referer] = request.referer
   end
 
-  def mui_window_target(options = {})
+  def mui_window_target
     html = tag(:span, :class => 'mui_window_target')
     if session[:mui_window]
       script = "$(document).ready(function(){"

@@ -10,8 +10,8 @@ $(document).ready(function(){
     });
   	return false;
   });
-  $('.mui_click_window_open').click(function(){
-  	$('.mui_window_target').hide().load(this.id).fadeIn();
+  $('.mui_click_window_redirect').click(function(){
+  	$('.mui_window_target').hide().empty().load(this.id).fadeIn();
   	return false;
   });
   $('.mui_window').draggable();
