@@ -10,7 +10,7 @@ module Merb::MuiCore::MuiComponents
   def mui_button(options = {}, &block)
     attributes = {}
     attributes[:class] = 'mui_button'
-    attributes[:class] << %{ mui_button_tone_#{options[:tone] || 'neutral'}}
+    attributes[:class] << %{ mui_tone_#{options[:tone] || 'neutral'}}
     attributes[:class] << ' mui_inline' if options[:inline] == true
     attributes[:class] << ' mui_click'
     attributes[:class] << %{_message_#{options[:message]}} if options[:message]
@@ -79,14 +79,15 @@ module Merb::MuiCore::MuiComponents
 
   def mui_tab(options={})
     attributes={}
-    attributes[:class] = 'mui_tab mui_click'
-    if options[:controller] == controller_name || options[:selected] == true
-      attributes[:type] = 'submit'
-    else
-      attributes[:id] = options[:url] if options[:url]
-      attributes[:type] = 'button'
-    end
+    attributes[:class] = 'mui_tab'
+    attributes[:class] << '_selected' if options[:controller] == controller_name || options[:selected] == true
+    attributes[:class] << ' mui_inline' if options[:inline] == true
+    attributes[:class] << ' mui_click'
+    attributes[:class] << %{_message_#{options[:message]}} if options[:message]
+    attributes[:class] << %{_window_#{options[:window]}} if options[:window]
+    attributes[:id] = options[:url] if options[:url]
     attributes[:style] = %{width:#{options[:width]}em;} if options[:width]
+    attributes[:type] = 'button'
     attributes[:value] = options[:label] if options[:label]
     self_closing_tag(:input, attributes)
   end

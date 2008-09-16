@@ -78,7 +78,7 @@ button.mui_button .mui_button_text {
   text-align: left;
   width: 100%;
 }
-.mui_button_tone_neutral {
+.mui_button.mui_tone_neutral {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
   border-bottom-color: <%= color(0, 0, 0) %>;
   border-left-color: <%= color(0, 0, 0) %>;
@@ -86,7 +86,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.1, 0.1, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_neutral:hover {
+.mui_button.mui_tone_neutral:hover {
   background-color: <%= color(0.2, 0.2, 0.2) %>;
   border-bottom-color: <%= color(0, 0, 0) %>;
   border-left-color: <%= color(0.1, 0.1, 0.1) %>;
@@ -94,7 +94,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.2, 0.2, 0.2) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_neutral:active {
+.mui_button.mui_tone_neutral:active {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
   background-image: none;
   border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
@@ -103,7 +103,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_positive {
+.mui_button.mui_tone_positive {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   border-bottom-color: <%= color(0, 0.3, 0) %>;
   border-left-color: <%= color(0, 0.4, 0) %>;
@@ -111,7 +111,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.1, 0.5, 0.1) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_positive:hover {
+.mui_button.mui_tone_positive:hover {
   background-color: <%= color(0.2, 0.6, 0.2) %>;
   border-bottom-color: <%= color(0, 0.4, 0) %>;
   border-left-color: <%= color(0.1, 0.5, 0.1) %>;
@@ -119,7 +119,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.2, 0.6, 0.2) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_positive:active {
+.mui_button.mui_tone_positive:active {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   background-image: none;
   border-bottom-color: <%= color(0.1, 0.5, 0.1) %>;
@@ -128,7 +128,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0, 0.4, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_negative {
+.mui_button.mui_tone_negative {
   background-color: <%= color(0.6, 0, 0) %>;
   border-bottom-color: <%= color(0.4, 0, 0) %>;
   border-left-color: <%= color(0.5, 0, 0) %>;
@@ -136,7 +136,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.6, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_negative:hover {
+.mui_button.mui_tone_negative:hover {
   background-color: <%= color(0.7, 0, 0) %>;
   border-bottom-color: <%= color(0.5, 0, 0) %>;
   border-left-color: <%= color(0.6, 0, 0) %>;
@@ -144,7 +144,7 @@ button.mui_button .mui_button_text {
   border-top-color: <%= color(0.7, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-.mui_button_tone_negative:active {
+.mui_button.mui_tone_negative:active {
   background-color: <%= color(0.6, 0, 0) %>;
   background-image: none;
   border-bottom-color: <%= color(0.6, 0, 0) %>;
@@ -387,7 +387,7 @@ blockquote.mui_quote {
 
 /* tab */
 
-.mui_tab, input[type=submit].mui_tab {
+.mui_tab, .mui_tab_selected {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
@@ -411,6 +411,12 @@ blockquote.mui_quote {
 }
 .mui_tab:hover {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
+}
+.mui_tab:active, .mui_tab_selected {
+  background-color: <%= color(0, 0.3, 0.9) %> !important;
+  border-left-color: <%= color(0, 0.25, 0.85) %> !important;
+  border-right-color: <%= color(0, 0.2, 0.8) %> !important;
+  color: <%= color(1, 1, 1) %> !important;
 }
 
 /* title */
@@ -477,13 +483,7 @@ h6.mui_title {
 .mui_tray .mui_tab:hover {
   background-color: <%= color(0.9, 0.9, 0.9) %>;
 }
-.mui_tray .mui_tab:active, .mui_tray input[type=submit].mui_tab, .mui_tab:active, input[type=submit].mui_tab {
-  background-color: <%= color(0, 0.3, 0.9) %>;
-  border-left-color: <%= color(0, 0.25, 0.85) %>;
-  border-right-color: <%= color(0, 0.2, 0.8) %>;
-  color: <%= color(1, 1, 1) %>;
-}
-.mui_tray .mui_tab:first-child, .mui_tray input[type=submit].mui_tab:first-child, .mui_window_window .mui_tab:first-child, .mui_window_window input[type=submit].mui_tab:first-child {
+.mui_tray .mui_tab:first-child, .mui_tray .mui_tab_selected:first-child {
   <%= border_radius(:corner => 'top_left') %>
 }
 .mui_tray h1.mui_title {
