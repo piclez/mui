@@ -22,17 +22,13 @@ div.mui_bar {
   border-style: none;
   border-width: 0;
   color: <%= color(1, 1, 1) %>;
-  padding-left: 2em;
-  padding-right: 2em;
-  white-space: nowrap;
 }
 div.mui_bar_window {
-  padding-left: 1em;
-  padding-right: 1em;
   <%= border_radius(:edge => 'top') %>
 }
 div.mui_bar td {
   line-height: 2em;
+  white-space: nowrap;
 }
 input.mui_bar_tab {
   background-image: url('/images/reflection.png');
@@ -293,7 +289,8 @@ table.mui_grid {
   table-layout: fixed;
 }
 table.mui_grid_bar {
-  border-spacing: 0;
+  border-spacing: 1em 0;
+  table-layout: auto;
   width: 100%;
 }
 table.mui_grid_button {
@@ -492,6 +489,7 @@ span.mui_window {
   color: <%= color(1, 1, 1) %>;
   display: inline-block;
   padding: 1em;
+  position: relative;
   <%= border_radius(:edge => 'bottom') %>
 }
 span.mui_window_target {
