@@ -120,7 +120,7 @@ module Merb::MuiCore::MuiDesktop
     attributes = {}
     attributes[:class] = 'mui_link'
     attributes[:class] << ' mui_link_external' if options[:external]
-    attributes[:href] = options[:href]
+    attributes[:href] = options[:url]
     if block_given?
       content = capture(&block)
       attributes[:title] = options[:title]
