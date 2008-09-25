@@ -5,32 +5,25 @@ class MuiFlickr::Photosets < MuiFlickr::Application
   FlickRaw.api_key = MuiFlickr[:api_key]
   FlickRaw.shared_secret = MuiFlickr[:shared_secret]
 
-  @flickr_user_name = MuiFlickr[:user_name]
-  
   def index
     @photosets = flickr.photosets.getList :user_id => user_id
+    photoset_id = params[:id] || @photosets.first.id
+    @photoset = flickr.photosets.getInfo(:photoset_id => photoset_id)
+    @photos = flickr.photosets.getPhotos(:photoset_id => photoset_id).photo
     display @photosets
   end
 
-  def photoset
-    @photos = flickr.photosets.getPhotos(:photoset_id => params[:id]).photo
-    @photoset = flickr.photosets.getInfo(:photoset_id => params[:id])
-    display @photos
-  end
-
   def photo
-    photoset_id = flickr.photos.getAllContexts(:photo_id => params[:id]).first.id
-    context = flickr.photosets.getContext(:photo_id => params[:id], :photoset_id => photoset_id)
-    @next = context.nextphoto unless context.nextphoto.id == 0
-    @photoset = flickr.photosets.getInfo(:photoset_id => photoset_id)
-    @previous = context.prevphoto unless context.prevphoto.id == 0
+    @photoset = flickr.photosets.getInfo(:photoset_id => params[:photoset_id])
     @photo = flickr.photos.getInfo(:photo_id => params[:id], :secret => params[:secret])
-    @photo.title << 'Untitled' if @photo.title == ''
-#      if @photo.comments.to_i > 0
-#        @comments = flickr.photos.comments.getList(:photo_id => params[:id])
-#      end
-    @size = flickr.photos.getSizes(:photo_id => params[:id]).last
-    display @photo
+    sizes = flickr.photos.getSizes :photo_id => @photo.id
+    original = sizes.find {|s| s.label == 'Medium'}
+    @height = original.height
+    @width = original.width
+    context = flickr.photosets.getContext(:photo_id => params[:id], :photoset_id => @photoset.id)
+    @next_id = context.nextphoto.id unless context.nextphoto.id == 0
+    @previous_id = context.prevphoto.id unless context.prevphoto.id == 0
+    display(@photo, :layout => false)
   end
 
   private

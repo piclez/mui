@@ -1,5 +1,3 @@
-<%= mui_message(:tone => @message[:tone]) do %>
-  <%= mui_paragraph do %>
-    <%= @message[:text] %>
-  <% end =%>
+<%= mui_message(:title => @message[:title], :tone => @message[:tone]) do %>
+  <%= @message[:body] %>
 <% end =%>

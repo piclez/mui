@@ -7,10 +7,10 @@ if defined?(Merb::Plugins)
   
   module MuiFlickr
     def self.setup_router(scope)
+      scope.match('/stylesheets/mui_flickr.css').to(:controller => 'stylesheets', :action => 'flickr').name(:mui_flickr_stylesheet)
       scope.to(:controller => 'photosets') do |a|
-        a.match('/photo/:id').to(:action => 'photo').name(:mui_photo)
-        a.match('/photoset/:id').to(:action => 'photoset').name(:mui_photoset)
-        a.match('/photosets').to(:action => 'index').name(:mui_photosets)
+        a.match('/photo/:id').to(:action => 'photo').name(:mui_flickr_photo)
+        a.match('/photos').to(:action => 'index').name(:mui_flickr_photosets)
       end
     end
   end

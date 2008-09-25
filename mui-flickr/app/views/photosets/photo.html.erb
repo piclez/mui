@@ -1,22 +1,9 @@
-<%= mui_tray do %>
-  <%= mui_bar do %>
-  	<%= mui_tab(:label => 'Sets', :url => url(:mui_photosets)) %><%= mui_tab(:label => @photoset.title, :url => url(:mui_photoset, :id => @photoset.id)) %><%= mui_tab(:label => @photo.title, :selected => true) %>
-  <% end =%>
-  <%= mui_row do %>
-    <%= mui_column do %>
-      <%= mui_image("http://farm#{@photo.farm}.static.flickr.com/#{@photo.server}/#{@photo.id}_#{@photo.secret}.jpg", :photo => true) %>
-    <% end =%>
-    <%= mui_column do %>
-      <% if @previous %>
-        <%= mui_button(:inline => true, :label => 'Previous', :url => url(:mui_photo, :id => @previous.id), :width => 15) do %>
-          <%= mui_image("http://farm#{@photo.farm}.static.flickr.com/#{@previous.server}/#{@previous.id}_#{@previous.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %>
-        <% end =%>
-      <% end %>
-      <% if @next %>
-        <%= mui_button(:inline => true, :label => 'Next', :url => url(:mui_photo, :id => @next.id), :width => 15) do %>
-          <%= mui_image("http://farm#{@photo.farm}.static.flickr.com/#{@next.server}/#{@next.id}_#{@next.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %>
-        <% end =%>
-      <% end %>
+<%= mui_window(:title => mui_flickr_navigation) do %>
+  <%= mui_grid do %>
+    <%= mui_row do %>
+      <%= mui_column do %>
+        <%= mui_flickr_photo(:farm => @photo.farm, :id => @photo.id) %>
+      <% end =%>
     <% end =%>
   <% end =%>
 <% end =%>

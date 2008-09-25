@@ -7,7 +7,7 @@ class MuiPage::Pages < MuiPage::Application
     if Page.first
       display @pages = Page.all
     else
-      session[:mui_message] = {:text => 'Create the first page.'}
+      session[:mui_message] = {:title => 'Create the first page'}
       session[:mui_window] = url(:mui_page_create)
       render
     end
@@ -20,12 +20,9 @@ class MuiPage::Pages < MuiPage::Application
   def create_post
     page = Page.new(params[:page])
     if page.save
-      session[:mui_message] = {:text => 'Page created.', :tone => 'positive'}
+      session[:mui_message] = {:title => 'Page created', :tone => 'positive'}
     else
-      error = page.errors.each do |e|
-        tag(:span, e, :class => 'error')
-      end
-      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to create page', :body => mui_list(password.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect
@@ -42,12 +39,9 @@ class MuiPage::Pages < MuiPage::Application
   def update_put
     page = Page.get!(params[:id])
     if page.update_attributes(params[:page])
-      session[:mui_message] = {:text => 'Page updated.', :tone => 'positive'}
+      session[:mui_message] = {:title => 'Page updated', :tone => 'positive'}
     else
-      error = page.errors.each do |e|
-        tag(:span, e, :class => 'error')
-      end
-      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to update page', :body => mui_list(password.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect
@@ -60,12 +54,9 @@ class MuiPage::Pages < MuiPage::Application
   def delete_put
     page = Page.get!(params[:id])
     if page.destroy
-      session[:mui_message] = {:text => 'Page deleted.', :tone => 'positive'}
+      session[:mui_message] = {:title => 'Page deleted', :tone => 'positive'}
     else
-      error = page.errors.each do |e|
-        tag(:span, e, :class => 'error')
-      end
-      session[:mui_message] = {:text => error.to_s, :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to delete page', :body => mui_list(password.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect

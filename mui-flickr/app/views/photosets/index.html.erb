@@ -1,5 +1,16 @@
-<%= mui_tray do %>
-  <%= mui_bar(:label => 'Sets') %>
-  <% @photosets.each do |photoset| %><%= mui_button(:inline => true, :label => %{#{photoset.title} (#{photoset.photos})}, :url => url(:mui_photoset, :id => photoset.id), :width => 20) do %>
-  <%= mui_image("http://farm#{photoset.farm}.static.flickr.com/#{photoset.server}/#{photoset.primary}_#{photoset.secret}_s.jpg", :border_radius => true, :height => 75, :photo => true, :width => 75) %><% end =%><% end %>
+<%= mui_flickr do %>
+  <%= mui_grid(:type => 'desktop') do %>
+    <%= mui_row do %>
+      <%= mui_column(:width => '25%') do %>
+        <% @photosets.each do |photoset| %>
+          <%= mui_flickr_tab(:photoset => photoset) %>
+        <% end %>
+      <% end =%>
+      <%= mui_column do %>
+        <% @photos.each do |photo| %>
+          <%= mui_flickr_button(:photo => photo) %>
+        <% end %>
+      <% end =%>
+    <% end =%>
+  <% end =%>
 <% end =%>

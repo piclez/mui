@@ -1,7 +1,7 @@
 module Merb::MuiCore::MuiStylesheets
 
-  def mui_stylesheet
-    self_closing_tag(:link, :charset => 'utf-8', :href => url(:mui_stylesheet), :media => 'all', :rel => 'Stylesheet', :type => 'text/css')
+  def mui_stylesheet(options={})
+    self_closing_tag(:link, :charset => 'utf-8', :href => options[:url], :media => 'all', :rel => 'Stylesheet', :type => 'text/css')
   end
 
   def border_radius(options={})
@@ -9,21 +9,7 @@ module Merb::MuiCore::MuiStylesheets
     if mui_gecko?
       property('-moz') do
         property('border') do
-          if options[:corner] == 'top_left'
-            property('radius') do
-              property('bottomleft', :value => 0)
-              property('bottomright', :value => 0)
-              property('topleft', :value => %{#{options[:amount]}em})
-              property('topright', :value => 0)
-            end
-          elsif options[:edge] == 'left'
-            property('radius') do
-              property('bottomleft', :value => %{#{options[:amount]}em})
-              property('bottomright', :value => 0)
-              property('topleft', :value => %{#{options[:amount]}em})
-              property('topright', :value => 0)
-            end
-          elsif options[:edge] == 'bottom'
+          if options[:edge] == 'bottom'
             property('radius') do
               property('bottomleft', :value => %{#{options[:amount]}em})
               property('bottomright', :value => %{#{options[:amount]}em})
@@ -45,17 +31,7 @@ module Merb::MuiCore::MuiStylesheets
     elsif mui_webkit?
       property('-webkit') do
         property('border') do
-          if options[:corner] == 'top_left'
-            property('bottom-left-radius', :value => 0)
-            property('bottom-right-radius', :value => 0)
-            property('top-left-radius', :value => %{#{options[:amount]}em})
-            property('top-right-radius', :value => 0)
-          elsif options[:edge] == 'left'
-            property('bottom-left-radius', :value => %{#{options[:amount]}em})
-            property('bottom-right-radius', :value => 0)
-            property('top-left-radius', :value => %{#{options[:amount]}em})
-            property('top-right-radius', :value => 0)
-          elsif options[:edge] == 'bottom'
+          if options[:edge] == 'bottom'
             property('bottom-left-radius', :value => %{#{options[:amount]}em})
             property('bottom-right-radius', :value => %{#{options[:amount]}em})
             property('top-left-radius', :value => 0)

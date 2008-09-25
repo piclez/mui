@@ -1,6 +1,16 @@
-<%= mui_window(:label => 'Password Entry') do %>
+<%= mui_window(:title => 'Enter Password') do %>
   <%= mui_form(:action => url(:mui_password_read), :model => @password) do %>
-    <%= mui_form_password(:password, :focus => true, :inline => true, :label => 'Password') %>
-    <%= mui_button(:label => 'Enter', :submit => true, :tone => 'positive')%>
+    <%= mui_grid(:type => 'form') do %>
+      <%= mui_row do %>
+        <%= mui_column do %>
+          <%= mui_password(:password, :focus => true, :inline => true, :title => 'Password') %>
+        <% end =%>
+      <% end =%>
+      <%= mui_row do %>
+        <%= mui_column do %>
+          <%= mui_button(:title => 'Enter', :submit => true, :tone => 'positive')%>
+        <% end =%>
+      <% end =%>
+    <% end =%>
   <% end =%>
 <% end =%>

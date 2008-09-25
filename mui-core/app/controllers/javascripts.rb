@@ -2,7 +2,7 @@ class MuiCore::Javascripts < MuiCore::Application
 
   only_provides :js
   
-  def index
+  def desktop
     render :layout => false
   end
   

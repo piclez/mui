@@ -1,7 +1,12 @@
-<%= mui_window(:label => 'Create') do %>
+<%= mui_window(:title => 'Create Page') do %>
   <%= mui_form(:action => url(:mui_page_create), :model => @page) do %>
-    <%= mui_form_text(:label, :focus => true, :label => 'Label') %>
-    <%= mui_form_text_area :value %>
-    <%= mui_button(:label => 'Create Page', :submit => true, :tone => 'positive')%>
+    <%= mui_grid(:type => 'form') do %>
+      <%= partial(:form) %>
+      <%= mui_row do %>
+        <%= mui_column do %>
+  		    <%= mui_button(:title => 'Create', :submit => true, :tone => 'positive')%>
+        <% end =%>
+      <% end =%>
+    <% end =%>
   <% end =%>
 <% end =%>

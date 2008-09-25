@@ -1,14 +1,17 @@
-<%= mui_row do %>
-  <%= mui_column(:width => '100%') do %>
-    <%= mui_title(@page.label)%>
+<%= mui_grid(:type => 'desktop') do %>
+  <%= mui_row do %>
+    <%= mui_column(:title => @page.title) %>
+    <% if mui_password? %>
+      <%= mui_column(:x => 1, :y => 0.5) do %>
+        <%= mui_button(:title => '&larr; Back', :url => url(:mui_pages)) %>
+        <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :id => @page.id), :window => 'open') %>
+        <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :id => @page.id), :window => 'open') %>
+      <% end =%>
+    <% end %>
   <% end =%>
-  <% if mui_password? %>
-    <%= mui_column(:nowrap => 'nowrap', :valign => 'bottom') do %>
-      <%= mui_button(:window => 'open', :inline => true, :label => 'Update', :url => url(:mui_page_update, :id => @page.id)) %>
-      <%= mui_button(:window => 'open', :inline => true, :label => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :id => @page.id)) %>
+  <%= mui_row do %>
+    <%= mui_column do %>
+      <%= @page.body %>
     <% end =%>
-  <% end %>
-<% end =%>
-<%= mui_paragraph do %>
-  <%= @page.value %>
+  <% end =%>
 <% end =%>
