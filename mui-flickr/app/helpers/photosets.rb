@@ -1,9 +1,5 @@
 module MuiFlickr::MuiPhotosets
 
-  def mui_flickr(options = {}, &block)
-    mui_stylesheet(:url => url(:mui_flickr_stylesheet)) + tag(:div, capture(&block), :class => 'mui_flickr')
-  end
-  
   def mui_flickr_button(options = {})
     attributes = {}
     attributes[:class] = 'mui_button mui_button_tone_neutral mui_click_window_open'
