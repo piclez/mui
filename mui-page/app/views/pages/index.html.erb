@@ -12,8 +12,7 @@
   <%= mui_grid(:type => 'desktop') do %>
     <% @pages.each do |page| %>
       <%= mui_row do %>
-        <%= mui_column(:type => 'tray') do %>
-          <%= mui_bar(:title => page.title) %>
+        <%= mui_column(:title => page.title, :type => 'tray') do %>
           <%= mui_grid(:type => 'tray') do %>
             <%= mui_row do %>
               <%= mui_column(:span => 2) do %>
