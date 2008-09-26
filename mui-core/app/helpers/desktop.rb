@@ -68,14 +68,14 @@ module Merb::MuiCore::MuiDesktop
     attributes[:class] << %{_#{options[:type]}} if options[:type]
     attributes[:colspan] = options[:span] if options[:span]
     if options[:y]
-      attributes[:valign] = 'top' if options[:x] <= 0
-      attributes[:valign] = 'middle' if options[:x] == 0.5
-      attributes[:valign] = 'bottom' if options[:x] >= 1
+      attributes[:valign] = 'top' if options[:y] <= 0
+      attributes[:valign] = 'middle' if options[:y] == 0.5
+      attributes[:valign] = 'bottom' if options[:y] >= 1
     end
     attributes[:width] = options[:width] if options[:width]
     title_attributes = {}
     title_attributes[:class] = 'mui_title'
-    title_attributes[:class] << %{_#{options[:type]}} if options[:type]
+    title_attributes[:class] << %{ mui_title_#{options[:type]}} if options[:type]
     content = ''
     content << tag(:h1, options[:title], title_attributes) if options[:title]
     content << capture(&block) if block_given?
