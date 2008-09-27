@@ -22,7 +22,7 @@ class MuiPage::Pages < MuiPage::Application
     if page.save
       session[:mui_message] = {:title => 'Page created', :tone => 'positive'}
     else
-      session[:mui_message] = {:title => 'Unable to create page', :body => mui_list(password.errors), :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to create page', :body => mui_list(page.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect
@@ -41,7 +41,7 @@ class MuiPage::Pages < MuiPage::Application
     if page.update_attributes(params[:page])
       session[:mui_message] = {:title => 'Page updated', :tone => 'positive'}
     else
-      session[:mui_message] = {:title => 'Unable to update page', :body => mui_list(password.errors), :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to update page', :body => mui_list(page.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect
@@ -56,7 +56,7 @@ class MuiPage::Pages < MuiPage::Application
     if page.destroy
       session[:mui_message] = {:title => 'Page deleted', :tone => 'positive'}
     else
-      session[:mui_message] = {:title => 'Unable to delete page', :body => mui_list(password.errors), :tone => 'negative'}
+      session[:mui_message] = {:title => 'Unable to delete page', :body => mui_list(page.errors), :tone => 'negative'}
       session[:mui_window] = url(:mui_page_create)
     end
     mui_window_redirect

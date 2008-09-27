@@ -14,7 +14,7 @@
           <%= mui_grid(:type => 'tray') do %>
             <%= mui_row do %>
               <%= mui_column(:span => 2) do %>
-                <%= page.body %>
+                <%= mui_page_truncate(:body => page.body) %>
               <% end =%>
             <% end =%>
             <%= mui_row do %>
