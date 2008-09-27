@@ -4,8 +4,8 @@
     <% if mui_password? %>
       <%= mui_column(:x => 1, :y => 0.5) do %>
         <%= mui_button(:title => '&larr; Back', :url => url(:mui_pages)) %>
-        <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :id => @page.id), :window => 'open') %>
-        <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :id => @page.id), :window => 'open') %>
+        <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :page_id => @page.id), :window => 'open') %>
+        <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :page_id => @page.id), :window => 'open') %>
       <% end =%>
     <% end %>
   <% end =%>

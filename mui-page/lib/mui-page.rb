@@ -11,11 +11,11 @@ if defined?(Merb::Plugins)
         p.match('/pages').to(:action => 'index').name(:mui_pages)
         p.match('/page/create', :method => :post).to(:action => 'create_post').name(:mui_page_create)
         p.match('/page/create').to(:action => 'create').name(:mui_page_create)
-        p.match('/page/read/:id').to(:action => 'read').name(:mui_page_read)
-        p.match('/page/update/:id', :method => :put).to(:action => 'update_put').name(:mui_page_update)
-        p.match('/page/update/:id').to(:action => 'update').name(:mui_page_update)
-        p.match('/page/delete/:id', :method => :put).to(:action => 'delete_put').name(:mui_page_delete)
-        p.match('/page/delete/:id').to(:action => 'delete').name(:mui_page_delete)
+        p.match('/page/read/:page_id').to(:action => 'read').name(:mui_page_read)
+        p.match('/page/update/:page_id', :method => :put).to(:action => 'update_put').name(:mui_page_update)
+        p.match('/page/update/:page_id').to(:action => 'update').name(:mui_page_update)
+        p.match('/page/delete/:page_id', :method => :put).to(:action => 'delete_put').name(:mui_page_delete)
+        p.match('/page/delete/:page_id').to(:action => 'delete').name(:mui_page_delete)
       end
     end
   end

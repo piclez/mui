@@ -1,5 +1,5 @@
 <%= mui_window(:title => 'Update Page') do %>
-  <%= mui_form(:action => url(:mui_page_update, :id => @page.id), :model => @page) do %>
+  <%= mui_form(:action => url(:mui_page_update, :page_id => @page.id), :model => @page) do %>
     <%= mui_grid(:type => 'form') do %>
       <%= partial(:form) %>
       <%= mui_row do %>

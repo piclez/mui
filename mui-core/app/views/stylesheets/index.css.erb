@@ -280,9 +280,6 @@ table.mui_grid_form {
   border-spacing: 1em;
   margin: -1em;
 }
-table.mui_grid_message {
-  border-spacing: 1em;
-}
 table.mui_grid_tray {
   border-spacing: 0 1em;
   margin-bottom: -1em;
@@ -366,43 +363,38 @@ select.mui_menu {
 
 /* message */
 
-span.mui_message_target {
-  display: inline-block;
-  max-width: 90%;
-  position: fixed;
-  right: 2em;
-  top: 0;
+div.mui_message_target {
+  display: hidden;
 }
-span.mui_message {
-  background-image: url('/images/transparency.png');
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-left-style: solid;
-  border-left-width: 1px;
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-top-style: solid;
-  border-top-style: none;
+div.mui_message {
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-style: none;
+  border-width: 0;
   color: <%= color(1, 1, 1) %>;
-  display: inline-block;
-  <%= border_radius(:edge => 'bottom') %>
 }
-span.mui_message.mui_tone_positive {
-  border-color: <%= color(0, 0.6, 0) %>;
+div.mui_message td {
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
 }
-span.mui_message.mui_tone_negative {
-  border-color: <%= color(0.6, 0, 0) %>;
+div.mui_message.mui_tone_positive {
+  background-color: <%= color(0, 0.6, 0) %>;
 }
-span.mui_message.mui_tone_neutral {
-  border-color: <%= color(0, 0, 0) %>;
+div.mui_message.mui_tone_negative {
+  background-color: <%= color(0.6, 0, 0) %>;
+}
+div.mui_message.mui_tone_neutral {
+  background-color: <%= color(0, 0, 0) %>;
 }
 
 /* paragraph */
 
 p.mui_paragraph {
   line-height: 1.5em;
-  max-width: 40em;
-  min-width: 10em;
+  max-width: 30em;
 }
 p.mui_paragraph+p.mui_paragraph {
   margin-top: 1em;

@@ -39,10 +39,12 @@ $(document).ready(function(){
   $('.mui_focus').focus();
 });
 $(document).keyup(function(event){
-  if (event.keyCode == 27){
-    $('.mui_window_target').fadeOut(function(){
-      $('.mui_window_target').empty();
-    });
-  	return false;
+  if (event.keyCode == 37) {
+    $('[name=previous]').click();
+    return false;
+  }
+  else if (event.keyCode == 39) {
+    $('[name=next]').click();
+    return false;
   }
 });

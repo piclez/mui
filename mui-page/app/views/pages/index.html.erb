@@ -19,12 +19,12 @@
             <% end =%>
             <%= mui_row do %>
               <%= mui_column do %>
-                <%= mui_button(:title => 'Read &rarr;', :tone => 'positive', :url => url(:mui_page_read, :id => page.id)) %>
+                <%= mui_button(:title => 'Read &rarr;', :tone => 'positive', :url => url(:mui_page_read, :page_id => page.id)) %>
               <% end =%>
               <% if mui_password? %>
                 <%= mui_column(:x => 1) do %>
-                  <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :id => page.id), :window => 'open') %>
-                  <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :id => page.id), :window => 'open') %>
+                  <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :page_id => page.id), :window => 'open') %>
+                  <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :page_id => page.id), :window => 'open') %>
                 <% end =%>
               <% end %>
             <% end =%>

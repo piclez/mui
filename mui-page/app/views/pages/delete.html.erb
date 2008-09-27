@@ -5,7 +5,7 @@
     <% end =%>
     <%= mui_row do %>
       <%= mui_column do %>
-  		  <%= mui_form(:action => url(:mui_page_delete, :id => @page.id), :model => @page) do %>
+  		  <%= mui_form(:action => url(:mui_page_delete, :page_id => @page.id), :model => @page) do %>
           <%= mui_button(:title => 'Delete', :submit => true, :tone => 'negative') %>
         <% end =%>
       <% end =%>

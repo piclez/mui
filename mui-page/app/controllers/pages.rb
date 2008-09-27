@@ -29,15 +29,15 @@ class MuiPage::Pages < MuiPage::Application
   end
 
   def read
-    display @page = Page.get!(params[:id])
+    display @page = Page.get!(params[:page_id])
   end
 
   def update
-    display(@page = Page.get!(params[:id]), :layout => false)
+    display(@page = Page.get!(params[:page_id]), :layout => false)
   end
 
   def update_put
-    page = Page.get!(params[:id])
+    page = Page.get!(params[:page_id])
     if page.update_attributes(params[:page])
       session[:mui_message] = {:title => 'Page updated', :tone => 'positive'}
     else
@@ -48,11 +48,11 @@ class MuiPage::Pages < MuiPage::Application
   end
 
   def delete
-    display(@page = Page.get!(params[:id]), :layout => false)
+    display(@page = Page.get!(params[:page_id]), :layout => false)
   end
 
   def delete_put
-    page = Page.get!(params[:id])
+    page = Page.get!(params[:page_id])
     if page.destroy
       session[:mui_message] = {:title => 'Page deleted', :tone => 'positive'}
     else

@@ -9,3 +9,11 @@ $(document).ready(function(){
   });
   $('.mui_focus').focus();
 });
+$(document).keyup(function(event){
+  if (event.keyCode == 27){
+    if ($('.mui_click_message_close').length == 0){
+      $('.mui_click_window_close').click();
+    }
+  	return false;
+  }
+});

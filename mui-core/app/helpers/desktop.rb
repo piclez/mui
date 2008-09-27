@@ -1,8 +1,8 @@
 module Merb::MuiCore::MuiDesktop
   
   def mui(options = {}, &block)
-    output = capture(&block) if block_given?
-    output << tag(:span, :class => 'mui_message_target')
+    output = tag(:div, :class => 'mui_message_target')
+    output << capture(&block) if block_given?
     if session[:mui_message]
       script = "$(document).ready(function(){"
       script << "$('.mui_message_target').hide().load('#{url(:mui_message)}').fadeIn();"
@@ -42,6 +42,7 @@ module Merb::MuiCore::MuiDesktop
     attributes[:class] << %{_message_#{options[:message]}} if options[:message]
     attributes[:class] << %{_window_#{options[:window]}} if options[:window]
     attributes[:id] = options[:url] if options[:url]
+    attributes[:name] = options[:name] if options[:name]
     attributes[:style] = %{width:#{options[:width]};} if options[:width]
     attributes[:type] = options[:submit] == true ? 'submit' : 'button'
     attributes[:value] = options[:title] if options[:title]
@@ -65,7 +66,7 @@ module Merb::MuiCore::MuiDesktop
       attributes[:align] = 'right' if options[:x] >= 1
     end
     attributes[:class] = 'mui_column'
-    attributes[:class] << %{_#{options[:type]}} if options[:type]
+    attributes[:class] << %{ mui_column_#{options[:type]}} if options[:type]
     attributes[:colspan] = options[:span] if options[:span]
     if options[:y]
       attributes[:valign] = 'top' if options[:y] <= 0
@@ -93,7 +94,7 @@ module Merb::MuiCore::MuiDesktop
     tag(:table, capture(&block), attributes)
   end
 
-  def mui_image(file, options={})
+  def mui_image(options={})
     attributes={}
     attributes[:align] = options[:align] if options[:align]
     attributes[:class] = 'mui_image'
@@ -101,7 +102,7 @@ module Merb::MuiCore::MuiDesktop
     if options[:height] && options[:width]
       attributes[:class] << ' mui_image_rounded' if options[:rounded] == true
       attributes[:src] = '/images/nil.png'
-      attributes[:style] = %{background-image: url('#{file}');}
+      attributes[:style] = %{background-image: url('#{options[:url]}');}
       attributes[:style] << %{height: #{options[:height]}px;}
       attributes[:style] << %{width: #{options[:width]}px;}
     else
