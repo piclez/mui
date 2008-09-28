@@ -19,7 +19,12 @@ $(document).ready(function(){
     $('.mui_window_target').fadeOut();
   });
   $('.mui_click_window_redirect').click(function(){
-  	$('.mui_window_target').load(this.id);
+    var url = this.id
+  	$('.mui_window_target').fadeOut(function(){
+  	  $('.mui_window_target').load(url, function(){
+  	    $('.mui_window_target').fadeIn();
+    	});
+  	});
   });
   $('.mui_window_target').draggable({
     'containment': 'window',
