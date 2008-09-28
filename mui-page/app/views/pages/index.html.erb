@@ -1,6 +1,6 @@
 <%= mui_grid(:type => 'desktop') do %>
   <%= mui_row do %>
-    <%= mui_column(:title => 'Pages') %>
+    <%= mui_column(:title => MuiPage[:title]) %>
     <% if mui_password? %>
       <%= mui_column(:x => 1, :y => 0.5) do %>
         <%= mui_button(:title => 'Create', :url => url(:mui_page_create), :window => 'open') %>
@@ -14,7 +14,9 @@
           <%= mui_grid(:type => 'tray') do %>
             <%= mui_row do %>
               <%= mui_column(:span => 2) do %>
-                <%= mui_page_truncate(:body => page.body) %>
+                <%= mui_paragraph do %>
+                  <%= mui_page_truncate(:body => page.body) %>
+                <% end =%>
               <% end =%>
             <% end =%>
             <%= mui_row do %>

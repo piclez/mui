@@ -8,8 +8,8 @@ module MuiPassword::MuiPasswords
     Password.first ? true : false
   end
 
-  def mui_password_javascript
-    tag(:script, :src => url(:mui_password_javascript), :type => 'text/javascript')
+  def mui_javascript_password
+    tag(:script, :src => url(:mui_javascript_password), :type => 'text/javascript')
   end
 
   def mui_password_redirect

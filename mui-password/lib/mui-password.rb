@@ -8,7 +8,7 @@ if defined?(Merb::Plugins)
   
   module MuiPassword
     def self.setup_router(scope)
-      scope.match('/javascripts/mui_password.js').to(:controller => 'javascripts', :action => 'password').name(:mui_password_javascript)
+      scope.match('/javascripts/mui_password.js').to(:controller => 'javascripts', :action => 'password').name(:mui_javascript_password)
       scope.to(:controller => 'passwords') do |i|
         i.match('/password/exit').to(:action => 'exit').name(:mui_password_exit)
         i.match('/password/create', :method => :post).to(:action => 'create_post').name(:mui_password_create)

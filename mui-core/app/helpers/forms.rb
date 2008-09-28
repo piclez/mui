@@ -44,9 +44,9 @@ module Merb::MuiCore::MuiForms
     text_field(name, attributes)
   end
   
-  def mui_wysiwyg(name, options = {})
+  def mui_hyper_text(name, options = {})
     attributes = {}
-    attributes[:class] = 'mui_wysiwyg'
+    attributes[:class] = 'mui_hyper_text'
     attributes[:class] << ' mui_focus' if options[:focus] == true
     attributes[:label] = options[:title]
     text_area(name, attributes)
