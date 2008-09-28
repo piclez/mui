@@ -4,16 +4,16 @@ $(document).ready(function(){
   var windowWidth = $('.mui_window_target').width();
   var windowHeight = $('.mui_window_target').height();
   if (windowWidth > browserWidth){
-    $('.mui_window_target').css('position', 'absolute', 'left', 0);
+    $('.mui_window_target').css({position:'absolute', left:'1em'});
   }
   else{
-    $('.mui_window_target').css('left', (browserWidth/2)+(windowWidth/2)*(-1));
+    $('.mui_window_target').css({position:'fixed', left:(browserWidth/2)+(windowWidth/2)*(-1)});
   }
   if (windowHeight > browserHeight){
-    $('.mui_window_target').css('position', 'absolute', 'top', 0);
+    $('.mui_window_target').css({position:'absolute', top:'1em'});
   }
   else{
-    $('.mui_window_target').css('top', (browserHeight/2)+(windowHeight/2)*(-1));
+    $('.mui_window_target').css({position:'fixed', top:(browserHeight/2)+(windowHeight/2)*(-1)});
   }
   $('.mui_click_window_close').click(function(){
     $('.mui_window_target').fadeOut();
