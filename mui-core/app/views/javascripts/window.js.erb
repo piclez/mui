@@ -16,11 +16,10 @@ $(document).ready(function(){
     $('.mui_window_target').css('top', (browserHeight/2)+(windowHeight/2)*(-1));
   }
   $('.mui_click_window_close').click(function(){
-    $('.mui_window_target').hide();
+    $('.mui_window_target').fadeOut();
   });
   $('.mui_click_window_redirect').click(function(){
-    var url = this.id;
-    $('.mui_window_target').load(url);
+  	$('.mui_window_target').load(this.id);
   });
   $('.mui_window_target').draggable({
     'containment': 'window',

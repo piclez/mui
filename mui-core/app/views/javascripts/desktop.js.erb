@@ -1,6 +1,11 @@
 $(document).ready(function(){
   $('.mui_click_window_open').click(function(){
-  	$('.mui_window_target').empty().load(this.id).show();
+    var url = this.id
+  	$('.mui_window_target').fadeOut(function(){
+  	  $('.mui_window_target').load(url, function(){
+  	    $('.mui_window_target').fadeIn();
+    	});
+  	});
   });
   $('.mui_click').click(function(){
   	location.href=this.id;
