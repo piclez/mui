@@ -12,7 +12,7 @@ module Merb::MuiCore::MuiDesktop
     output << capture(&block) if block_given?
     output << tag(:span, :class => 'mui_window_target')
     if session[:mui_window]
-      output << tag(:script, "$('.mui_window_target').fadeOut(function(){$('.mui_window_target').load('#{session[:mui_window]}', function(){$('.mui_window_target').fadeIn();$('.mui_focus:first').focus();});});", :type => 'text/javascript')    	
+      output << tag(:script, "windowOpen('#{session[:mui_window]}');", :type => 'text/javascript')    	
     end
     output
   end
