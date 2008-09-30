@@ -1,5 +1,4 @@
 $(function(){
-  $('.mui_message').hide().slideDown('fast');
   $('.mui_click').click(function(){
     window.location = this.id;
   });
@@ -11,6 +10,7 @@ $(function(){
       $('.mui_message').remove();
     });
   });
+  messagePosition();
 });
 $(document).keyup(function(event){
   if (event.keyCode == 27){
@@ -43,6 +43,12 @@ function windowClose(url){
 	  target.empty;
     $('.mui_focus:first').focus();
 	});
+}
+function messagePosition(){
+  var browserWidth = $(window).width();
+  var messageWidth = $('.mui_message').width();
+  $('.mui_message').css({position:'fixed', left:(browserWidth/2)+(messageWidth/2)*(-1), top:0});
+  $('.mui_message').slideDown('slow');
 }
 function windowPosition(){
   var browserWidth = $(window).width();
