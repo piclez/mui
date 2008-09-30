@@ -1,20 +1,18 @@
 module Merb::MuiCore::MuiDesktop
   
   def mui(options = {}, &block)
-    output = tag(:div, :class => 'mui_message_target')
-    output << capture(&block) if block_given?
-    if session[:mui_message]
-      script = "$(document).ready(function(){"
-      script << "$('.mui_message_target').hide().load('#{url(:mui_message)}').fadeIn();"
-      script << "});"
-      output << tag(:script, script, :type => 'text/javascript')
+    output = ''
+    if message = session[:mui_message]
+      content = mui_button(:title => '&#215;', :message => 'close')
+      content << message[:title] if message[:title]
+      content << message[:body] if message[:body]
+      output << tag(:div, content, :class => %{mui_message mui_message_#{message[:tone]}})
+      session.delete(:mui_message)
     end
+    output << capture(&block) if block_given?
     output << tag(:span, :class => 'mui_window_target')
     if session[:mui_window]
-      script = "$(document).ready(function(){"
-      script << "$('.mui_window_target').hide().load('#{session[:mui_window]}').fadeIn();"
-      script << "});"
-      output << tag(:script, script, :type => 'text/javascript')
+      output << tag(:script, "$('.mui_window_target').fadeOut(function(){$('.mui_window_target').load('#{session[:mui_window]}', function(){$('.mui_window_target').fadeIn();$('.mui_focus:first').focus();});});", :type => 'text/javascript')    	
     end
     output
   end
@@ -23,11 +21,11 @@ module Merb::MuiCore::MuiDesktop
     attributes = {}
     attributes[:class] = 'mui_bar'
     attributes[:class] << %{ mui_bar_#{options[:type]}} if options[:type]
-    columns = ''
-    columns << tag(:td, options[:title], :class => 'mui_bar_title') if options[:title]
-    columns << tag(:td, mui_button(:title => '&#215;', :window => 'close'), :align => 'right') if options[:window] == 'close'
-    columns << capture(&block) if block_given?
-    tag(:div, tag(:table, tag(:tr, columns), :class => 'mui_grid mui_grid_bar'), attributes)
+    content = ''
+    content << capture(&block) if block_given?
+    content << options[:title] if options[:title]
+    content << mui_button(:title => '&#215;', :window => 'close') if options[:window] == 'close'
+    tag(:div, content, attributes)
   end
 
   def mui_block(&block)
@@ -158,16 +156,10 @@ module Merb::MuiCore::MuiDesktop
 
   def mui_tab(options={})
     attributes={}
-    attributes[:class] = 'mui_bar_tab'
-    attributes[:class] << ' mui_selected' if options[:controller] == controller_name || options[:selected] == true
-    attributes[:class] << ' mui_inline' if options[:inline] == true
-    attributes[:class] << ' mui_click'
-    attributes[:class] << %{_message_#{options[:message]}} if options[:message]
-    attributes[:class] << %{_window_#{options[:window]}} if options[:window]
-    attributes[:id] = options[:url] if options[:url]
-    attributes[:type] = 'button'
-    attributes[:value] = options[:title] if options[:title]
-    self_closing_tag(:input, attributes)
+    attributes[:class] = 'mui_tab'
+    attributes[:class] << ' mui_tab_selected' if options[:controller] == controller_name || options[:selected] == true
+    attributes[:href] = options[:url] if options[:url]
+    tag(:a, options[:title], attributes)
   end
 
 end

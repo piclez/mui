@@ -14,7 +14,6 @@ if defined?(Merb::Plugins)
         j.match('/javascripts/mui_message.js').to(:action => 'message').name(:mui_javascript_message)
         j.match('/javascripts/mui_window.js').to(:action => 'window').name(:mui_javascript_window)
       end
-      scope.match('/message').to(:controller => 'messages', :action => 'index').name(:mui_message)
     end
   end
 

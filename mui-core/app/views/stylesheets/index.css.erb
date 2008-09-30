@@ -1,5 +1,6 @@
 ﻿<%= @gecko -%>
 <%= @msie -%>
+
 * {
   font-family: "Lucida Grande", Verdana, sans-serif;
   line-height: 1em;
@@ -17,49 +18,21 @@ div.mui_bar {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: none;
-  border-width: 0;
   color: <%= color(1, 1, 1) %>;
+  height: 2em;
+  line-height: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  white-space: nowrap;
 }
 div.mui_bar_window {
   <%= border_radius(:edge => 'top') %>
 }
-div.mui_bar td {
-  height: 2em;
-  white-space: nowrap;
-}
-input.mui_bar_tab {
-  background-color: <%= color(0.1, 0.1, 0.1) %>;
-  background-image: url('/images/reflection.png');
-  background-position: center center;
-  background-repeat: repeat-x;
-  border-bottom: none;
-  border-left: none;
-  border-right-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-right-style: solid;
-  border-right-width: 1px;
-  border-top: none;
-  color: <%= color(1, 1, 1) %>;
-  font-size: 1em;
-  height: 2em;
-  padding-left: 2em;
-  padding-right: 2em;
-}
-input.mui_bar_tab:first-child {
-  border-left-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-left-style: solid;
-  border-left-width: 1px;
-}
-input.mui_bar_tab:hover {
-  background-color: <%= color(0.2, 0.2, 0.2) %>;
-}
-input.mui_bar_tab:active, *.mui_selected {
-  background-color: <%= color(0, 0.3, 0.9) %> !important;
-  border-left-color: <%= color(0.1, 0.1, 0.1) %> !important;
-  border-right-color: <%= color(0.1, 0.1, 0.1) %> !important;
-  color: <%= color(1, 1, 1) %> !important;
+div.mui_bar *.mui_button {
+  float: right;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  margin-top: 0.5em;
 }
 
 /* block */
@@ -172,7 +145,7 @@ input.mui_checkbox {
 
 /* code */
 
-code.mi {
+code.mui_code {
   background-color: <%= color(0, 0, 0) %>;
   border-color: <%= color(0, 0, 0) %>;
   border-style: solid;
@@ -186,7 +159,7 @@ code.mi {
   padding-top: 15px;
   margin-top: 5px;
 }
-code.mi var {
+code.mui_code var {
   color: <%= color(0.75, 0.75, 0.75) %>;
 }
 
@@ -322,26 +295,26 @@ kbd.mui_key {
 
 /* link */
 
-.mui_link {
+a.mui_link {
   color: #0066ff;
   text-decoration: none;
 }
-.mui_link:visited {
+a.mui_link:visited {
   color: #993399;
 }
-.mui_link:active {
+a.mui_link:active {
   color: #3399ff;
   outline: 0;
   text-decoration: underline;
 }
-.mui_link:focus {
+a.mui_link:focus {
   color: #3399ff;
   outline: 0;
 }
-.mui_link:hover {
+a.mui_link:hover {
   text-decoration: underline;
 }
-.mui_link_external {
+a.mui_link_external {
   cursor: ne-resize;
 }
 
@@ -364,30 +337,33 @@ select.mui_menu {
 
 /* message */
 
-div.mui_message_target {
-  display: hidden;
-}
 div.mui_message {
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: none;
-  border-width: 0;
   color: <%= color(1, 1, 1) %>;
+  line-height: 2em;
+  min-height: 2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  white-space: nowrap;
 }
-div.mui_message td {
-  padding-bottom: 0.5em;
-  padding-top: 0.5em;
+div.mui_message ul.mui_list {
+  padding-bottom: 0.75em;
 }
-div.mui_message.mui_tone_positive {
+div.mui_message input.mui_button {
+  float: right;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  margin-top: 0.5em;
+}
+div.mui_message_positive {
   background-color: <%= color(0, 0.6, 0) %>;
 }
-div.mui_message.mui_tone_negative {
+div.mui_message_negative {
   background-color: <%= color(0.6, 0, 0) %>;
 }
-div.mui_message.mui_tone_neutral {
+div.mui_message_neutral {
   background-color: <%= color(0, 0, 0) %>;
 }
 
@@ -406,6 +382,39 @@ p.mui_paragraph+p.mui_paragraph {
 
 blockquote.mui_quote {
   background-color: #e5e5e5;
+}
+
+/* tab */
+
+a.mui_tab {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  border-bottom: none;
+  border-left: none;
+  border-right-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top: none;
+  color: <%= color(1, 1, 1) %>;
+  display: inline-block;
+  font-size: 1em;
+  line-height: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  text-decoration: none;
+}
+a.mui_tab:first-child {
+  border-left-color: <%= color(0.1, 0.1, 0.1) %>;
+  border-left-style: solid;
+  border-left-width: 1px;
+}
+a.mui_tab:hover {
+  background-color: <%= color(0.2, 0.2, 0.2) %>;
+}
+a.mui_tab:active, a.mui_tab_selected, a.mui_tab_selected:hover {
+  background-color: <%= color(0, 0.3, 0.9) %>;
 }
 
 /* table */
@@ -464,10 +473,5 @@ span.mui_window {
   color: <%= color(1, 1, 1) %>;
   display: inline-block;
   padding: 1em;
-  position: relative;
   <%= border_radius(:edge => 'bottom') %>
-}
-span.mui_window_target {
-  display: hidden;
-  position: fixed;
 }
