@@ -28,6 +28,11 @@ $(document).keyup(function(event){
     $('[name=next]').click();
   }
 });
+function messagePosition(){
+  var browserWidth = $(window).width();
+  var messageWidth = $('.mui_message').width();
+  $('.mui_message').css({position:'fixed', left:(browserWidth/2)+(messageWidth/2)*(-1), top:0}).slideDown('fast');
+}
 function windowOpen(url){
   var target = $('.mui_window_target');
   target.fadeOut(function(){
@@ -43,12 +48,6 @@ function windowClose(url){
 	  target.empty;
     $('.mui_focus:first').focus();
 	});
-}
-function messagePosition(){
-  var browserWidth = $(window).width();
-  var messageWidth = $('.mui_message').width();
-  $('.mui_message').css({position:'fixed', left:(browserWidth/2)+(messageWidth/2)*(-1), top:0});
-  $('.mui_message').slideDown('slow');
 }
 function windowPosition(){
   var browserWidth = $(window).width();

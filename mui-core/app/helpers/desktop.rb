@@ -10,9 +10,10 @@ module Merb::MuiCore::MuiDesktop
       session.delete(:mui_message)
     end
     output << capture(&block) if block_given?
-    output << tag(:span, :class => 'mui_window_target')
+    output << tag(:div, :class => 'mui_window_target')
     if session[:mui_window]
       output << tag(:script, "windowOpen('#{session[:mui_window]}');", :type => 'text/javascript')    	
+      session.delete(:mui_window)
     end
     output
   end
@@ -21,11 +22,18 @@ module Merb::MuiCore::MuiDesktop
     attributes = {}
     attributes[:class] = 'mui_bar'
     attributes[:class] << %{ mui_bar_#{options[:type]}} if options[:type]
-    content = ''
-    content << capture(&block) if block_given?
-    content << options[:title] if options[:title]
-    content << mui_button(:title => '&#215;', :window => 'close') if options[:window] == 'close'
-    tag(:div, content, attributes)
+    columns = ''
+    columns << tag(:td, capture(&block), :class => 'mui_bar_tabs') if block_given?
+    columns << tag(:td, options[:title], :class => 'mui_bar_title') if options[:title]
+    buttons = ''
+    buttons << options[:buttons] if options[:buttons]
+    if options[:password] and mui_password?
+      buttons << mui_button(:title => 'Password', :url => url(:mui_password_update), :window => 'open')
+      buttons << mui_button(:title => 'Exit', :url => url(:mui_password_exit))
+    end
+    buttons << mui_button(:title => '&#215;', :window => 'close') if options[:window] == 'close'
+    columns << tag(:td, buttons, :class => 'mui_bar_buttons')
+    tag(:div, tag(:table, tag(:tr, columns)), attributes)
   end
 
   def mui_block(&block)

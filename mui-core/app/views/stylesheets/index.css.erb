@@ -19,20 +19,32 @@ div.mui_bar {
   background-position: center center;
   background-repeat: repeat-x;
   color: <%= color(1, 1, 1) %>;
-  height: 2em;
-  line-height: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
   white-space: nowrap;
 }
 div.mui_bar_window {
+  position: absolute;
+  top: 0;
+  width: 100%;
   <%= border_radius(:edge => 'top') %>
 }
-div.mui_bar *.mui_button {
-  float: right;
-  margin-bottom: 0.5em;
-  margin-left: 1em;
-  margin-top: 0.5em;
+div.mui_bar table {
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
+}
+div.mui_bar td {
+  height: 2em;
+}
+td.mui_bar_buttons {
+  padding-right: 1em;
+  text-align: right;
+}
+td.mui_bar_tabs {
+  padding-right: 1em;
+}
+td.mui_bar_title {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /* block */
@@ -232,39 +244,6 @@ textarea.mui_hyper_text {
   width: 100%;
 }
 
-/* grid */
-
-table.mui_grid {
-  border-spacing: 0;
-  table-layout: fixed;
-}
-table.mui_grid_bar {
-  border-spacing: 1em 0;
-  table-layout: auto;
-  width: 100%;
-}
-table.mui_grid_button {
-  border-spacing: 0.5em;
-}
-table.mui_grid_desktop {
-  border-spacing: 1em;
-  width: 100%;
-}
-table.mui_grid_form {
-  border-spacing: 1em;
-  margin: -1em;
-}
-table.mui_grid_tray {
-  border-spacing: 0 1em;
-  margin-bottom: -1em;
-  margin-top: -1em;
-  width: 100%;
-}
-table.mui_grid_window {
-  border-spacing: 1em;
-  width: 100%;
-}
-
 /* image */
 
 img.mui_image {
@@ -347,19 +326,15 @@ div.mui_message {
   color: <%= color(1, 1, 1) %>;
   display: none;
   line-height: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
+  min-width: 50%;
+  padding: 1em;
   white-space: nowrap;
   <%= border_radius(:edge => 'bottom') %>
 }
-div.mui_message ul.mui_list {
-  padding-bottom: 0.75em;
-}
 div.mui_message input.mui_button {
-  float: right;
-  margin-bottom: 0.5em;
-  margin-left: 1em;
-  margin-top: 0.5em;
+  position: absolute;
+  right: 1em;
+  top: 1em;
 }
 div.mui_message_positive {
   border-color: <%= color(0, 0.6, 0) %>;
@@ -472,10 +447,13 @@ i.mui_truncate {
 
 /* window */
 
-span.mui_window {
+div.mui_window {
   background-image: url('/images/transparency.png');
   color: <%= color(1, 1, 1) %>;
-  display: inline-block;
   padding: 1em;
+  margin-top: 2em;
   <%= border_radius(:edge => 'bottom') %>
+}
+span.mui_window_target {
+  display: none;
 }
