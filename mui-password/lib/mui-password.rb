@@ -9,16 +9,16 @@ if defined?(Merb::Plugins)
   module MuiPassword
     def self.setup_router(scope)
       scope.match('/javascripts/mui_password.js').to(:controller => 'javascripts', :action => 'password').name(:mui_javascript_password)
-      scope.to(:controller => 'passwords') do |i|
-        i.match('/password/exit').to(:action => 'exit').name(:mui_password_exit)
-        i.match('/password/create', :method => :post).to(:action => 'create_post').name(:mui_password_create)
-        i.match('/password/create').to(:action => 'create').name(:mui_password_create)
-        i.match('/password/read', :method => :post).to(:action => 'read_post').name(:mui_password_read)
-        i.match('/password/read').to(:action => 'read').name(:mui_password_read)
-        i.match('/password/update', :method => :post).to(:action => 'update_post').name(:mui_password_update)
-        i.match('/password/update').to(:action => 'update').name(:mui_password_update)
-        i.match('/password/delete', :method => :post).to(:action => 'delete_post').name(:mui_password_delete)
-        i.match('/password/delete').to(:action => 'delete').name(:mui_password_delete)
+      scope.to(:controller => 'passwords') do |p|
+        p.match('/password/exit').to(:action => 'exit').name(:mui_password_exit)
+        p.match('/password/create', :method => :post).to(:action => 'create_post').name(:mui_password_create)
+        p.match('/password/create').to(:action => 'create').name(:mui_password_create)
+        p.match('/password/read', :method => :post).to(:action => 'read_post').name(:mui_password_read)
+        p.match('/password/read').to(:action => 'read').name(:mui_password_read)
+        p.match('/password/update', :method => :post).to(:action => 'update_post').name(:mui_password_update)
+        p.match('/password/update').to(:action => 'update').name(:mui_password_update)
+        p.match('/password/delete', :method => :post).to(:action => 'delete_post').name(:mui_password_delete)
+        p.match('/password/delete').to(:action => 'delete').name(:mui_password_delete)
       end
     end
   end

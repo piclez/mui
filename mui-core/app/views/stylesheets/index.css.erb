@@ -2,55 +2,87 @@
 <%= @msie -%>
 
 * {
-  font-family: "Lucida Grande", Verdana, sans-serif;
-  line-height: 1em;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
   margin: 0;
   padding: 0;
 }
 body {
   font-size: 13px;
 }
+b, em, i, strong {
+  font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", sans-serif;
+}
 
 /* bar */
 
-div.mui_bar {
+table.mui_bar, table.mui_bar_desktop {
+  border-collapse: collapse;
+}
+table.mui_bar, table.mui_bar_desktop {
+  width: 100%;
+}
+table.mui_bar {
+  margin: 0.5em;
+}
+table.mui_bar_desktop {
   background-color: <%= color(0.1, 0.1, 0.1) %>;
   background-image: url('/images/reflection.png');
   background-position: center center;
   background-repeat: repeat-x;
   color: <%= color(1, 1, 1) %>;
-  white-space: nowrap;
-}
-div.mui_bar_window {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  <%= border_radius(:edge => 'top') %>
-}
-div.mui_bar table {
-  border-collapse: collapse;
-  table-layout: auto;
-  width: 100%;
-}
-div.mui_bar td {
-  height: 2em;
 }
 td.mui_bar_buttons {
+  padding-left: 1em;
+  white-space: nowrap;
+}
+td.mui_bar_end {
   padding-right: 1em;
   text-align: right;
-}
-td.mui_bar_tabs {
-  padding-right: 1em;
+  white-space: nowrap;
 }
 td.mui_bar_title {
-  padding-left: 1em;
-  padding-right: 1em;
+  color: <%= color(0, 0, 0) %>;
+  font-size: 3em;
+  font-weight: bold;
+  letter-spacing: -0.1em;
+  line-height: 1em;
+}
+table.mui_bar_desktop td.mui_bar_end {
+  padding-right: 2em;
 }
 
 /* block */
 
+*.mui_block {
+  margin: 0.5em;
+}
 span.mui_block {
-  display: block;
+  display: inline-block;
+  vertical-align: top;
+}
+div.mui_block_tray {
+  background-color: <%= color(0.95, 0.95, 0.95) %>;
+  border-bottom-color: <%= color(0.95, 0.95, 0.95) %>;
+  border-left-color: <%= color(0.85, 0.85, 0.85) %>;
+  border-right-color: <%= color(0.85, 0.85, 0.85) %>;
+  border-top-color: <%= color(0.75, 0.75, 0.75) %>;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1em;
+  <%= border_radius %>
+}
+div.mui_block_tray *.mui_block {
+  margin: 0;
+}
+h1.mui_block_title {
+  color: <%= color(0, 0, 0) %>;
+  font-weight: bold;
+  letter-spacing: -0.1em;
+  line-height: 1em;
+  margin-left: -0.05em;
+}
+*.mui_block+*.mui_block, h1.mui_block_title+*.mui_block {
+  margin-top: 1em !important;
 }
 
 /* button */
@@ -83,15 +115,6 @@ span.mui_block {
   border-top-color: <%= color(0.3, 0.3, 0.3) %>;
   color: <%= color(1, 1, 1) %>;
 }
-*.mui_button_tone_neutral:active {
-  background-color: <%= color(0.1, 0.1, 0.1) %>;
-  background-image: none;
-  border-bottom-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-left-color: <%= color(0, 0, 0) %>;
-  border-right-color: <%= color(0, 0, 0) %>;
-  border-top-color: <%= color(0, 0, 0) %>;
-  color: <%= color(1, 1, 1) %>;
-}
 *.mui_button_tone_positive {
   background-color: <%= color(0.1, 0.5, 0.1) %>;
   border-bottom-color: <%= color(0, 0.3, 0) %>;
@@ -106,15 +129,6 @@ span.mui_block {
   border-left-color: <%= color(0.1, 0.5, 0.1) %>;
   border-right-color: <%= color(0.1, 0.5, 0.1) %>;
   border-top-color: <%= color(0.2, 0.6, 0.2) %>;
-  color: <%= color(1, 1, 1) %>;
-}
-*.mui_button_tone_positive:active {
-  background-color: <%= color(0.1, 0.5, 0.1) %>;
-  background-image: none;
-  border-bottom-color: <%= color(0.1, 0.5, 0.1) %>;
-  border-left-color: <%= color(0.1, 0.5, 0.1) %>;
-  border-right-color: <%= color(0.1, 0.5, 0.1) %>;
-  border-top-color: <%= color(0, 0.4, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
 *.mui_button_tone_negative {
@@ -133,20 +147,24 @@ span.mui_block {
   border-top-color: <%= color(0.7, 0, 0) %>;
   color: <%= color(1, 1, 1) %>;
 }
-*.mui_button_tone_negative:active {
-  background-color: <%= color(0.6, 0, 0) %>;
-  background-image: none;
-  border-bottom-color: <%= color(0.6, 0, 0) %>;
-  border-left-color: <%= color(0.6, 0, 0) %>;
-  border-right-color: <%= color(0.6, 0, 0) %>;
-  border-top-color: <%= color(0.5, 0, 0) %>;
-  color: <%= color(1, 1, 1) %>;
-}
 button.mui_button {
-  padding: 0;
+  padding: 0.5em;
+  text-align: left;
+}
+button.mui_button img {
+  border-bottom-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-left-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-right-color: <%= color(0.3, 0.3, 0.3) %>;
+  border-top-color: <%= color(0.4, 0.4, 0.4) %>;
+  border-style: solid;
+  border-width: 1px;
+  <%= border_radius %>
+}
+button.mui_button table {
+  border-collapse: collapse;
 }
 button.mui_button td {
-  text-align: left;
+  padding-right: 1em;
 }
 
 /* checkbox */
@@ -175,26 +193,10 @@ code.mui_code var {
   color: <%= color(0.75, 0.75, 0.75) %>;
 }
 
-/* column */
-
-td.mui_column {
-}
-td.mui_column_tray {
-  background-color: <%= color(0.95, 0.95, 0.95) %>;
-  border-bottom-color: <%= color(0.95, 0.95, 0.95) %>;
-  border-left-color: <%= color(0.85, 0.85, 0.85) %>;
-  border-right-color: <%= color(0.85, 0.85, 0.85) %>;
-  border-top-color: <%= color(0.75, 0.75, 0.75) %>;
-  border-style: solid;
-  border-width: 1px;
-  padding: 1em;
-  <%= border_radius(:amount => 0.6) %>
-}
-
 /* desktop */
 
 div.mui_desktop {
-  padding: 1em;
+  padding: 1.5em;
 }
 
 /* divider */
@@ -244,6 +246,16 @@ textarea.mui_hyper_text {
   width: 100%;
 }
 
+/* grid */
+
+table.mui_grid {
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+*.mui_block+table.mui_grid {
+  margin-top: 1em;
+}
+
 /* image */
 
 img.mui_image {
@@ -258,14 +270,6 @@ img.mui_image_border {
   border-style: solid;
   border-width: 1px;
 }
-
-
-/* inline */
-
-span.mui_inline {
-  display: inline-block;
-}
-
 
 /* key */
 
@@ -292,9 +296,6 @@ a.mui_link:focus {
 }
 a.mui_link:hover {
   text-decoration: underline;
-}
-a.mui_link_external {
-  cursor: ne-resize;
 }
 
 /* list */
@@ -382,61 +383,14 @@ a.mui_tab {
   line-height: 2em;
   padding-left: 2em;
   padding-right: 2em;
+  text-align: center;
   text-decoration: none;
-}
-a.mui_tab:first-child {
-  border-left-color: <%= color(0.1, 0.1, 0.1) %>;
-  border-left-style: solid;
-  border-left-width: 1px;
 }
 a.mui_tab:hover {
   background-color: <%= color(0.2, 0.2, 0.2) %>;
 }
-a.mui_tab:active, a.mui_tab_selected, a.mui_tab_selected:hover {
-  background-color: <%= color(0, 0.3, 0.9) %>;
-}
-
-/* table */
-
-table.mui_table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-style: none;
-  border-width: 0;
-  margin: 1em;
-  table-layout: fixed;
-  width: 100%;
-}
-
-/* title */
-
-h1.mui_title {
-  font-family: Helvetica, Verdana, sans-serif;
-  font-size: 3em;
-  letter-spacing: -0.05em;
-  margin-bottom: 0.33em;
-  margin-left: -0.06em;
-  margin-top: -0.13em;
-}
-h1.mui_title_tray {
-  font-size: 2em;
-  letter-spacing: -0.05em;
-  margin-bottom: 0.5em;
-}
-h2.mui_title {
-  font-size: 2.4em;
-}
-h3.mui_title {
-  font-size: 2em;
-}
-h4.mui_title {
-  font-size: 1.6em;
-}
-h5.mui_title {
-  font-size: 1.2em;
-}
-h6.mui_title {
-  font-size: 0.85em;
+a.mui_tab:active, *.mui_button:active, *.mui_selected {
+  background-color: <%= color(0, 0.3, 0.9) %> !important;
 }
 
 /* truncate */
@@ -447,13 +401,32 @@ i.mui_truncate {
 
 /* window */
 
-div.mui_window {
+table.mui_window {
+  border-collapse: collapse;
+}
+table.mui_window table.mui_grid {
+  table-layout: auto;
+}
+table.mui_window_bar {
+  background-color: <%= color(0.1, 0.1, 0.1) %>;
+  background-image: url('/images/reflection.png');
+  background-position: center center;
+  background-repeat: repeat-x;
+  color: <%= color(1, 1, 1) %>;
+  height: 2em;
+  width: 100%;
+  <%= border_radius(:edge => 'top') %>
+}
+td.mui_window_title {
+  font-size: 0.85em;
+  padding-left: 1em;
+}
+td.mui_window_content {
   background-image: url('/images/transparency.png');
   color: <%= color(1, 1, 1) %>;
-  padding: 1em;
-  margin-top: 2em;
+  padding: 0.5em;
   <%= border_radius(:edge => 'bottom') %>
 }
-span.mui_window_target {
+div.mui_window_target {
   display: none;
 }

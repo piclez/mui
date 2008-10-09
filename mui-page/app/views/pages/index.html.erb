@@ -1,38 +1,31 @@
-<%= mui_grid(:type => 'desktop') do %>
-  <%= mui_row do %>
-    <%= mui_column(:title => MuiPage[:title]) %>
-    <% if mui_password? %>
-      <%= mui_column(:x => 1, :y => 0.5) do %>
-        <%= mui_button(:title => 'Create', :url => url(:mui_page_create), :window => 'open') %>
-      <% end =%>
-    <% end %>
-  <% end =%>
-  <% if @pages %>
-    <% @pages.each do |page| %>
-      <%= mui_row do %>
-        <%= mui_column(:title => page.title, :span => 2, :type => 'tray') do %>
-          <%= mui_grid(:type => 'tray') do %>
-            <%= mui_row do %>
-              <%= mui_column(:span => 2) do %>
-                <%= mui_paragraph do %>
-                  <%= mui_page_truncate(:body => page.body) %>
-                <% end =%>
-              <% end =%>
+<%= mui_bar(:title => MuiPage[:title]) do %>
+  <% if mui_password? %>
+    <%= mui_bar_end do %>
+      <%= mui_button(:title => 'Create', :url => url(:mui_page_create), :window => 'open') %>
+    <% end =%>
+  <% end %>
+<% end =%>
+<% if @pages %>
+  <% @pages.each do |page| %>
+    <%= mui_grid do %>
+      <%= mui_cell do %>
+        <%= mui_block(:title => page.title, :type => 'tray') do %>
+          <%= mui_block do %>
+            <%= mui_page_truncate(:body => page.body) %>
+          <% end =%>
+          <%= mui_grid(:columns => 2, :width => '100%') do %>
+            <%= mui_cell do %>
+              <%= mui_button(:title => 'Read &rarr;', :tone => 'positive', :url => url(:mui_page_read, :page_id => page.id)) %>
             <% end =%>
-            <%= mui_row do %>
-              <%= mui_column do %>
-                <%= mui_button(:title => 'Read &rarr;', :tone => 'positive', :url => url(:mui_page_read, :page_id => page.id)) %>
+            <% if mui_password? %>
+              <%= mui_cell(:align => 'right') do %>
+                <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :page_id => page.id), :window => 'open') %>
+                <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :page_id => page.id), :window => 'open') %>
               <% end =%>
-              <% if mui_password? %>
-                <%= mui_column(:x => 1) do %>
-                  <%= mui_button(:title => 'Update', :url => url(:mui_page_update, :page_id => page.id), :window => 'open') %>
-                  <%= mui_button(:title => 'Delete', :tone => 'negative', :url => url(:mui_page_delete, :page_id => page.id), :window => 'open') %>
-                <% end =%>
-              <% end %>
-            <% end =%>
+            <% end %>
           <% end =%>
         <% end =%>
       <% end =%>
-    <% end %>
+    <% end =%>
   <% end %>
-<% end =%>
+<% end %>

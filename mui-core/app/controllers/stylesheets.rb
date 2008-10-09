@@ -9,7 +9,7 @@ class MuiCore::Stylesheets < MuiCore::Application
         property('padding', :value => 0)
       end
     elsif mui_msie?
-      @msie = selector('.mui_button, .mui_bar_tab') do
+      @msie = selector('.mui_button') do
         property('overflow', :value => 'visible')
         property('width', :value => 'auto')
       end

@@ -18,26 +18,34 @@ module Merb::MuiCore::MuiDesktop
     output
   end
 
-  def mui_bar(options = {}, &block)
+  def mui_block(options = {}, &block)
     attributes = {}
-    attributes[:class] = 'mui_bar'
-    attributes[:class] << %{ mui_bar_#{options[:type]}} if options[:type]
-    columns = ''
-    columns << tag(:td, capture(&block), :class => 'mui_bar_tabs') if block_given?
-    columns << tag(:td, options[:title], :class => 'mui_bar_title') if options[:title]
-    buttons = ''
-    buttons << options[:buttons] if options[:buttons]
-    if options[:password] and mui_password?
-      buttons << mui_button(:title => 'Password', :url => url(:mui_password_update), :window => 'open')
-      buttons << mui_button(:title => 'Exit', :url => url(:mui_password_exit))
+    attributes[:class] = 'mui_block'
+    if type = options[:type]
+      if type == 'inline'
+        tag_type = :span
+      else
+        tag_type = :div
+        attributes[:class] << %{ mui_block_#{type}}
+      end
+    else
+      tag_type = :div
     end
-    buttons << mui_button(:title => '&#215;', :window => 'close') if options[:window] == 'close'
-    columns << tag(:td, buttons, :class => 'mui_bar_buttons')
-    tag(:div, tag(:table, tag(:tr, columns)), attributes)
-  end
-
-  def mui_block(&block)
-    tag(:span, (capture(&block) if block_given?), :class => 'mui_block')
+    if options[:height] || options[:width]
+      attributes[:style] = ''
+      attributes[:style] << %{height:#{options[:height]};} if options[:height]
+      attributes[:style] << %{width:#{options[:width]};} if options[:width]
+    end
+    content = ''
+    if options[:title]
+      title_size = options[:title_size] || '2em'
+      title_attributes = {}
+      title_attributes[:class] = 'mui_block_title'
+      title_attributes[:style] = %{font-size:#{title_size}}
+      content << tag(:h1, options[:title], title_attributes)
+    end
+    content << capture(&block) if block_given?
+    tag(tag_type, content, attributes)
   end
   
   def mui_button(options = {}, &block)
@@ -54,7 +62,7 @@ module Merb::MuiCore::MuiDesktop
     attributes[:value] = options[:title] if options[:title]
     if block_given?
       if options[:title]
-        content = tag(:table, tag(:tr, tag(:td, capture(&block)) + tag(:td, options[:title], :class => 'mui_button_text')))
+        content = tag(:table, tag(:tr, tag(:td, capture(&block)) + tag(:td, options[:title], :width => '100%')))
       else
         content = capture(&block)
       end
@@ -64,40 +72,8 @@ module Merb::MuiCore::MuiDesktop
     end
   end
 
-  def mui_column(options = {}, &block)
-    attributes = {}
-    if options[:x]
-      attributes[:align] = 'left' if options[:x] <= 0
-      attributes[:align] = 'center' if options[:x] == 0.5
-      attributes[:align] = 'right' if options[:x] >= 1
-    end
-    attributes[:class] = 'mui_column'
-    attributes[:class] << %{ mui_column_#{options[:type]}} if options[:type]
-    attributes[:colspan] = options[:span] if options[:span]
-    if options[:y]
-      attributes[:valign] = 'top' if options[:y] <= 0
-      attributes[:valign] = 'middle' if options[:y] == 0.5
-      attributes[:valign] = 'bottom' if options[:y] >= 1
-    end
-    attributes[:width] = options[:width] if options[:width]
-    title_attributes = {}
-    title_attributes[:class] = 'mui_title'
-    title_attributes[:class] << %{ mui_title_#{options[:type]}} if options[:type]
-    content = ''
-    content << tag(:h1, options[:title], title_attributes) if options[:title]
-    content << capture(&block) if block_given?
-    tag(:td, content, attributes)
-  end
-
   def mui_desktop(options = {}, &block)
     tag(:div, capture(&block), :class => 'mui_desktop')
-  end
-
-  def mui_grid(options = {}, &block)
-    attributes = {}
-    attributes[:class] = 'mui_grid'
-    attributes[:class] << %{ mui_grid_#{options[:type]}} if options[:type]
-    tag(:table, capture(&block), attributes)
   end
 
   def mui_image(options={})
@@ -118,15 +94,10 @@ module Merb::MuiCore::MuiDesktop
     attributes[:class] << ' mui_inline' if options[:inline] == true
     self_closing_tag(:img, attributes)
   end
-
-  def mui_inline(&block)
-    tag(:span, (capture(&block) if block_given?), :class => 'mui_inline')
-  end
   
   def mui_link(options={}, &block)
     attributes = {}
     attributes[:class] = 'mui_link'
-    attributes[:class] << ' mui_link_external' if options[:external]
     attributes[:href] = options[:url]
     if block_given?
       content = capture(&block)
@@ -148,26 +119,7 @@ module Merb::MuiCore::MuiDesktop
   end
 
   def mui_paragraph(options={}, &block)
-    attributes={}
-    attributes[:class] = 'mui_paragraph'
-    attributes[:class] << ' mui_inline' if options[:inline] == true
-    tag(:p, (capture(&block) if block_given?), attributes)
-  end
-
-  def mui_row(options = {}, &block)
-    attributes = {}
-    attributes[:class] = 'mui_row'
-    attributes[:class] << %{_#{options[:type]}} if options[:type]
-    attributes[:valign] = 'top' unless options[:type] == 'bar'
-    tag(:tr, capture(&block), attributes)
-  end
-
-  def mui_tab(options={})
-    attributes={}
-    attributes[:class] = 'mui_tab'
-    attributes[:class] << ' mui_tab_selected' if options[:controller] == controller_name || options[:selected] == true
-    attributes[:href] = options[:url] if options[:url]
-    tag(:a, options[:title], attributes)
+    tag(:p, (capture(&block) if block_given?), :class => 'mui_paragraph')
   end
 
 end

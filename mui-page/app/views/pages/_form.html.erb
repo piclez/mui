@@ -1,10 +1,6 @@
-<%= mui_row do %>
-  <%= mui_column do %>
-    <%= mui_text(:title, :focus => true, :title => 'Title', :width => '30em') %>
-  <% end =%>
+<%= mui_block do %>
+  <%= mui_text(:title, :focus => true, :title => 'Title', :width => '30em') %>
 <% end =%>
-<%= mui_row do %>
-  <%= mui_column do %>
-	  <%= mui_hyper_text(:body, :title => 'Body') %>
-  <% end =%>
+<%= mui_block do %>
+	<%= mui_hyper_text(:body, :title => 'Body') %>
 <% end =%>

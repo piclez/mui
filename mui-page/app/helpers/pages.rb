@@ -1,5 +1,9 @@
 module MuiPage::MuiPages
 
+  def mui_page?
+    controller_name == 'mui_page/pages'
+  end
+
   def mui_page_truncate(options = {})
     limit = options[:limit] || 50
     title = options[:title] || '...continued'

@@ -1,9 +1,5 @@
-<%= mui_window(:title => mui_flickr_navigation) do %>
-  <%= mui_grid do %>
-    <%= mui_row do %>
-      <%= mui_column do %>
-        <%= mui_flickr_photo %>
-      <% end =%>
-    <% end =%>
+<%= mui_window(:buttons => mui_flickr_navigation) do %>
+  <%= mui_block do %>
+    <%= mui_flickr_photo %>
   <% end =%>
 <% end =%>

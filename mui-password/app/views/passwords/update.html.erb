@@ -1,15 +1,9 @@
 <%= mui_window(:title => 'Update/Delete Password') do %>
   <%= mui_form(:action => url(:mui_password_update), :model => @password) do %>
-    <%= mui_grid(:type => 'form') do %>
-      <%= partial(:form) %>
-      <%= mui_row do %>
-        <%= mui_column do %>
-          <%= mui_button(:title => 'Update', :submit => true, :tone => 'positive')%>
-        <% end =%>
-        <%= mui_column(:x => 1) do %>
-          <%= mui_button(:title => 'Delete', :url => url(:mui_password_delete), :window => 'redirect') %>
-        <% end =%>
-      <% end =%>
+    <%= partial(:form) %>
+    <%= mui_block do %>
+      <%= mui_button(:title => 'Update', :submit => true, :tone => 'positive')%>
+      <%= mui_button(:title => 'Delete', :url => url(:mui_password_delete), :window => 'redirect') %>
     <% end =%>
   <% end =%>
 <% end =%>

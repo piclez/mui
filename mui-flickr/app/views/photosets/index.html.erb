@@ -1,11 +1,13 @@
-<%= mui_grid(:type => 'desktop') do %>
-  <%= mui_row do %>
-    <%= mui_column(:width => '25%') do %>
+<%= mui_grid(:columns => 2) do %>
+  <%= mui_cell(:width => '25%') do %>
+    <%= mui_block do %>
       <% @photosets.each do |photoset| %>
         <%= mui_flickr_tab(:photoset => photoset) %>
       <% end %>
     <% end =%>
-    <%= mui_column do %>
+  <% end =%>
+  <%= mui_cell(:width => '75%') do %>
+    <%= mui_block do %>
       <% @photos.each do |photo| %>
         <%= mui_flickr_button(:photo => photo) %>
       <% end %>

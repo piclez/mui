@@ -1,14 +1,8 @@
 <%= mui_window(:title => 'Delete Password') do %>
-  <%= mui_grid(:type => 'form') do %>
-    <%= mui_row do %>
-      <%= mui_column do %>Are you sure that you want to delete your password?<% end =%>
-    <% end =%>
-    <%= mui_row do %>
-      <%= mui_column do %>
-        <%= mui_form(:action => url(:mui_password_delete)) do %>
-          <%= mui_button(:title => 'Delete', :submit => true, :tone => 'negative') %>
-        <% end =%>
-      <% end =%>
+  <%= mui_block do %>Are you sure that you want to delete your password?<% end =%>
+  <%= mui_block do %>
+    <%= mui_form(:action => url(:mui_password_delete)) do %>
+      <%= mui_button(:title => 'Delete', :submit => true, :tone => 'negative') %>
     <% end =%>
   <% end =%>
 <% end =%>

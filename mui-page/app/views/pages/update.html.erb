@@ -1,12 +1,8 @@
 <%= mui_window(:title => 'Update Page') do %>
   <%= mui_form(:action => url(:mui_page_update, :page_id => @page.id), :model => @page) do %>
-    <%= mui_grid(:type => 'form') do %>
-      <%= partial(:form) %>
-      <%= mui_row do %>
-        <%= mui_column do %>
-  		    <%= mui_button(:title => 'Update', :submit => true, :tone => 'positive')%>
-        <% end =%>
-      <% end =%>
+    <%= partial(:form) %>
+    <%= mui_block do %>
+  		<%= mui_button(:title => 'Update', :submit => true, :tone => 'positive')%>
     <% end =%>
   <% end =%>
 <% end =%>

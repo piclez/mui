@@ -1,39 +1,32 @@
 require 'rubygems'
 require 'rake/gempackagetask'
-require "extlib"
 require 'spec/rake/spectask'
-require 'merb-core/tasks/merb_rake_helper'
 
-RUBY_FORGE_PROJECT = "mui"
-PROJECT_URL = "http://uipoet.com/"
-PROJECT_SUMMARY     = "User interface components for Merb."
-PROJECT_DESCRIPTION = PROJECT_SUMMARY
+require 'merb-core'
+require 'merb-core/tasks/merb'
+require 'merb-core/test/tasks/spectasks'
 
-GEM_AUTHOR = "Jamie Hoover"
-GEM_EMAIL  = "dont.tase@me.com"
-
-GEM_NAME    = "mui-core"
-PKG_BUILD   = ENV['PKG_BUILD'] ? '.' + ENV['PKG_BUILD'] : ''
-GEM_VERSION = (Mui::VERSION rescue "1.0") + PKG_BUILD
-
-RELEASE_NAME    = "REL #{GEM_VERSION}"
-
-require "extlib/tasks/release"
+GEM_NAME = "mui-core"
+AUTHOR = "Jamie Hoover"
+EMAIL = "dont.tase@me.com"
+HOMEPAGE = "http://uipoet.com/"
+SUMMARY = "User interface components for Merb."
+GEM_VERSION = "1.0"
 
 spec = Gem::Specification.new do |s|
-  s.rubyforge_project = RUBY_FORGE_PROJECT
+  s.rubyforge_project = "mui"
   s.name = GEM_NAME
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = true
   s.extra_rdoc_files = ["README", "LICENSE"]
-  s.summary = PROJECT_SUMMARY
-  s.description = PROJECT_DESCRIPTION
-  s.author = GEM_AUTHOR
-  s.email = GEM_EMAIL
-  s.homepage = PROJECT_URL
-  s.add_dependency('merb-slices', '>= 0.9.6')
-  s.add_dependency('merb_helpers', '>= 0.9.6')
+  s.summary = SUMMARY
+  s.description = s.summary
+  s.author = AUTHOR
+  s.email = EMAIL
+  s.homepage = HOMEPAGE
+  s.add_dependency('merb-slices', '>= 0.9.8')
+  s.add_dependency('merb-helpers', '>= 0.9.8')
   s.require_path = 'lib'
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{lib,app,public}/**/*")
 end
@@ -43,21 +36,33 @@ Rake::GemPackageTask.new(spec) do |pkg|
 end
 
 desc "Install the gem"
-task :install => [:package] do
-  sh %{#{sudo} gem install #{install_home} pkg/#{GEM_NAME}-#{GEM_VERSION} --no-update-sources}
+task :install do
+  Merb::RakeHelper.install(GEM_NAME, :version => GEM_VERSION)
 end
 
-namespace :jruby do
+desc "Uninstall the gem"
+task :uninstall do
+  Merb::RakeHelper.uninstall(GEM_NAME, :version => GEM_VERSION)
+end
 
-  desc "Run :package and install the resulting .gem with jruby"
-  task :install => :package do
-    sh %{#{sudo} jruby -S gem install #{install_home} pkg/#{GEM_NAME}-#{GEM_VERSION}.gem --no-rdoc --no-ri}
+desc "Create a gemspec file"
+task :gemspec do
+  File.open("#{GEM_NAME}.gemspec", "w") do |file|
+    file.puts spec.to_ruby
   end
-  
 end
 
-desc "Run all specs"
-Spec::Rake::SpecTask.new("specs") do |t|
-  t.spec_opts = ["--format", "specdoc", "--colour"]
-  t.spec_files = Dir["spec/**/*_spec.rb"].sort
+desc "Run all examples (or a specific spec with TASK=xxxx)"
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_opts  = ["-cfs"]
+  t.spec_files = begin
+    if ENV["TASK"] 
+      ENV["TASK"].split(',').map { |task| "spec/**/#{task}_spec.rb" }
+    else
+      FileList['spec/**/*_spec.rb']
+    end
+  end
 end
+
+desc 'Default: run spec examples'
+task :default => 'spec'

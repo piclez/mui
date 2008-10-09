@@ -3,7 +3,7 @@ module MuiPassword::MuiPasswords
   def mui_password?
     session[:mui_password_id] ? true : false
   end
-
+  
   def mui_password_exists?
     Password.first ? true : false
   end

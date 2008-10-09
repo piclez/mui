@@ -49,12 +49,16 @@ module Merb::MuiCore::MuiStylesheets
     end
   end
 
-  def color(red,green,blue)
-    %{rgb(#{decimal_to_rgb(red)}, #{decimal_to_rgb(green)}, #{decimal_to_rgb(blue)})}
+  def color(r,g,b)
+    %{rgb(#{decimal_to_rgb(r)}, #{decimal_to_rgb(g)}, #{decimal_to_rgb(b)})}
   end
 
   def decimal_to_rgb(d)
     (d * 255).to_i
+  end
+
+  def has_layout
+    'min-height: 0;' if msie?
   end
 
   def property(property, options={})
@@ -69,10 +73,6 @@ module Merb::MuiCore::MuiStylesheets
     elsif options[:value]
       @child << %{\r  #{@parent}#{property}: #{options[:value]};}
     end
-  end
-
-  def has_layout
-    'min-height: 0;' if msie?
   end
 
   def selector(selector)
