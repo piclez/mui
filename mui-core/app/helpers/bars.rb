@@ -6,7 +6,7 @@ module Merb::MuiCore::MuiBars
     attributes[:class] = 'mui_bar'
     attributes[:class] << %{_#{options[:type]}} if options[:type]
     content = ''
-    content << tag(:td, options[:title], :class => 'mui_bar_title') if options[:title]
+    content << tag(:td, tag(:h1, options[:title], :class => 'mui_bar_title')) if options[:title]
     content << capture(&block) if block_given?
     tag(:table, tag(:tr, content), attributes)
   end

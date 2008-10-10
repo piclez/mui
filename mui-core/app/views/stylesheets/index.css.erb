@@ -9,8 +9,9 @@
 body {
   font-size: 13px;
 }
-b, em, i, strong {
+b, em, h1, i, label, strong {
   font-family: "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", sans-serif;
+  font-weight: bold;
 }
 
 /* bar */
@@ -40,10 +41,9 @@ td.mui_bar_end {
   text-align: right;
   white-space: nowrap;
 }
-td.mui_bar_title {
+h1.mui_bar_title {
   color: <%= color(0, 0, 0) %>;
   font-size: 3em;
-  font-weight: bold;
   letter-spacing: -0.1em;
   line-height: 1em;
 }
@@ -76,7 +76,6 @@ div.mui_block_tray *.mui_block {
 }
 h1.mui_block_title {
   color: <%= color(0, 0, 0) %>;
-  font-weight: bold;
   letter-spacing: -0.1em;
   line-height: 1em;
   margin-left: -0.05em;
@@ -182,7 +181,7 @@ code.mui_code {
   border-width: 1px;
   color: <%= color(1, 1, 1) %>;
   display: block;
-  font-family: 'Bitstream Vera Sans Mono', 'Monaco', monospace;
+  font-family: 'Bitstream Vera Sans Mono', 'Monaco', 'Lucida Console' monospace;
   padding-bottom: 15px;
   padding-left: 30px;
   padding-right: 30px;
@@ -214,7 +213,6 @@ hr.mui_divider {
 label {
   display: block;
   font-size: 0.85em;
-  font-weight: bold;
 }
 input.mui_password, input.mui_text, textarea.mui_hyper_text {
   background-color: <%= color(1, 1, 1) %>;
@@ -226,24 +224,15 @@ input.mui_password, input.mui_text, textarea.mui_hyper_text {
   border-width: 1px;
   color: <%= color(0, 0, 0) %>;
   display: block;
-  font-size: 1em;
-  line-height: 1.6em;
-  min-height: 1.6em;
+  font-size: 0.9em;
+  min-height: 1.5em;
   margin-top: 0.25em;
-  padding-left: 0.25em;
-  padding-right: 0.25em;
-  <%= border_radius %>
   <%= border_radius(:amount => 0.4) %>
 }
 textarea.mui_hyper_text {
-  color: <%= color(0.2, 0.2, 0.2) %>;
-  font-size: 0.9em;
-  height: 100%;
-  line-height: 1.5em;
-  min-height: 20em;
-  min-width: 40em;
-  padding: 0;
-  width: 100%;
+  font-family: 'Bitstream Vera Sans Mono', 'Monaco', 'Lucida Console' monospace;
+  height: 20em;
+  width: 40em;
 }
 
 /* grid */
@@ -418,7 +407,6 @@ table.mui_window_bar {
   <%= border_radius(:edge => 'top') %>
 }
 td.mui_window_title {
-  font-size: 0.85em;
   padding-left: 1em;
 }
 td.mui_window_content {
