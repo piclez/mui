@@ -13,10 +13,9 @@ module Merb::MuiCore::MuiForms
   end
 
   def mui_check(name, options = {})
-    attributes = {}
-    attributes[:class] = 'mui_check'
-    attributes[:label] = options[:title]
-    checkbox(name, attributes)
+    columns = tag(:td, check_box(name, :class => 'mui_check'))
+    columns << tag(:td, tag(:label, options[:title]))
+    tag(:table, tag(:tr, columns))
   end
   
   def mui_password(name, options = {})

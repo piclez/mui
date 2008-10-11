@@ -6,6 +6,7 @@ class Page
   property :id, Integer, :key => true, :serial => true
   property :title, String
   property :body, Text
+  property :publish, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
 

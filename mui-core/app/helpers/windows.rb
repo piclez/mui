@@ -11,7 +11,7 @@ module Merb::MuiCore::MuiWindows
   end
 
   def mui_window(options = {}, &block)
-    script = tag(:script, :src => url(:mui_javascript_window), :type => 'text/javascript')
+    script = tag(:script, :src => url(:mui_core_javascript_window), :type => 'text/javascript')
     bar_content = ''
     bar_content << tag(:td, options[:buttons], :class => 'mui_bar_buttons') if options[:buttons]
     bar_content << tag(:td, options[:title], :class => 'mui_window_title') if options[:title]

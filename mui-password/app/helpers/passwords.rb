@@ -9,7 +9,7 @@ module MuiPassword::MuiPasswords
   end
 
   def mui_javascript_password
-    tag(:script, :src => url(:mui_javascript_password), :type => 'text/javascript')
+    tag(:script, :src => url(:mui_password_javascript), :type => 'text/javascript')
   end
 
   def mui_password_redirect
